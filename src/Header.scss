@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  line-height: 5rem;
+
+  .logo_area {
+    margin-left: 7vw;
+  }
+
+  .button_area {
+    display: flex;
+    justify-content: end;
+    margin-right: 7vw;
+  }
+}
