@@ -5,6 +5,10 @@ export interface ThumbnailCardProps {
 }
 
 const ThumbnailCard = (props: ThumbnailCardProps) => {
-  return <div className="thumbnail_card">썸네일</div>;
+  return (
+    <div className="thumbnail_card">
+      <img src={props.url} />
+    </div>
+  );
 };
 export default ThumbnailCard;

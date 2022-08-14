@@ -5,7 +5,9 @@ import "./MainPage.scss";
 const MainPage = () => {
   return (
     <div className="body">
-      <ThumbnailCard url={""} />
+      <div className="thumbnail">
+        <ThumbnailCard url={"img/thumbnail_1.jpg"} />
+      </div>
     </div>
   );
 };
