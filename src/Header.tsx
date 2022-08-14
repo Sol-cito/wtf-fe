@@ -1,12 +1,17 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import HeaderButton from "./Components/HeaderButton";
 import HeaderLogo from "./Components/HeaderLogo";
 import "./Header.scss";
 import HEADER_MODEL_DATA from "./models/HeaderModel";
 
 const Header = () => {
+  const location = useLocation();
+
   const [selectedHeaderBtn, setSelectedHeaderBtn] = useState<string>(
-    HEADER_MODEL_DATA.headerButton[0].name
+    location.pathname.slice(1)
+      ? location.pathname.slice(1)
+      : HEADER_MODEL_DATA.headerButton[0].name
   );
 
   return (
