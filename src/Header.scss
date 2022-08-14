@@ -1,5 +1,10 @@
 .header {
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
   justify-content: space-between;
   line-height: 5rem;
 
