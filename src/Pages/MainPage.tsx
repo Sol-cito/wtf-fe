@@ -1,20 +1,20 @@
+import { Container, Grid } from "@material-ui/core";
 import ThumbnailCard from "../Components/ThumbnailCard";
+import THUMBNAIL_DATA from "../models/ThumbnailModel";
 import "./MainPage.scss";
 
 const MainPage = () => {
-  const urlArr = [
-    "img/thumbnail_1.jpg",
-    "img/thumbnail_2.jpg",
-    "img/thumbnail_3.jpg",
-    "img/thumbnail_4.jpg",
-    "img/thumbnail_5.jpg",
-  ];
-
   return (
     <div className="grid_container">
-      {urlArr.map((url, idx) => {
-        return <ThumbnailCard key={idx} url={url} />;
-      })}
+      <Grid container spacing={1}>
+        {THUMBNAIL_DATA.map((data, idx) => {
+          return (
+            <Grid item key={idx} xs={12} sm={4}>
+              <ThumbnailCard url={data.url} text={data.text} />
+            </Grid>
+          );
+        })}
+      </Grid>
     </div>
   );
 };
