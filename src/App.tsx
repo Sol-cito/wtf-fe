@@ -5,6 +5,7 @@ import NotFoundPage from "./Pages/NotFoundPage";
 import ContactPage from "./Pages/AboutPage";
 import Header from "./Header";
 import Footer from "./Footer";
+import ProjectPage from "./Pages/ProjectPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <div className="body">
           <Routes>
             <Route path="/" element={<MainPage />} />
+            <Route path="/:projectName" element={<ProjectPage />} />
             <Route path="/about" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
