@@ -1,4 +1,4 @@
-import { Container, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import ThumbnailCard from "../Components/ThumbnailCard";
 import THUMBNAIL_DATA from "../models/ThumbnailModel";
