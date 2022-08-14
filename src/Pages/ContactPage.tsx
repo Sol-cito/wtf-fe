@@ -1,6 +1,6 @@
 import React from "react";
 
 const ContactPage = () => {
-  return <div>Contact 페이지</div>;
+  return <div>저는 Lesley 빠가 입니다.</div>;
 };
 export default ContactPage;

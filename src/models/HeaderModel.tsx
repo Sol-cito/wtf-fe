@@ -3,11 +3,11 @@ const HEADER_MODEL_DATA = {
 
   headerButton: [
     {
-      name: "Home",
+      name: "home",
       url: "/",
     },
     {
-      name: "Contact",
+      name: "contact",
       url: "/contact",
     },
   ],
