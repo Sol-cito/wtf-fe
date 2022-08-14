@@ -19,5 +19,15 @@
     margin-top: 100px;
     margin-left: 10px;
     z-index: 1;
+    animation: slide 0.5s ease-in-out;
+  }
+
+  @keyframes slide {
+    from {
+      transform: translateY(40%);
+    }
+    to {
+      transform: translateY(0%);
+    }
   }
 }

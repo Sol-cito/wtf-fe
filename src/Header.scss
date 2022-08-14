@@ -7,8 +7,10 @@
   background-color: white;
   justify-content: space-between;
   line-height: 10vh;
+  z-index: 2;
 
   .logo_area {
+    border: none;
     margin-left: 7vw;
   }
 
@@ -16,9 +18,9 @@
     display: flex;
     justify-content: end;
     margin-right: 7vw;
+  }
 
-    a {
-      text-decoration: none;
-    }
+  a {
+    text-decoration: none;
   }
 }

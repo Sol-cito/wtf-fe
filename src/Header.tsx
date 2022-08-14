@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import HeaderButton from "./Components/HeaderButton";
 import HeaderLogo from "./Components/HeaderLogo";
 import "./Header.scss";
@@ -14,11 +14,15 @@ const Header = () => {
       : HEADER_MODEL_DATA.headerButton[0].name
   );
 
+  const handleOnClickLogo = () => {
+    setSelectedHeaderBtn(HEADER_MODEL_DATA.headerButton[0].name);
+  };
+
   return (
     <div className="header">
-      <div className="logo_area">
+      <Link className="logo_area" to={"/"} onClick={handleOnClickLogo}>
         <HeaderLogo logoName={HEADER_MODEL_DATA.headerLogoName} />
-      </div>
+      </Link>
       <div className="button_area">
         {HEADER_MODEL_DATA.headerButton.map((data, idx) => {
           return (

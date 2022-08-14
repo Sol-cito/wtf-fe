@@ -7,8 +7,8 @@ const HEADER_MODEL_DATA = {
       url: "/",
     },
     {
-      name: "contact",
-      url: "/contact",
+      name: "about",
+      url: "/about",
     },
   ],
 };

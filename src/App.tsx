@@ -2,8 +2,9 @@ import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
 import NotFoundPage from "./Pages/NotFoundPage";
-import ContactPage from "./Pages/ContactPage";
+import ContactPage from "./Pages/AboutPage";
 import Header from "./Header";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -13,10 +14,11 @@ function App() {
         <div className="body">
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/about" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
     </div>
   );
