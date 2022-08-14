@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./ThumbnailCard.scss";
 
 export interface ThumbnailCardProps {
-  url: string;
+  imgUrl: string;
   text: string;
 }
 
@@ -24,7 +24,7 @@ const ThumbnailCard = (props: ThumbnailCardProps) => {
       onMouseLeave={handleOnMouseLeave}
     >
       {isHovering ? <div className="overlay_text">{props.text}</div> : null}
-      <img className={isHovering ? "hover" : ""} src={props.url} />
+      <img className={isHovering ? "hover" : ""} src={props.imgUrl} />
     </div>
   );
 };

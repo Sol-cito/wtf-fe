@@ -1,34 +1,42 @@
 const THUMBNAIL_DATA = [
   {
-    url: "img/thumbnail_1.jpg",
+    imgUrl: "img/thumbnail_1.jpg",
+    linkUrl: "/projectPage",
     text: "Explanation of design",
   },
   {
-    url: "img/thumbnail_2.jpg",
+    imgUrl: "img/thumbnail_2.jpg",
+    linkUrl: "/projectPage",
     text: "overlay text",
   },
   {
-    url: "img/thumbnail_3.jpg",
+    imgUrl: "img/thumbnail_3.jpg",
+    linkUrl: "/projectPage",
     text: "overlay text",
   },
   {
-    url: "img/thumbnail_4.jpg",
+    imgUrl: "img/thumbnail_4.jpg",
+    linkUrl: "/projectPage",
     text: "overlay text",
   },
   {
-    url: "img/thumbnail_5.jpg",
+    imgUrl: "img/thumbnail_5.jpg",
+    linkUrl: "/projectPage",
     text: "overlay text",
   },
   {
-    url: "img/thumbnail_6.jpg",
+    imgUrl: "img/thumbnail_6.jpg",
+    linkUrl: "/projectPage",
     text: "overlay text",
   },
   {
-    url: "img/thumbnail_7.jpg",
+    imgUrl: "img/thumbnail_7.jpg",
+    linkUrl: "/projectPage",
     text: "overlay text",
   },
   {
-    url: "img/thumbnail_8.jpg",
+    imgUrl: "img/thumbnail_8.jpg",
+    linkUrl: "/projectPage",
     text: "overlay text",
   },
 ];

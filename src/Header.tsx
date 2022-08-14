@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import HeaderButton from "./Components/HeaderButton";
 import HeaderLogo from "./Components/HeaderLogo";
@@ -7,6 +7,10 @@ import HEADER_MODEL_DATA from "./models/HeaderModel";
 
 const Header = () => {
   const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const [selectedHeaderBtn, setSelectedHeaderBtn] = useState<string>(
     location.pathname.slice(1)

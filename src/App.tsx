@@ -1,5 +1,5 @@
 import "./App.scss";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import ContactPage from "./Pages/AboutPage";
@@ -7,7 +7,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ProjectPage from "./Pages/ProjectPage";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
@@ -24,6 +24,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
