@@ -2,7 +2,7 @@ const THUMBNAIL_DATA = [
   {
     imgUrl: "img/thumbnail_1.jpg",
     linkUrl: "/projectPage",
-    text: "Explanation of design",
+    text: "Explanation of the design should be here",
   },
   {
     imgUrl: "img/thumbnail_2.jpg",
