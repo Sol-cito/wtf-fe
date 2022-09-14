@@ -4,7 +4,7 @@
 
 ### Description
 
-WTF is a soccer team located in Seoul...
+WTF is a soccer team located in Seoul consisting of YONSEI old boys......
 
 ### Environment
 
