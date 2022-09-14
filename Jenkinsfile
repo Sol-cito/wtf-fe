@@ -12,7 +12,7 @@ pipeline {
                 echo "Build project"
                 sh "cd /var/lib/jenkins/jobs/wtf-fe/workspace/"
                 sh "npm install --save --legacy-peer-deps"
-                sh "npm run build"
+                sh "CI= npm run build"
             }
         }
         // stage('Move Build Folder to Project dir') {
