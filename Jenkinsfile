@@ -21,6 +21,13 @@ pipeline {
                 sh "cd /home/sol/project/wtf-fe/"
                 sh "rm -rf build"
                 sh "cd /var/lib/jenkins/jobs/wtf-fe/workspace/"
+                sh "mv build /home/sol/project/wtf-fe/"
+            }
+        }
+        stage('Restart Nginx') {
+            steps {
+                echo "Restart Nginx"
+                sh "sudo systemctl restart nginx"
             }
         }
     }
