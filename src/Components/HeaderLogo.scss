@@ -1,8 +1,14 @@
 .header_logo {
   cursor: pointer;
 
+  .logo_image {
+    width: 50px;
+    float: left;
+  }
+
   .logo_name {
     font-size: 25px;
     font-weight: bolder;
+    float: left;
   }
 }
