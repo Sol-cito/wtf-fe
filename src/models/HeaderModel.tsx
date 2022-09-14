@@ -1,5 +1,5 @@
 const HEADER_MODEL_DATA = {
-  headerLogoName: "Lesley Genius",
+  headerLogoName: "WTF",
 
   headerButton: [
     {
