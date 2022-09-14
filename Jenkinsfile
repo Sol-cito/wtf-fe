@@ -16,15 +16,15 @@ pipeline {
         }
         stage('Move Build Folder to Project dir') {
             steps {
-                sh "rm -rf /home/sol/project/wtf-fe/build"
-                sh "mv /var/lib/jenkins/jobs/wtf-fe-dev/workspace/build /home/sol/project/wtf-fe/"
+                sh "sudo rm -rf /home/sol/project/wtf-fe/build"
+                sh "sudo cp /var/lib/jenkins/jobs/wtf-fe-dev/workspace/build /home/sol/project/wtf-fe/"
             }
         }
-        // stage('Restart Nginx') {
-        //     steps {
-        //         echo "Restart Nginx"
-        //         sh "sudo systemctl restart nginx"
-        //     }
-        // }
+        stage('Restart Nginx') {
+            steps {
+                echo "Restart Nginx"
+                sh "sudo systemctl restart nginx"
+            }
+        }
     }
 }
