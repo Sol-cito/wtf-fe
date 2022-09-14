@@ -1,4 +1,4 @@
-## Climate Change Map
+## Team WTF Homepage
 
 ---
 
