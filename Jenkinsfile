@@ -1,37 +1,27 @@
 pipeline {
     agent any
-    // tools {
-    //     nodejs "node16"
-    //     git "git"
-    // }
+
     stages {
         stage('Health Check') {
             steps {
                 echo "Hello WTF!!!!!"
             }
         }
-        // stage('Prepare') {
-        //     steps {
-        //         echo "clone project"
-        //         sh "cd /var/lib/jenkins/jobs/wtf-fe/workspace/"
-        //         sh "rm -rf *"
-        //         sh "rm -rf .git"
-        //         git branch: "${BRANCH}", credentialsId: "ef29195d-a28d-45b3-8cb1-eefaf3a99bb2", url: 'https://github.com/Sol-cito/wtf-fe.git'
-        //     }
-        // }
-
-        // stage('Build') {
-        //     steps {
-        //         sh "npm install"
-        //         sh "npm run build"
-        //     }
-        // }
-
-        // stage('Deploy') {
-        //     steps {
-        //         sh "npm install"
-        //         sh "npm run build"
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                echo "Build project"
+                sh "cd /var/lib/jenkins/jobs/wtf-fe/workspace/"
+                sh "npm install --save --legacy-peer-deps"
+                sh "CI= npm run build"
+            }
+        }
+        stage('Move Build Folder to Project dir') {
+            steps {
+                echo "Move Build Folder to Project dir"
+                sh "cd /home/sol/project/wtf-fe/"
+                sh "rm -rf build"
+                sh "cd /var/lib/jenkins/jobs/wtf-fe/workspace/"
+            }
+        }
     }
 }
