@@ -17,7 +17,7 @@ pipeline {
         stage('Move Build Folder to Project dir') {
             steps {
                 sh "sudo rm -rf /home/sol/project/wtf-fe/build"
-                sh "sudo cp /var/lib/jenkins/jobs/wtf-fe-dev/workspace/build /home/sol/project/wtf-fe/"
+                sh "sudo cp -r /var/lib/jenkins/jobs/wtf-fe-dev/workspace/build /home/sol/project/wtf-fe/"
             }
         }
         stage('Restart Nginx') {
