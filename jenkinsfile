@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Health Check') {
             steps {
-                echo "Hello WTF!!!!"
+                echo "Hello WTF!!!!!"
             }
         }
         stage('Prepare') {
