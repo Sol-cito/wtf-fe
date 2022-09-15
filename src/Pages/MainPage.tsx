@@ -1,7 +1,8 @@
 import MainPageBox from "../Components/MainPageContainer";
 import TextTypingBox from "../Components/TextTypingBox";
-import { MAIN_PAGE_BOX_TYPING } from "../Models/TextConstant";
+import { MAIN_PAGE_BOX_TYPING } from "../CommonConstant/TextConstant";
 import "./MainPage.scss";
+import { SALLOW_GREY_COLOR } from "../CommonConstant/StringColorConstant";
 
 const MainPage = () => {
   return (
@@ -10,7 +11,7 @@ const MainPage = () => {
         boxColor="yellow"
         includedComponent={<TextTypingBox text={MAIN_PAGE_BOX_TYPING} />}
       />
-      <MainPageBox />
+      <MainPageBox boxColor={SALLOW_GREY_COLOR} />
     </div>
   );
 };

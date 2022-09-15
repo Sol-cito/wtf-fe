@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import HEADER_MODEL_DATA from "../Models/HeaderModel";
-import { GO_BACK_HOME, PAGE_NOT_FOUND } from "../Models/TextConstant";
+import { GO_BACK_HOME, PAGE_NOT_FOUND } from "../CommonConstant/TextConstant";
 import { useAppDispatch, useAppSelector } from "../Store/config";
 import { setHeaderBtn } from "../Store/Slices/HeaderBtnSlice";
 import "./NotFoundPage.scss";
