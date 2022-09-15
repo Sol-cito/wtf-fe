@@ -15,7 +15,7 @@ const HEADER_MODEL_DATA = {
     },
     {
       name: "match",
-      url: "/about",
+      url: "/match",
     },
     {
       name: "players",
