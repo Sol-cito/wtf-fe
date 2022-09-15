@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import HeaderButton from "./Components/HeaderButton";
 import HeaderLogo from "./Components/HeaderLogo";
 import "./Header.scss";
-import HEADER_MODEL_DATA from "./models/HeaderModel";
+import HEADER_MODEL_DATA from "./Models/HeaderModel";
 
 const Header = () => {
   const location = useLocation();
