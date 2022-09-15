@@ -1,6 +1,6 @@
 import MainPageBox from "../Components/MainPageContainer";
 import TextTypingBox from "../Components/TextTypingBox";
-import { MAIN_PAGE_BOX_TYPING } from "../models/TextConstant";
+import { MAIN_PAGE_BOX_TYPING } from "../Models/TextConstant";
 import "./MainPage.scss";
 
 const MainPage = () => {

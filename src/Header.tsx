@@ -4,22 +4,20 @@ import HeaderButton from "./Components/HeaderButton";
 import HeaderLogo from "./Components/HeaderLogo";
 import "./Header.scss";
 import HEADER_MODEL_DATA from "./Models/HeaderModel";
+import { useAppDispatch, useAppSelector } from "./Store/config";
+import { setHeaderBtn } from "./Store/Slices/HeaderBtnSlice";
 
 const Header = () => {
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const [selectedHeaderBtn, setSelectedHeaderBtn] = useState<string>(
-    location.pathname.slice(1)
-      ? location.pathname.slice(1)
-      : HEADER_MODEL_DATA.headerButton[0].name
-  );
-
   const handleOnClickLogo = () => {
-    setSelectedHeaderBtn(HEADER_MODEL_DATA.headerButton[0].name);
+    // setSelectedHeaderBtn(HEADER_MODEL_DATA.headerButton[0].name);
+    dispatch(setHeaderBtn(HEADER_MODEL_DATA.headerButton[0].name));
   };
 
   return (
@@ -32,15 +30,7 @@ const Header = () => {
       </Link>
       <div className="button_area">
         {HEADER_MODEL_DATA.headerButton.map((data, idx) => {
-          return (
-            <HeaderButton
-              key={idx}
-              btnName={data.name}
-              isSelected={data.name === selectedHeaderBtn}
-              url={data.url}
-              setSelectedHeaderBtn={setSelectedHeaderBtn}
-            />
-          );
+          return <HeaderButton key={idx} btnName={data.name} url={data.url} />;
         })}
       </div>
     </div>

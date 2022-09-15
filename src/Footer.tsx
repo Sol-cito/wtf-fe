@@ -1,5 +1,5 @@
 import "./Footer.scss";
-import { FOOTER_COPY_RIGHT } from "./models/TextConstant";
+import { FOOTER_COPY_RIGHT } from "./Models/TextConstant";
 
 const Footer = () => {
   return (
