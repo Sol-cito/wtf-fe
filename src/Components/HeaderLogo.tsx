@@ -2,13 +2,14 @@ import "./HeaderLogo.scss";
 
 export interface HeaderLogoProps {
   logoName: string;
+  srcLink: string;
 }
 
 const HeaderLogo = (props: HeaderLogoProps) => {
   return (
     <div className="header_logo">
-      <img className="logo_image" src="img/logo_yellow.jpg" />
-      <div className="logo_name">{props.logoName}</div>
+      <img id="logo_image" src={props.srcLink} />
+      <div id="logo_name">{props.logoName}</div>
     </div>
   );
 };

@@ -25,7 +25,10 @@ const Header = () => {
   return (
     <div className="header">
       <Link className="logo_area" to={"/"} onClick={handleOnClickLogo}>
-        <HeaderLogo logoName={HEADER_MODEL_DATA.headerLogoName} />
+        <HeaderLogo
+          logoName={HEADER_MODEL_DATA.headerLogo.name}
+          srcLink={HEADER_MODEL_DATA.headerLogo.srcLink}
+        />
       </Link>
       <div className="button_area">
         {HEADER_MODEL_DATA.headerButton.map((data, idx) => {

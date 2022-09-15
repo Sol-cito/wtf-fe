@@ -1,14 +1,15 @@
 .header_logo {
   cursor: pointer;
+  display: flex;
+  align-items: center;
 
-  .logo_image {
+  #logo_image {
+    margin-right: 20px;
     width: 50px;
-    float: left;
   }
 
-  .logo_name {
+  #logo_name {
     font-size: 25px;
     font-weight: bolder;
-    float: left;
   }
 }

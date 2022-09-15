@@ -1,5 +1,8 @@
 const HEADER_MODEL_DATA = {
-  headerLogoName: "WTF",
+  headerLogo: {
+    name: "W T F",
+    srcLink: "img/logo_yellow.jpg",
+  },
 
   headerButton: [
     {
@@ -9,6 +12,22 @@ const HEADER_MODEL_DATA = {
     {
       name: "about",
       url: "/about",
+    },
+    {
+      name: "match",
+      url: "/about",
+    },
+    {
+      name: "players",
+      url: "/players",
+    },
+    {
+      name: "community",
+      url: "/community",
+    },
+    {
+      name: "contact",
+      url: "/contact",
     },
   ],
 };
