@@ -1,0 +1,20 @@
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+}
+
+.typing_area {
+  height: inherit;
+  text-align: center;
+  font-size: 100px;
+  font-family: fantasy;
+  padding-top: 15%;
+
+  .typing_result {
+  }
+
+  .typing_cursor {
+    animation: blink-effect 1.5s step-end infinite;
+  }
+}

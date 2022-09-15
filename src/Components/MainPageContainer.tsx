@@ -1,14 +1,14 @@
-import "./MainPageBox.scss";
+import "./MainPageContainer.scss";
 
-export interface MainPageBoxProps {
+export interface MainPageContainerProps {
   includedComponent?: React.ReactElement;
   boxColor?: string | "black";
 }
 
-const MainPageBox = (props: MainPageBoxProps) => {
+const MainPageBox = (props: MainPageContainerProps) => {
   return (
     <div className="main_page_box" style={{ backgroundColor: props.boxColor }}>
-      <div className="box_inside">메인 페이지 박스</div>
+      {props.includedComponent}
     </div>
   );
 };

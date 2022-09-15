@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
+import { GO_BACK_HOME, PAGE_NOT_FOUND } from "../models/TextConstant";
 import "./NotFoundPage.scss";
 
 const NotFoundPage = () => {
   return (
     <div className="not_found_container">
-      <h1>Page Not Found</h1>
+      <h1>{PAGE_NOT_FOUND}</h1>
       <div>
-        <Link to={"/"}>홈으로</Link>
+        <Link to={"/"}>{GO_BACK_HOME}</Link>
       </div>
     </div>
   );
