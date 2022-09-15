@@ -7,7 +7,10 @@ export interface MainPageContainerProps {
 
 const MainPageBox = (props: MainPageContainerProps) => {
   return (
-    <div className="main_page_box" style={{ backgroundColor: props.boxColor }}>
+    <div
+      className="main_page_container"
+      style={{ backgroundColor: props.boxColor }}
+    >
       {props.includedComponent}
     </div>
   );

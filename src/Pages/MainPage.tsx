@@ -3,6 +3,7 @@ import TextTypingBox from "../Components/TextTypingBox";
 import { MAIN_PAGE_BOX_TYPING } from "../CommonConstant/TextConstant";
 import "./MainPage.scss";
 import { SALLOW_GREY_COLOR } from "../CommonConstant/StringColorConstant";
+import PlayerBox from "../Components/PlayerInfoBox";
 
 const MainPage = () => {
   return (
@@ -11,7 +12,10 @@ const MainPage = () => {
         boxColor="yellow"
         includedComponent={<TextTypingBox text={MAIN_PAGE_BOX_TYPING} />}
       />
-      <MainPageBox boxColor={SALLOW_GREY_COLOR} />
+      <MainPageBox
+        boxColor={SALLOW_GREY_COLOR}
+        includedComponent={<PlayerBox />}
+      />
     </div>
   );
 };

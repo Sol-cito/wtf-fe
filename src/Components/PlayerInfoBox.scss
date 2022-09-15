@@ -1,0 +1,29 @@
+.intro_title_area {
+  margin: 1vw 0 1vw 0;
+  .intro_title {
+    font-family: Impact;
+    font-size: 40px;
+  }
+}
+
+.player_info_area {
+  display: flex;
+  align-items: center;
+
+  .player_photho_area {
+    flex-grow: 1;
+  }
+
+  .player_profile_area {
+    flex-grow: 2;
+    font-family: cursive;
+    span {
+      font-weight: bolder;
+    }
+
+    p {
+      margin: 3vw 0 3vw 0;
+      font-size: 30px;
+    }
+  }
+}
