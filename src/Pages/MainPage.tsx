@@ -1,9 +1,9 @@
-import MainPageBox from "../Components/MainPageContainer";
-import TextTypingBox from "../Components/TextTypingBox";
-import { MAIN_PAGE_BOX_TYPING } from "../CommonConstant/TextConstant";
-import "./MainPage.scss";
 import { SALLOW_GREY_COLOR } from "../CommonConstant/StringColorConstant";
-import PlayerBox from "../Components/PlayerInfoBox";
+import { MAIN_PAGE_BOX_TYPING } from "../CommonConstant/TextConstant";
+import MainPageBox from "../Components/MainPageContainer";
+import PlayerCarousel from "../Components/PlayerCarousel";
+import TextTypingBox from "../Components/TextTypingBox";
+import "./MainPage.scss";
 
 const MainPage = () => {
   return (
@@ -14,7 +14,7 @@ const MainPage = () => {
       />
       <MainPageBox
         boxColor={SALLOW_GREY_COLOR}
-        includedComponent={<PlayerBox />}
+        includedComponent={<PlayerCarousel />}
       />
     </div>
   );

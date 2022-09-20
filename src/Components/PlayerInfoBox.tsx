@@ -1,14 +1,11 @@
 import { PlayerModel } from "../Models/PlayerModel";
-import { PlayerTestData1, PlayerTestData2 } from "../Test/TestData";
 import "./PlayerInfoBox.scss";
-import PlayerPhoto from "./PlayerPhoto";
 
-export interface PlayerBoxProps {}
+export interface PlayerBoxProps {
+  player: PlayerModel;
+}
 
-const PlayerBox = (props: PlayerBoxProps) => {
-  const playerTestData1: PlayerModel = PlayerTestData1;
-  const playerTestData2: PlayerModel = PlayerTestData2;
-
+const PlayerInfoBox = (props: PlayerBoxProps) => {
   return (
     <div>
       <div className="intro_title_area">
@@ -16,24 +13,24 @@ const PlayerBox = (props: PlayerBoxProps) => {
       </div>
       <div className="player_info_area">
         <div className="player_photho_area">
-          <PlayerPhoto src={PlayerTestData1.imgSrc} />
+          {/* <PlayerPhoto src={PlayerTestData1.imgSrc} /> */}
         </div>
         <div className="player_profile_area">
           <p>
             <span> Name : </span>
-            {PlayerTestData1.name}
+            {props.player.name}
           </p>
           <p>
             <span> Back No : </span>
-            {PlayerTestData1.backNo}
+            {props.player.backNo}
           </p>
           <p>
             <span> Position : </span>
-            {PlayerTestData1.position}
+            {props.player.position}
           </p>
           <p>
             <span> Moto : </span>
-            {PlayerTestData1.moto}
+            {props.player.moto}
           </p>
         </div>
       </div>
@@ -41,4 +38,4 @@ const PlayerBox = (props: PlayerBoxProps) => {
   );
 };
 
-export default PlayerBox;
+export default PlayerInfoBox;
