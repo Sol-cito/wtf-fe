@@ -5,7 +5,7 @@ import { getAllPlayersService } from "../Service/PlayerService";
 import PlayerInfoBox from "./PlayerInfoBox";
 
 const PlayerCarousel = () => {
-  const [players, setPlayers] = useState<Array<PlayerModel>>();
+  const [players, setPlayers] = useState<PlayerModel[]>([]);
 
   const getAllPlayers = async () => {
     const res = await getAllPlayersService();
@@ -18,7 +18,7 @@ const PlayerCarousel = () => {
 
   return (
     <div>
-      {players
+      {players && players.length > 0
         ? players.map((player, idx) => {
             return <PlayerInfoBox key={idx} player={player} />;
           })
