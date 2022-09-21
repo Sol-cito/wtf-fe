@@ -1,9 +1,11 @@
 export interface PlayerModel {
   name: string;
-  imgSrc: string;
-  backNo: number;
+  firstNameEng: string;
+  familyNameEng: string;
+  birth: string;
   position: string;
+  backNo: number;
   moto: string;
-  goal: number;
-  assist: number;
+  profileImgSrc: string;
+  curYn: string;
 }

@@ -1,0 +1,25 @@
+.intro_title_area {
+  margin: 1vw 0 1vw 0;
+  .intro_title {
+    font-family: Impact;
+    font-size: 40px;
+  }
+}
+.slide_container {
+  display: flex;
+  width: max-content;
+  transition: all ease 0.5s;
+
+  .player_info_container {
+    width: max-content;
+    padding: 10px 30px 0 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all ease 0.5s;
+  }
+
+  .player_info_container:hover {
+    transform: scale(1.1);
+  }
+}

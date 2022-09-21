@@ -1,7 +1,7 @@
 import { SALLOW_GREY_COLOR } from "../CommonConstant/StringColorConstant";
 import { MAIN_PAGE_BOX_TYPING } from "../CommonConstant/TextConstant";
 import MainPageBox from "../Components/MainPageContainer";
-import PlayerCarousel from "../Components/PlayerCarousel";
+import PlayerCarousel from "../Components/PlayerSlide";
 import TextTypingBox from "../Components/TextTypingBox";
 import "./MainPage.scss";
 

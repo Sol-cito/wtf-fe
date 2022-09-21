@@ -6,24 +6,7 @@
   }
 }
 
-.player_info_area {
-  display: flex;
-  align-items: center;
-
-  .player_photho_area {
-    flex-grow: 1;
-  }
-
-  .player_profile_area {
-    flex-grow: 2;
-    font-family: cursive;
-    span {
-      font-weight: bolder;
-    }
-
-    p {
-      margin: 3vw 0 3vw 0;
-      font-size: 30px;
-    }
-  }
+.player_profile_area {
+  flex-grow: 2;
+  font-family: cursive;
 }

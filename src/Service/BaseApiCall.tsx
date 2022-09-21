@@ -10,9 +10,6 @@ export interface AxiosResponseModel {
 async function baseApiCall(requestConfig: AxiosRequestConfig): Promise<any> {
   const baseUrl: string = process.env.REACT_APP_BASE_URL as string;
 
-  console.log("baseUrl : " + baseUrl);
-  console.log("url : " + requestConfig.url);
-
   let axiosResponse: AxiosResponseModel = {
     successOrNot: SuccessOrNot.Y,
     statusCode: 200,
