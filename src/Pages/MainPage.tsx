@@ -1,18 +1,17 @@
-import { BLACK } from "../CommonConstant/StringColorConstant";
-import { MAIN_PAGE_BOX_TYPING } from "../CommonConstant/TextConstant";
+import { BLACK, SALLWOW_BLACK } from "../CommonConstant/StringColorConstant";
 import MainPageBox from "../Components/MainPageContainer";
-import PlayerCarousel from "../Components/PlayerSlide";
-import TextTypingBox from "../Components/TextTypingBox";
+import MainTeamPhotoBox from "../Components/MainPageTeamPhotoBox";
+import PlayerSlide from "../Components/PlayerSlide";
 import "./MainPage.scss";
 
 const MainPage = () => {
   return (
     <div className="page_container">
+      <MainPageBox boxColor={BLACK} includedComponent={<MainTeamPhotoBox />} />
       <MainPageBox
-        boxColor={BLACK}
-        includedComponent={<TextTypingBox text={MAIN_PAGE_BOX_TYPING} />}
+        boxColor={SALLWOW_BLACK}
+        includedComponent={<PlayerSlide />}
       />
-      <MainPageBox boxColor={BLACK} includedComponent={<PlayerCarousel />} />
     </div>
   );
 };

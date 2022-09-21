@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import HEADER_MODEL_DATA from "../Models/HeaderModel";
+import HEADER_CONSTANT_DATA from "../CommonConstant/HeaderConstant";
 import { GO_BACK_HOME, PAGE_NOT_FOUND } from "../CommonConstant/TextConstant";
 import { useAppDispatch, useAppSelector } from "../Store/config";
 import { setHeaderBtn } from "../Store/Slices/HeaderBtnSlice";
@@ -9,7 +9,7 @@ const NotFoundPage = () => {
   const dispatch = useAppDispatch();
 
   const handleOnClick = () => {
-    dispatch(setHeaderBtn(HEADER_MODEL_DATA.headerButton[0].name));
+    dispatch(setHeaderBtn(HEADER_CONSTANT_DATA.headerButton[0].name));
   };
 
   return (

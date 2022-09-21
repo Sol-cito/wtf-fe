@@ -9,13 +9,13 @@
   text-align: center;
   font-size: 100px;
   font-family: fantasy;
-  padding-top: 15%;
 
   .typing_result {
-    color: white;
+    color: rgb(203, 193, 0);  
   }
 
   .typing_cursor {
+    color: rgb(203, 193, 0);
     animation: blink-effect 1.5s step-end infinite;
   }
 }

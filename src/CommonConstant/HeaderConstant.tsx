@@ -1,4 +1,4 @@
-const HEADER_MODEL_DATA = {
+const HEADER_CONSTANT_DATA = {
   headerLogo: {
     name: "W T F",
     srcLink: "img/logo_yellow.jpg",
@@ -32,4 +32,4 @@ const HEADER_MODEL_DATA = {
   ],
 };
 
-export default HEADER_MODEL_DATA;
+export default HEADER_CONSTANT_DATA;
