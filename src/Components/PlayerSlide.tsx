@@ -48,8 +48,8 @@ const PlayerSlide = () => {
         {players && players.length > 0
           ? players.map((player, idx) => {
               return (
-                <div className="player_info_container">
-                  <PlayerInfoBox key={idx} player={player} />
+                <div key={idx} className="player_info_container">
+                  <PlayerInfoBox player={player} />
                 </div>
               );
             })

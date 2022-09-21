@@ -21,14 +21,12 @@ const HeaderButton = (props: ButtonProps) => {
   };
 
   return (
-    <Link to={props.url} onClick={handleOnClick}>
-      <div className="header_button">
-        <div
-          className={"button_name" + (props.btnName === value ? " active" : "")}
-        >
-          {changeFirstLetterUpperCase(props.btnName)}
-        </div>
-      </div>
+    <Link to={props.url} onClick={handleOnClick} className="header_button">
+      <span
+        className={"button_name" + (props.btnName === value ? " active" : "")}
+      >
+        {changeFirstLetterUpperCase(props.btnName)}
+      </span>
     </Link>
   );
 };

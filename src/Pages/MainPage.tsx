@@ -1,4 +1,4 @@
-import { SALLOW_GREY_COLOR } from "../CommonConstant/StringColorConstant";
+import { BLACK } from "../CommonConstant/StringColorConstant";
 import { MAIN_PAGE_BOX_TYPING } from "../CommonConstant/TextConstant";
 import MainPageBox from "../Components/MainPageContainer";
 import PlayerCarousel from "../Components/PlayerSlide";
@@ -9,13 +9,10 @@ const MainPage = () => {
   return (
     <div className="page_container">
       <MainPageBox
-        boxColor="yellow"
+        boxColor={BLACK}
         includedComponent={<TextTypingBox text={MAIN_PAGE_BOX_TYPING} />}
       />
-      <MainPageBox
-        boxColor={SALLOW_GREY_COLOR}
-        includedComponent={<PlayerCarousel />}
-      />
+      <MainPageBox boxColor={BLACK} includedComponent={<PlayerCarousel />} />
     </div>
   );
 };

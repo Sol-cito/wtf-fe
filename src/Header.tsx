@@ -16,7 +16,6 @@ const Header = () => {
   }, [location]);
 
   const handleOnClickLogo = () => {
-    // setSelectedHeaderBtn(HEADER_MODEL_DATA.headerButton[0].name);
     dispatch(setHeaderBtn(HEADER_MODEL_DATA.headerButton[0].name));
   };
 
