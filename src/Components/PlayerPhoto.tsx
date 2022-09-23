@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./PlayerPhoto.scss";
 
 export interface PlayerPhotoProps {
@@ -5,9 +6,26 @@ export interface PlayerPhotoProps {
 }
 
 const PlayerPhoto = (props: PlayerPhotoProps) => {
+  const [isHovering, setIsHovering] = useState<boolean>(false);
+
+  const handleOnMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleOnMouseLeave = () => {
+    setIsHovering(false);
+  };
+
   return (
     <div className="photo_container">
-      <img src={props.src} />
+      {isHovering ? (
+        <div className="overlay_text">헤이 맨~~~~~!!!!!!!!!!</div>
+      ) : null}
+      <img
+        src={props.src}
+        onMouseOver={handleOnMouseOver}
+        onMouseLeave={handleOnMouseLeave}
+      />
     </div>
   );
 };
