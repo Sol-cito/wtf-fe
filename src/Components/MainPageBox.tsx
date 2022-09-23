@@ -1,4 +1,4 @@
-import "./MainPageContainer.scss";
+import "./MainPageBox.scss";
 
 export interface MainPageContainerProps {
   includedComponent?: React.ReactElement;

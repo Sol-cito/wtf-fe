@@ -1,6 +1,7 @@
 import { BLACK, SALLWOW_BLACK } from "../CommonConstant/StringColorConstant";
-import MainPageBox from "../Components/MainPageContainer";
+import MainPageBox from "../Components/MainPageBox";
 import MainTeamPhotoBox from "../Components/MainPageTeamPhotoBox";
+import MatchResultBox from "../Components/MatchResultBox";
 import PlayerSlide from "../Components/PlayerSlide";
 import "./MainPage.scss";
 
@@ -12,6 +13,7 @@ const MainPage = () => {
         boxColor={SALLWOW_BLACK}
         includedComponent={<PlayerSlide />}
       />
+      <MainPageBox boxColor={BLACK} includedComponent={<MatchResultBox />} />
     </div>
   );
 };
