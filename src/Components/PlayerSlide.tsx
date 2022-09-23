@@ -38,24 +38,36 @@ const PlayerSlide = () => {
       <div className="intro_title_area">
         <span className="intro_title"> Players </span>
       </div>
-      <p onClick={() => handleOnSlideBtnClick(-1)}> 왼쪽 </p>
-      <div
-        className="slide_container"
-        style={{
-          transform: `translateX(${slideTranslateXValue}%)`,
-        }}
-      >
-        {players && players.length > 0
-          ? players.map((player, idx) => {
-              return (
-                <div key={idx} className="player_info_container">
-                  <PlayerInfoBox player={player} />
-                </div>
-              );
-            })
-          : null}
+      <div className="slide_area">
+        <div className="arrow_area">
+          <img
+            id="arrow_left"
+            src="img/etc/arrow_pointing_left.png"
+            onClick={() => handleOnSlideBtnClick(-1)}
+          />
+          <img
+            id="arrow_right"
+            src="img/etc/arrow_pointing_right.png"
+            onClick={() => handleOnSlideBtnClick(1)}
+          />
+        </div>
+        <div
+          className="slide_container"
+          style={{
+            transform: `translateX(${slideTranslateXValue}%)`,
+          }}
+        >
+          {players && players.length > 0
+            ? players.map((player, idx) => {
+                return (
+                  <div key={idx} className="player_info_container">
+                    <PlayerInfoBox player={player} />
+                  </div>
+                );
+              })
+            : null}
+        </div>
       </div>
-      <p onClick={() => handleOnSlideBtnClick(1)}> 오른쪽 </p>
     </div>
   );
 };
