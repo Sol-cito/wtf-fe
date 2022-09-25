@@ -2,11 +2,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
 import headerBtnSlice from "./Slices/HeaderBtnSlice";
+import playerModalSlice from "./Slices/PlayerModalSlice";
 
 const logger = createLogger();
 
 const rootReducer = combineReducers({
   counter: headerBtnSlice.reducer,
+  playerModelShow: playerModalSlice.reducer,
 });
 
 const initialState = {};
