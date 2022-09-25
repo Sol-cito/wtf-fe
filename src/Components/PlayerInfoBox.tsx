@@ -9,7 +9,7 @@ export interface PlayerBoxProps {
 const PlayerInfoBox = (props: PlayerBoxProps) => {
   return (
     <>
-      <PlayerPhoto src={props.player.profileImgSrc} />
+      <PlayerPhoto player={props.player} />
       <div className="player_profile_area"></div>
     </>
   );

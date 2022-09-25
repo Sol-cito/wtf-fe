@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { PlayerModel } from "../Models/PlayerModel";
 import "./PlayerPhoto.scss";
 
 export interface PlayerPhotoProps {
-  src: string;
+  player: PlayerModel;
 }
 
 const PlayerPhoto = (props: PlayerPhotoProps) => {
@@ -17,15 +18,19 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
   };
 
   return (
-    <div className="photo_container">
-      {/* {isHovering ? (
-        <div className="overlay_text">헤이 맨~~~~~!!!!!!!!!!</div>
-      ) : null} */}
-      <img
-        src={props.src}
-        onMouseOver={handleOnMouseOver}
-        onMouseLeave={handleOnMouseLeave}
-      />
+    <div
+      className="photo_container"
+      onMouseOver={handleOnMouseOver}
+      onMouseLeave={handleOnMouseLeave}
+    >
+      {isHovering ? (
+        <div className="overlay_text">
+          <p>No. {props.player.backNo}</p>
+          <p>{props.player.position}</p>
+          <p>{props.player.firstNameEng}</p>
+        </div>
+      ) : null}
+      <img src={props.player.profileImgSrc} />
     </div>
   );
 };
