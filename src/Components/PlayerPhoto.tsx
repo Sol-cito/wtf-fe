@@ -18,9 +18,9 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
 
   return (
     <div className="photo_container">
-      {isHovering ? (
+      {/* {isHovering ? (
         <div className="overlay_text">헤이 맨~~~~~!!!!!!!!!!</div>
-      ) : null}
+      ) : null} */}
       <img
         src={props.src}
         onMouseOver={handleOnMouseOver}

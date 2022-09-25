@@ -29,7 +29,7 @@ const PlayerSlide = () => {
   const handleOnSlideBtnClick = (cnt: number) => {
     let nextValue =
       slideTranslateXValue + Math.round(75 / players.length) * cnt;
-    if (nextValue >= 0 || nextValue <= -75) return;
+    if (nextValue >= 10 || nextValue <= -75) return;
     setSlideTranslateXValue(nextValue);
   };
 
