@@ -2,7 +2,7 @@ import { PlayerModel } from "../Models/PlayerModel";
 import "./PlayerSlide.scss";
 import { useState, useEffect } from "react";
 import { getAllPlayersService } from "../Service/PlayerService";
-import PlayerInfoBox from "./PlayerInfoBox";
+import PlayerPhoto from "./PlayerPhoto";
 
 const PlayerSlide = () => {
   const [players, setPlayers] = useState<PlayerModel[]>([]);
@@ -61,7 +61,7 @@ const PlayerSlide = () => {
             ? players.map((player, idx) => {
                 return (
                   <div key={idx} className="player_info_container">
-                    <PlayerInfoBox player={player} />
+                    <PlayerPhoto player={player} />
                   </div>
                 );
               })
