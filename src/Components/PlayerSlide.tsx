@@ -18,15 +18,7 @@ const PlayerSlide = () => {
 
   const getAllPlayers = async () => {
     const res = await getAllPlayersService();
-    // test
-    let temp: PlayerModel[] = new Array<PlayerModel>();
-    temp.push(...res);
-    temp.push(...res);
-    temp.push(...res);
-    temp.push(...res);
-    temp.push(...res);
-
-    setPlayers(temp);
+    setPlayers(res);
     setSlideTranslateXValue(-20);
   };
 
