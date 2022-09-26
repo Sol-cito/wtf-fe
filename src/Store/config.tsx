@@ -7,8 +7,8 @@ import playerModalSlice from "./Slices/PlayerModalSlice";
 const logger = createLogger();
 
 const rootReducer = combineReducers({
-  counter: headerBtnSlice.reducer,
-  playerModelShow: playerModalSlice.reducer,
+  headerBtn: headerBtnSlice.reducer,
+  playerModal: playerModalSlice.reducer,
 });
 
 const initialState = {};

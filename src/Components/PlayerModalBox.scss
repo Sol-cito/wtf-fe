@@ -1,0 +1,14 @@
+.player_info_container {
+  display: flex;
+
+  .photo_area {
+    img {
+      display: block;
+      width: 30vh;
+      height: 50vh;
+      object-fit: cover;
+    }
+  }
+  .info_area {
+  }
+}

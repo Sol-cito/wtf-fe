@@ -9,7 +9,7 @@ export interface ButtonProps {
 }
 
 const HeaderButton = (props: ButtonProps) => {
-  const { value } = useAppSelector((state) => state.counter);
+  const { headerBtnValue } = useAppSelector((state) => state.headerBtn);
   const dispatch = useAppDispatch();
 
   const handleOnClick = () => {
@@ -23,7 +23,9 @@ const HeaderButton = (props: ButtonProps) => {
   return (
     <Link to={props.url} onClick={handleOnClick} className="header_button">
       <span
-        className={"button_name" + (props.btnName === value ? " active" : "")}
+        className={
+          "button_name" + (props.btnName === headerBtnValue ? " active" : "")
+        }
       >
         {changeFirstLetterUpperCase(props.btnName)}
       </span>

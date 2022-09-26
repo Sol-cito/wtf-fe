@@ -9,12 +9,14 @@
   margin: 15vh 20vw 0 20vw;
   z-index: 999;
 
+  .modal_header {
+    font-size: 40px;
+    float: right;
+    margin: 0 20px 0 0;
+    cursor: pointer;
+  }
+
   .modal_container {
-    .modal_header {
-      font-size: 40px;
-      float: right;
-      margin: 0 20px 0 0;
-      cursor: pointer;
-    }
+    padding: 10vh;
   }
 }

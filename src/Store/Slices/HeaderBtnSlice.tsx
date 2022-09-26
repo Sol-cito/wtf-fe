@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CommonState {
-  value: string;
+  headerBtnValue: string;
 }
 
 const initialState: CommonState = {
-  value: "home",
+  headerBtnValue: "home",
 };
 
 export const headerBtnSlice = createSlice({
@@ -13,7 +13,7 @@ export const headerBtnSlice = createSlice({
   initialState,
   reducers: {
     setHeaderBtn(state, action: PayloadAction<string>) {
-      state.value = action.payload;
+      state.headerBtnValue = action.payload;
     },
   },
 });

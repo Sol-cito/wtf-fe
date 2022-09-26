@@ -9,11 +9,12 @@ import {
   setPlayerModalState,
 } from "../Store/Slices/PlayerModalSlice";
 import Modal from "./Modal";
+import PlayerModalBox from "./PlayerModalBox";
 
 const PlayerSlide = () => {
   const [players, setPlayers] = useState<PlayerModel[]>([]);
   const [slideTranslateXValue, setSlideTranslateXValue] = useState<number>(0);
-  const { modalShow } = useAppSelector((state) => state.playerModelShow);
+  const { modalShow } = useAppSelector((state) => state.playerModal);
   const dispatch = useAppDispatch();
 
   const getAllPlayers = async () => {
@@ -80,7 +81,7 @@ const PlayerSlide = () => {
             : null}
         </div>
       </div>
-      <Modal showModal={modalShow} />
+      <Modal showModal={modalShow} includedComponent={<PlayerModalBox />} />
     </>
   );
 };

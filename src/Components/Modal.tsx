@@ -11,7 +11,6 @@ export interface ModalProps {
 }
 
 const Modal = (props: ModalProps) => {
-  const { modalShow } = useAppSelector((state) => state.playerModelShow);
   const dispatch = useAppDispatch();
 
   const onClickModalClose = () => {
@@ -25,11 +24,10 @@ const Modal = (props: ModalProps) => {
     <>
       {props.showModal ? (
         <div className="modal_background">
-          <div className="modal_container">
-            <p className="modal_header" onClick={onClickModalClose}>
-              X
-            </p>
-          </div>
+          <p className="modal_header" onClick={onClickModalClose}>
+            X
+          </p>
+          <div className="modal_container">{props.includedComponent}</div>
         </div>
       ) : null}
     </>
