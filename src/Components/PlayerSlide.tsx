@@ -39,6 +39,7 @@ const PlayerSlide = () => {
       modalShow: true,
       player: inputPlayer,
     };
+    document.body.style.overflow = "hidden";
     dispatch(setPlayerModalState(playerModalState));
   };
 

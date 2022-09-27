@@ -19,6 +19,7 @@ const Modal = (props: ModalProps) => {
     const playerModalState: PlayerModalState = {
       modalShow: false,
     };
+    document.body.style.overflow = "unset";
     dispatch(setPlayerModalState(playerModalState));
   };
 
@@ -26,7 +27,7 @@ const Modal = (props: ModalProps) => {
     <>
       {props.showModal ? (
         <>
-          <div className="modal_back_shadow" />
+          <div className="modal_back_shadow" onClick={onClickModalClose} />
           <div
             className="modal_background"
             style={{
