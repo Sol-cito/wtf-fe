@@ -2,15 +2,67 @@
   display: flex;
 
   .photo_area {
+    margin-right: 4vw;
     img {
       display: block;
-      width: 30vh;
-      height: 50vh;
+      width: 35vh;
+      height: 55vh;
       object-fit: cover;
     }
   }
   .info_area {
-    font-size: 40px;
+    margin-top: 8vh;
     color: white;
+
+    .moto_area {
+      width: fit-content;
+      font-style: italic;
+      font-size: 2vw;
+      font-weight: 700;
+      border-bottom: 1px solid white;
+      word-break: break-all;
+    }
+
+    .basic_info_area {
+      margin-top: 12vh;
+
+      #back_no {
+        color: yellow;
+        font-size: 3vw;
+        font-weight: 700;
+        padding-right: 30px;
+      }
+
+      #position {
+        font-size: 3vw;
+        font-weight: 700;
+        padding-right: 30px;
+      }
+
+      #name {
+        font-size: 3vw;
+        font-weight: 700;
+      }
+    }
+
+    .eng_name_area {
+      #first_name_eng,
+      #family_name_eng {
+        color: yellow;
+        font-size: 3vh;
+        margin-right: 1vh;
+        font-weight: bold;
+      }
+    }
+
+    .birth_area {
+      margin-top: 3vh;
+      font-size: 3vh;
+
+      #birth {
+        color: yellow;
+        font-weight: bold;
+      }
+    }
   }
 }
