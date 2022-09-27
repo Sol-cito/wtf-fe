@@ -3,23 +3,35 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
 import headerBtnSlice from "./Slices/HeaderBtnSlice";
 import playerModalSlice from "./Slices/PlayerModalSlice";
+import storage from "redux-persist/lib/storage";
+import { persistStore, persistReducer } from "redux-persist";
 
 const logger = createLogger();
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   headerBtn: headerBtnSlice.reducer,
   playerModal: playerModalSlice.reducer,
 });
 
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["headerBtn"],
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const initialState = {};
 
 export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).concat(logger),
   devTools: process.env.NODE_ENV !== "production",
   preloadedState: initialState,
   enhancers: (defaultEnhancers) => [...defaultEnhancers],
 });
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
