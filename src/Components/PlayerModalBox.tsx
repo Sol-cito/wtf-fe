@@ -9,7 +9,8 @@ const PlayerModalBox = () => {
       {player ? (
         <div className="player_info_container">
           <div className="photo_area">
-            <img src={player.profileImgSrc} />
+            {/* <img src={player.profileImgSrc} /> */}
+            <img src="img/player/inhwan_profile_no_background.png" />
           </div>
           <div className="info_area">
             <div>{player.name}</div>
