@@ -1,0 +1,56 @@
+.match_container {
+  color: white;
+  border: 1px yellow solid;
+  display: flex;
+  height: 20vh;
+  align-items: center;
+  text-align: center;
+  margin: 2vw 0 2vw 0;
+
+  #match_type_name {
+    flex-grow: 1;
+    font-size: 2vw;
+    min-width: 20vw;
+  }
+
+  .date_and_location {
+    flex-grow: 2;
+    color: rgb(171, 171, 171);
+    #match_date {
+      font-size: 3vh;
+    }
+    #match_location {
+      font-size: 2vh;
+    }
+  }
+
+  .score_area {
+    flex-grow: 5;
+    font-size: 2vw;
+    display: flex;
+    min-width: 30vw;
+    align-items: center;
+
+    #wtf_area {
+      flex-grow: 2;
+    }
+
+    #wtf_logo,
+    #opposing_team_logo {
+      flex-grow: 2;
+      width: 1.5vh;
+    }
+
+    #goals_scored {
+      flex-grow: 3;
+    }
+
+    #goals_scored {
+      flex-grow: 3;
+    }
+
+    #opposing_team_area {
+      flex-grow: 2;
+    }
+  }
+}
