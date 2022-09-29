@@ -2,6 +2,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   #logo_image {
     margin-right: 20px;
@@ -12,5 +13,17 @@
     color: white;
     font-size: 25px;
     font-weight: bolder;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header_logo {
+    justify-content: center;
+    #logo_image {
+      width: 6vw;
+    }
+    #logo_name {
+      font-size: 6vw;
+    }
   }
 }

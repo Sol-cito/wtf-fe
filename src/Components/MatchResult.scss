@@ -28,6 +28,7 @@
     font-size: 1.5vw;
     display: flex;
     align-items: center;
+    word-break: break-all;
 
     #wtf_area {
       flex-grow: 0;
@@ -53,6 +54,51 @@
     #opposing_team_area {
       flex-shrink: 0;
       width: 10vw;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .match_container {
+    display: block;
+    height: fit-content;
+    padding: 1vh 0 1vh 0;
+
+    #match_type_name {
+      font-size: 3vw;
+    }
+    .date_and_location {
+      #match_date,
+      #match_location {
+        font-size: 2.5vw;
+      }
+    }
+    .score_area {
+      display: flex;
+      font-size: 3.5vw;
+      margin-top: 2vh;
+
+      #wtf_area {
+        flex-grow: 1;
+      }
+
+      #wtf_logo,
+      #opposing_team_logo {
+        flex-grow: 1;
+        width: 2vw;
+      }
+
+      #goals_scored {
+        flex-grow: 1;
+      }
+
+      #goals_scored {
+        flex-grow: 1;
+      }
+
+      #opposing_team_area {
+        flex-grow: 1;
+      }
     }
   }
 }

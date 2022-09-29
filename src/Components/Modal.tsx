@@ -9,7 +9,7 @@ import "./Modal.scss";
 export interface ModalProps {
   showModal: boolean;
   includedComponent?: React.ReactElement;
-  backgroundImageUrl?: string;
+  backgroundStyle?: {};
 }
 
 const Modal = (props: ModalProps) => {
@@ -28,13 +28,7 @@ const Modal = (props: ModalProps) => {
       {props.showModal ? (
         <>
           <div className="modal_back_shadow" onClick={onClickModalClose} />
-          <div
-            className="modal_background"
-            style={{
-              background: "url(/img/etc/player_modal_background.jpg)",
-              backgroundSize: "cover",
-            }}
-          >
+          <div className="modal_background" style={props.backgroundStyle}>
             <p className="modal_header" onClick={onClickModalClose}>
               X
             </p>

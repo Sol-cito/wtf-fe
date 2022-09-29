@@ -6,6 +6,7 @@ import "./Header.scss";
 import HEADER_CONSTANT_DATA from "./CommonConstant/HeaderConstant";
 import { useAppDispatch, useAppSelector } from "./Store/config";
 import { setHeaderBtn } from "./Store/Slices/HeaderBtnSlice";
+import { BrowserView, MobileView } from "react-device-detect";
 
 const Header = () => {
   const location = useLocation();
@@ -27,11 +28,16 @@ const Header = () => {
           srcLink={HEADER_CONSTANT_DATA.headerLogo.srcLink}
         />
       </Link>
-      <div className="button_area">
-        {HEADER_CONSTANT_DATA.headerButton.map((data, idx) => {
-          return <HeaderButton key={idx} btnName={data.name} url={data.url} />;
-        })}
-      </div>
+      <BrowserView>
+        <div className="button_area">
+          {HEADER_CONSTANT_DATA.headerButton.map((data, idx) => {
+            return (
+              <HeaderButton key={idx} btnName={data.name} url={data.url} />
+            );
+          })}
+        </div>
+      </BrowserView>
+      <MobileView></MobileView>
     </div>
   );
 };

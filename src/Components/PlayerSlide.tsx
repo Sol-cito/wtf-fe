@@ -10,6 +10,11 @@ import {
 } from "../Store/Slices/PlayerModalSlice";
 import Modal from "./Modal";
 import PlayerModalBox from "./PlayerModalBox";
+import { isMobile } from "react-device-detect";
+import {
+  PLAYER_MODAL_BACKGROUND_STYLE_BROWSER,
+  PLAYER_MODAL_BACKGROUND_STYLE_MOBILE,
+} from "../CommonConstant/ImgSrcConstant";
 
 const PlayerSlide = () => {
   const [players, setPlayers] = useState<PlayerModel[]>([]);
@@ -82,7 +87,15 @@ const PlayerSlide = () => {
             : null}
         </div>
       </div>
-      <Modal showModal={modalShow} includedComponent={<PlayerModalBox />} />
+      <Modal
+        showModal={modalShow}
+        includedComponent={<PlayerModalBox />}
+        backgroundStyle={
+          isMobile
+            ? PLAYER_MODAL_BACKGROUND_STYLE_MOBILE
+            : PLAYER_MODAL_BACKGROUND_STYLE_BROWSER
+        }
+      />
     </>
   );
 };

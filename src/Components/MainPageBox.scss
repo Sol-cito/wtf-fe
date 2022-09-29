@@ -1,6 +1,12 @@
 .main_page_container {
-  min-height: 70vh;
   padding: 1vh 15vw 1vh 15vw;
-  // margin-bottom: 10vh;
   overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+  .main_page_container {
+    font-size: 3vw;
+    padding: 1vh 15vw 1vh 15vw;
+    overflow: hidden;
+  }
 }

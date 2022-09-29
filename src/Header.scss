@@ -26,3 +26,16 @@
     text-decoration: none;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .header {
+    display: flex;
+    justify-content: center;
+    line-height: 1vh;
+
+    .logo_area {
+      margin-left: 0;
+      padding: 1vh;
+    }
+  }
+}

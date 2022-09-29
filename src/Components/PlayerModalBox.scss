@@ -62,3 +62,50 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .player_info_container {
+    display: block;
+
+    .photo_area {
+      display: flex;
+      justify-content: center;
+      img {
+        width: 50vw;
+        object-fit: cover;
+      }
+    }
+
+    .info_area {
+      margin-top: 4vh;
+      margin-bottom: 4vh;
+      text-align: center;
+
+      .moto_area {
+        display: inline;
+        font-size: 6vw;
+        width: auto;
+      }
+
+      .basic_info_area {
+        margin-top: 5vh;
+
+        #back_no,
+        #position,
+        #name {
+          font-size: 6vw;
+        }
+      }
+
+      .eng_name_area {
+        #first_name_eng,
+        #family_name_eng {
+          font-size: 8vw;
+        }
+      }
+      .birth_area {
+        margin-top: 8vh;
+      }
+    }
+  }
+}

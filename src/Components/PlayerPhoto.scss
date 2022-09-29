@@ -35,3 +35,19 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .photo_container {
+    img {
+      width: 20vh;
+      height: 30vh;
+      transition: none;
+    }
+    img:hover {
+      transform: none;
+    }
+    .overlay_text {
+      visibility: hidden;
+    }
+  }
+}
