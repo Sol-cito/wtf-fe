@@ -8,6 +8,7 @@
   margin-left: calc(-50vw + 50%);
   z-index: 3;
   background-color: white;
+  overflow-y: auto;
 
   .admin_menu_container {
     display: flex;
@@ -18,7 +19,7 @@
     }
     .player_register {
       font-size: 3vw;
-      width: 20vw;
+      width: 30vw;
     }
   }
 

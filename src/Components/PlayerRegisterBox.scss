@@ -1,3 +1,7 @@
+.register_info_area {
+  font-size: 3vh;
+}
+
 .register_page_container {
   text-align: center;
 
@@ -7,6 +11,6 @@
   }
 
   .registered_player_board {
-    height: 50vh;
+    margin-bottom: 2vh;
   }
 }
