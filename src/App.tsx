@@ -1,12 +1,18 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Footer from "./Footer";
 import Header from "./Header";
 import ContactPage from "./Pages/AboutPage";
+import AdminLoginPage from "./Pages/admin/AdminLoginPage";
+import AdminPage from "./Pages/admin/AdminPage";
+import PlayerRegisterPage from "./Pages/admin/PlayerRegisterPage";
 import MainPage from "./Pages/MainPage";
 import NotFoundPage from "./Pages/NotFoundPage";
+import { useAppSelector } from "./Store/config";
 
 const App = () => {
+  const { isLogin } = useAppSelector((state) => state.isLogin);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -16,6 +22,18 @@ const App = () => {
             <Route path="/" element={<MainPage />} />
             <Route path="/about" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route
+              path="/admin"
+              element={isLogin ? <AdminPage /> : <AdminLoginPage />}
+            />
+            {isLogin ? (
+              <>
+                <Route
+                  path="/admin/player/register"
+                  element={<PlayerRegisterPage />}
+                />
+              </>
+            ) : null}
           </Routes>
         </div>
         <Footer />

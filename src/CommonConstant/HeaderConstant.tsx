@@ -1,7 +1,7 @@
 const HEADER_CONSTANT_DATA = {
   headerLogo: {
     name: "W T F",
-    srcLink: "img/logo_yellow.jpg",
+    srcLink: "/img/logo_yellow.jpg",
   },
 
   headerButton: [
