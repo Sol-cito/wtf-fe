@@ -6,6 +6,14 @@
   span {
     font-family: sans-serif;
     color: grey;
-    font-size: 13px;
+    font-size: 2vh;
+  }
+
+  .icon_area {
+    float: right;
+    img {
+      margin-left: 2vw;
+      height: 2.5vh;
+    }
   }
 }
