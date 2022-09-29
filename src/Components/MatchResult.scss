@@ -9,12 +9,11 @@
 
   #match_type_name {
     flex-grow: 1;
-    font-size: 2vw;
-    min-width: 20vw;
+    font-size: 3vh;
   }
 
   .date_and_location {
-    flex-grow: 2;
+    flex-grow: 1;
     color: rgb(171, 171, 171);
     #match_date {
       font-size: 3vh;
@@ -25,32 +24,35 @@
   }
 
   .score_area {
-    flex-grow: 5;
-    font-size: 2vw;
+    flex-grow: 2;
+    font-size: 1.5vw;
     display: flex;
-    min-width: 30vw;
     align-items: center;
 
     #wtf_area {
-      flex-grow: 2;
+      flex-grow: 0;
+      width: 10vw;
     }
 
     #wtf_logo,
     #opposing_team_logo {
-      flex-grow: 2;
-      width: 1.5vh;
+      flex-grow: 0;
+      width: 5vw;
     }
 
     #goals_scored {
-      flex-grow: 3;
+      flex-shrink: 0;
+      width: 5vw;
     }
 
     #goals_scored {
-      flex-grow: 3;
+      flex-shrink: 0;
+      width: 5vw;
     }
 
     #opposing_team_area {
-      flex-grow: 2;
+      flex-shrink: 0;
+      width: 10vw;
     }
   }
 }
