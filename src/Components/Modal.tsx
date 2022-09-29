@@ -1,9 +1,5 @@
-import { url } from "inspector";
-import { useAppDispatch, useAppSelector } from "../Store/config";
-import {
-  PlayerModalState,
-  setPlayerModalState,
-} from "../Store/Slices/PlayerModalSlice";
+import { useAppDispatch } from "../Store/config";
+import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";
 import "./Modal.scss";
 
 export interface ModalProps {
@@ -16,11 +12,11 @@ const Modal = (props: ModalProps) => {
   const dispatch = useAppDispatch();
 
   const onClickModalClose = () => {
-    const playerModalState: PlayerModalState = {
+    const modalState: ModalState = {
       modalShow: false,
     };
     document.body.style.overflow = "unset";
-    dispatch(setPlayerModalState(playerModalState));
+    dispatch(setModalState(modalState));
   };
 
   return (

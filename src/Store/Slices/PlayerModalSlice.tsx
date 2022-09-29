@@ -1,26 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PlayerModel } from "../../Models/PlayerModel";
 
-export interface PlayerModalState {
+export interface ModalState {
   modalShow: boolean;
   player?: PlayerModel;
 }
 
-const initialState: PlayerModalState = {
+const initialState: ModalState = {
   modalShow: false,
 };
 
-export const playerModalSlice = createSlice({
+export const modalSlice = createSlice({
   name: "playerModalSlice",
   initialState,
   reducers: {
-    setPlayerModalState(state, action: PayloadAction<PlayerModalState>) {
+    setModalState(state, action: PayloadAction<ModalState>) {
       state.modalShow = action.payload.modalShow;
       state.player = action.payload.player;
     },
   },
 });
 
-export const { setPlayerModalState } = playerModalSlice.actions;
+export const { setModalState } = modalSlice.actions;
 
-export default playerModalSlice;
+export default modalSlice;

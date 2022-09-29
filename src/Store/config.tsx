@@ -2,7 +2,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
 import headerBtnSlice from "./Slices/HeaderBtnSlice";
-import playerModalSlice from "./Slices/PlayerModalSlice";
+import playerModalSlice, { modalSlice } from "./Slices/PlayerModalSlice";
 import storage from "redux-persist/lib/storage/session";
 import { persistStore, persistReducer } from "redux-persist";
 import loginSlice from "./Slices/LoginSlice";
@@ -11,7 +11,7 @@ const logger = createLogger();
 
 export const rootReducer = combineReducers({
   headerBtn: headerBtnSlice.reducer,
-  playerModal: playerModalSlice.reducer,
+  modal: modalSlice.reducer,
   isLogin: loginSlice.reducer,
 });
 

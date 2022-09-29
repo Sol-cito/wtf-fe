@@ -3,7 +3,7 @@ import { useAppSelector } from "../Store/config";
 import "./PlayerModalBox.scss";
 
 const PlayerModalBox = () => {
-  const { player } = useAppSelector((state) => state.playerModal);
+  const { player } = useAppSelector((state) => state.modal);
 
   return (
     <>

@@ -4,10 +4,7 @@ import { useState, useEffect } from "react";
 import { getAllPlayersService } from "../Service/PlayerService";
 import PlayerPhoto from "./PlayerPhoto";
 import { useAppDispatch, useAppSelector } from "../Store/config";
-import {
-  PlayerModalState,
-  setPlayerModalState,
-} from "../Store/Slices/PlayerModalSlice";
+import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";
 import Modal from "./Modal";
 import PlayerModalBox from "./PlayerModalBox";
 import { isMobile } from "react-device-detect";
@@ -19,7 +16,7 @@ import {
 const PlayerSlide = () => {
   const [players, setPlayers] = useState<PlayerModel[]>([]);
   const [slideTranslateXValue, setSlideTranslateXValue] = useState<number>(0);
-  const { modalShow } = useAppSelector((state) => state.playerModal);
+  const { modalShow } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
 
   const getAllPlayers = async () => {
@@ -40,12 +37,12 @@ const PlayerSlide = () => {
   };
 
   const handleOnPlayerPhotoClick = (inputPlayer: PlayerModel) => {
-    const playerModalState: PlayerModalState = {
+    const playerModalState: ModalState = {
       modalShow: true,
       player: inputPlayer,
     };
     document.body.style.overflow = "hidden";
-    dispatch(setPlayerModalState(playerModalState));
+    dispatch(setModalState(playerModalState));
   };
 
   return (
