@@ -1,30 +1,23 @@
-import Modal from "../../Components/Modal";
-import { useAppDispatch, useAppSelector } from "../../Store/config";
-import { ModalState, setModalState } from "../../Store/Slices/PlayerModalSlice";
+import { useState } from "react";
+import PlayerRegisterBox from "../../Components/PlayerRegisterBox";
 import "./AdminPage.scss";
-import PlayerRegisterPage from "./PlayerRegisterPage";
 
 const AdminPage = () => {
-  const dispatch = useAppDispatch();
+  const [fragment, setFragment] = useState<React.ReactElement>();
 
   const handleRegisterClick = () => {
-    const playerRegisterModalState: ModalState = {
-      modalShow: true,
-    };
-    document.body.style.overflow = "hidden";
-    dispatch(setModalState(playerRegisterModalState));
+    setFragment(<PlayerRegisterBox />);
   };
-  const { modalShow } = useAppSelector((state) => state.modal);
 
   return (
     <div className="admin_background">
-      <div className="admin_container">
+      <div className="admin_menu_container">
         <button className="player_register" onClick={handleRegisterClick}>
           Player 등록
         </button>
         <button className="player_register">Player 수정</button>
       </div>
-      <Modal showModal={modalShow} includedComponent={<PlayerRegisterPage />} />
+      <div className="fragment_container">{fragment}</div>
     </div>
   );
 };

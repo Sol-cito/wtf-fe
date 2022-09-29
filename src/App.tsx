@@ -5,7 +5,7 @@ import Header from "./Header";
 import ContactPage from "./Pages/AboutPage";
 import AdminLoginPage from "./Pages/admin/AdminLoginPage";
 import AdminPage from "./Pages/admin/AdminPage";
-import PlayerRegisterPage from "./Pages/admin/PlayerRegisterPage";
+import PlayerRegisterBox from "./Components/PlayerRegisterBox";
 import MainPage from "./Pages/MainPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import { useAppSelector } from "./Store/config";
@@ -30,7 +30,7 @@ const App = () => {
               <>
                 <Route
                   path="/admin/player/register"
-                  element={<PlayerRegisterPage />}
+                  element={<PlayerRegisterBox />}
                 />
               </>
             ) : null}
