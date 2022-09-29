@@ -10,8 +10,7 @@ const PlayerModalBox = () => {
       {player ? (
         <div className="player_info_container">
           <div className="photo_area">
-            {/* <img src={player.profileImgSrc} /> */}
-            <img src="img/player/wonnam_profile_no_background.png" />
+            <img src="img/player/anonymous_profile_no_background.png" />
           </div>
           <div className="info_area">
             <div className="moto_area">"{player.moto}"</div>
