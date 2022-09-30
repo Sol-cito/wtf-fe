@@ -7,6 +7,11 @@ export interface GetParameter {
   params?: any;
 }
 
+export interface PostParameter {
+  url: string;
+  data?: any;
+}
+
 export async function getApiCall(getParameter: GetParameter): Promise<any> {
   const requestConfig: AxiosRequestConfig = {
     url: getParameter.url,
@@ -17,4 +22,12 @@ export async function getApiCall(getParameter: GetParameter): Promise<any> {
   return result.data;
 }
 
-export const postApiCall = async (url: string) => {};
+export async function postApiCall(postParameter: PostParameter): Promise<any> {
+  const requestConfig: AxiosRequestConfig = {
+    url: postParameter.url,
+    method: HttpMethod.POST,
+    data: postParameter.data,
+  };
+  const result = await baseApiCall(requestConfig); // TO-DO : successYn == n 일때 처리
+  return result.data;
+}

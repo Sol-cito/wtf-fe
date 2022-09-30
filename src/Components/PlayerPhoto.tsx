@@ -30,7 +30,12 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
           <p>{props.player.firstNameEng}</p>
         </div>
       ) : null}
-      <img src={props.player.profileImgSrc} />
+      <img
+        src={
+          props.player.profileImgSrc ||
+          "/img/player/anonymous_profile_no_background.png"
+        }
+      />
     </div>
   );
 };

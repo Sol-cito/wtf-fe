@@ -1,16 +1,27 @@
 .register_info_area {
+  border: 1px black solid;
   font-size: 3vh;
-}
-
-.register_page_container {
+  margin: 1vw 5vw 1vw 5vw;
   text-align: center;
 
   p {
-    font-size: 2vw;
-    margin-top: 0;
+    text-align: center;
   }
 
-  .registered_player_board {
-    margin-bottom: 2vh;
+  input {
+    width: 30vw;
+    font-size: 2vw;
+  }
+
+  textarea {
+    width: 30vw;
+    height: 10vh;
+    font-size: 2vw;
+  }
+
+  .register_btn {
+    font-size: 2vw;
+    width: 15vw;
+    margin: 3vh 0 3vh 0;
   }
 }
