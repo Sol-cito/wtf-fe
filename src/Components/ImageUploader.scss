@@ -1,0 +1,13 @@
+.profile_image_area {
+  border: 1px black solid;
+
+  p {
+    font-weight: 700;
+  }
+  img {
+    border: 1px black solid;
+    width: 30vw;
+    height: auto;
+    object-fit: cover;
+  }
+}

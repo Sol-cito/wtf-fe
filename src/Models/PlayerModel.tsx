@@ -6,6 +6,6 @@ export interface PlayerModel {
   position: string;
   backNo: number;
   moto: string;
-  profileImgSrc: string;
-  curYn: string;
+  profileImgSrc?: string;
+  curYn?: string;
 }

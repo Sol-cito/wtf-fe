@@ -28,11 +28,14 @@ export async function getPlayersByNameAPI(
 }
 
 export async function registerNewPlayerAPI(
-  player: PlayerModel
+  formData: FormData
 ): Promise<PlayerModel> {
   const postParameter: PostParameter = {
     url: "player/register",
-    data: player,
+    data: formData,
+    headerData: {
+      "Content-Type": "multipart/form-data",
+    },
   };
   const result: PlayerModel = await postApiCall(postParameter);
   return result;

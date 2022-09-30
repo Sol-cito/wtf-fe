@@ -13,7 +13,7 @@ const AdminPage = () => {
     <div className="admin_background">
       <div className="admin_menu_container">
         <button className="player_register" onClick={handleRegisterClick}>
-          Player 등록 및 수정
+          Player 등록
         </button>
       </div>
       <div className="fragment_container">{fragment}</div>
