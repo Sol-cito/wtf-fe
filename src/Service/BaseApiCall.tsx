@@ -13,17 +13,22 @@ async function baseApiCall(requestConfig: AxiosRequestConfig): Promise<any> {
   let axiosResponse: AxiosResponseModel = {
     successOrNot: SuccessOrNot.Y,
     statusCode: 200,
-    data: {},
+    data: null,
   };
 
-  requestConfig.url = baseUrl + requestConfig.url;
-  const response: AxiosResponse<any> = await axios.request(requestConfig);
-  if (response.status !== 200 || !response.data) {
+  try {
+    requestConfig.url = baseUrl + requestConfig.url;
+    const response: AxiosResponse<any> = await axios.request(requestConfig);
+    if (response.status !== 200 || !response.data) {
+      throw new Error("Api request fail");
+    }
+    axiosResponse.statusCode = response.status;
+    axiosResponse.data = response.data;
+    return axiosResponse;
+  } catch (e: any) {
     axiosResponse.successOrNot = SuccessOrNot.N;
+    return axiosResponse;
   }
-  axiosResponse.statusCode = response.status;
-  axiosResponse.data = response.data;
-  return axiosResponse;
 }
 
 export default baseApiCall;
