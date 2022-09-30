@@ -7,8 +7,9 @@ import {
 } from "../CommonConstant/CommonConstant";
 import { PlayerModel } from "../Models/PlayerModel";
 import {
-  getAllPlayersService,
-  registerNewPlayer,
+  getAllPlayersAPI,
+  getPlayersByNameAPI,
+  registerNewPlayerAPI,
 } from "../Service/PlayerService";
 import PlayerList from "./PlayerList";
 import "./PlayerRegisterBox.scss";
@@ -27,8 +28,18 @@ const PlayerRegisterBox = () => {
 
   const positions = ["GK", "FW", "MF", "DF"];
 
+  const initState = () => {
+    setKorName("");
+    setFirstNameEng("");
+    setFamilyNameEng("");
+    setBitrh("");
+    setPosition("");
+    setBackNo(0);
+    setMoto("");
+  };
+
   const getAllRegisteredPlayers = async () => {
-    const res = await getAllPlayersService();
+    const res = await getAllPlayersAPI();
     setPlayers(res);
   };
 
@@ -87,6 +98,14 @@ const PlayerRegisterBox = () => {
   };
 
   const registerPlayer = async () => {
+    const playerByNameRes: PlayerModel[] = await getPlayersByNameAPI(korName);
+    if (0 < playerByNameRes.length) {
+      let confirmRes = window.confirm(
+        "[Warning] 동일 이름으로 등록된 선수가 이미 있습니다. 그래도 등록하시겠습니까? \n"
+      );
+      if (!confirmRes) return;
+    }
+
     const playerModel: PlayerModel = {
       name: korName,
       firstNameEng: fistNameEng,
@@ -98,7 +117,14 @@ const PlayerRegisterBox = () => {
       profileImgSrc: "",
       curYn: "Y",
     };
-    await registerNewPlayer(playerModel);
+    const registerRes: PlayerModel = await registerNewPlayerAPI(playerModel);
+    if (registerRes) {
+      alert("등록 성공! " + registerRes.name);
+      getAllRegisteredPlayers();
+    } else {
+      alert("[ERROR] 등록 실패...개발자에게 문의 ㄱㄱ");
+    }
+    initState();
   };
 
   const testKorNameRegax = (e: React.ChangeEvent<HTMLInputElement>) => {

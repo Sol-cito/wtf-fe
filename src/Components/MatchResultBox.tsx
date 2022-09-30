@@ -2,13 +2,13 @@ import { MatchResultModel } from "../Models/MatchResultModel";
 import { useState, useEffect } from "react";
 import "./MatchResultBox.scss";
 import MatchResult from "./MatchResult";
-import { getRecentMatchService } from "../Service/MatchService";
+import { getRecentMatchAPI } from "../Service/MatchService";
 
 const MatchResultBox = () => {
   const [recentResult, setRecentResult] = useState<MatchResultModel[]>();
 
   const getRecentResult = async () => {
-    const res = await getRecentMatchService();
+    const res = await getRecentMatchAPI();
     setRecentResult(res);
   };
 

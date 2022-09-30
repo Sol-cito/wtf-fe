@@ -1,7 +1,7 @@
 import { PlayerModel } from "../Models/PlayerModel";
 import "./PlayerSlide.scss";
 import { useState, useEffect } from "react";
-import { getAllPlayersService } from "../Service/PlayerService";
+import { getAllPlayersAPI } from "../Service/PlayerService";
 import PlayerPhoto from "./PlayerPhoto";
 import { useAppDispatch, useAppSelector } from "../Store/config";
 import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";
@@ -19,20 +19,20 @@ const PlayerSlide = () => {
   const { modalShow } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
 
-  const getAllPlayers = async () => {
-    const res = await getAllPlayersService();
+  const getPlayers = async () => {
+    const res = await getAllPlayersAPI();
     setPlayers(res);
     setSlideTranslateXValue(-20);
   };
 
   useEffect(() => {
-    getAllPlayers();
+    getPlayers();
   }, []);
 
   const handleOnSlideBtnClick = (cnt: number) => {
     let nextValue =
       slideTranslateXValue + Math.round(75 / players.length) * cnt;
-    if (nextValue >= 10 || nextValue <= -75) return;
+    if (nextValue >= 10 || nextValue <= -100) return;
     setSlideTranslateXValue(nextValue);
   };
 

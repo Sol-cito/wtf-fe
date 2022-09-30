@@ -1,7 +1,7 @@
 import { MatchResultModel } from "../Models/MatchResultModel";
 import { getApiCall, GetParameter } from "./ApiCall";
 
-export async function getRecentMatchService(): Promise<MatchResultModel[]> {
+export async function getRecentMatchAPI(): Promise<MatchResultModel[]> {
   const getParameter: GetParameter = {
     url: "match/latest",
   };

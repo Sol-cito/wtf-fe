@@ -6,7 +6,7 @@ import {
   PostParameter,
 } from "./ApiCall";
 
-export async function getAllPlayersService(): Promise<PlayerModel[]> {
+export async function getAllPlayersAPI(): Promise<PlayerModel[]> {
   const getParameter: GetParameter = {
     url: "player/all",
   };
@@ -14,7 +14,20 @@ export async function getAllPlayersService(): Promise<PlayerModel[]> {
   return result;
 }
 
-export async function registerNewPlayer(
+export async function getPlayersByNameAPI(
+  inputName: string
+): Promise<PlayerModel[]> {
+  const getParameter: GetParameter = {
+    url: "player",
+    params: {
+      name: inputName,
+    },
+  };
+  const result: PlayerModel[] = await getApiCall(getParameter);
+  return result;
+}
+
+export async function registerNewPlayerAPI(
   player: PlayerModel
 ): Promise<PlayerModel> {
   const postParameter: PostParameter = {
