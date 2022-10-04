@@ -1,5 +1,11 @@
 .profile_image_area {
+  margin: 2vh 0 2vh 0;
+  padding: 5vh 0 5vh 0;
   border: 1px black solid;
+
+  input {
+    width: auto;
+  }
 
   p {
     font-weight: 700;

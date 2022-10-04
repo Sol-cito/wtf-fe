@@ -1,6 +1,6 @@
-export const KOREAN_REGAX = /^[가-힣]+$/;
+export const KOREAN_REGAX = /^[가-힣\s]+$/;
 
-export const ENGLISH_REGAX = /^[a-zA-Z]*$/;
+export const ENGLISH_REGAX = /^[a-zA-Z\s]*$/;
 
 export const NUMBER_REGAX = /^[0-9\b -]{0,13}$/;
 

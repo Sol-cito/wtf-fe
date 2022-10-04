@@ -1,4 +1,8 @@
 .register_info_area {
+  .register_title {
+    font-size: 4vw;
+    font-weight: 800;
+  }
   border: 1px black solid;
   font-size: 3vh;
   margin: 1vw 5vw 1vw 5vw;
@@ -10,18 +14,27 @@
 
   input {
     width: 30vw;
+    height: 5vw;
     font-size: 2vw;
   }
 
-  textarea {
-    width: 30vw;
-    height: 10vh;
-    font-size: 2vw;
+  .moto_area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      font-size: 2vw;
+    }
+    textarea {
+      width: 30vw;
+      height: 20vh;
+      font-size: 2vw;
+    }
   }
 
   .register_btn {
     font-size: 2vw;
-    width: 15vw;
+    // width: 15vw;
     margin: 3vh 0 3vh 0;
   }
 }

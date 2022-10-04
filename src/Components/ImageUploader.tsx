@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./ImageUploader.scss";
 
 export interface ImageUploaderProps {
+  title?: string;
   imageFile?: File;
   setImgFile: Function;
 }
@@ -26,21 +27,19 @@ const ImageUploader = (props: ImageUploaderProps) => {
 
   return (
     <div className="profile_image_area">
-      <p>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          multiple={false}
-          // value="파일명"
-        />
-        {profileImgBase64 ? (
-          <>
-            <p> * 이미지 미리보기 * </p>
-            <img src={profileImgBase64} />
-          </>
-        ) : null}
-      </p>
+      <p>{props.title}</p>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        multiple={false}
+      />
+      {profileImgBase64 ? (
+        <>
+          <p> * 이미지 미리보기 * </p>
+          <img src={profileImgBase64} />
+        </>
+      ) : null}
     </div>
   );
 };

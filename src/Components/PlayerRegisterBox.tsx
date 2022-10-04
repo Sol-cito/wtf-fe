@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import {
   BIRTH_REGAX,
@@ -11,10 +12,11 @@ import {
   getPlayersByNameAPI,
   registerNewPlayerAPI,
 } from "../Service/PlayerService";
+import CustomizedInput from "./CustomizedInput";
+import CustomizedSelectBox from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
 import PlayerList from "./PlayerList";
 import "./PlayerRegisterBox.scss";
-import SelectBox from "./SelectBox";
 
 const PlayerRegisterBox = () => {
   const [players, setPlayers] = useState<PlayerModel[]>([]);
@@ -49,6 +51,48 @@ const PlayerRegisterBox = () => {
   useEffect(() => {
     getAllRegisteredPlayers();
   }, []);
+
+  const testKorNameRegax = (input: string) => {
+    if (input && !KOREAN_REGAX.test(input)) {
+      alert("[Warning] 한글 이름이 한글이 아니거나 형식이 이상함..");
+      setKorName("");
+      return;
+    }
+  };
+
+  const handleFirstNameEngInput = (input: string) => {
+    input = input.charAt(0).toUpperCase() + input.slice(1);
+    setFirstNameEng(input);
+  };
+
+  const testFirstNameEngRegax = (input: string) => {
+    if (input && !ENGLISH_REGAX.test(input)) {
+      alert("[Warning] 영어가 아니거나 형식이 이상함..");
+      setFirstNameEng("");
+      return;
+    }
+  };
+
+  const handleFamilyNameEngInput = (input: string) => {
+    input = input.charAt(0).toUpperCase() + input.slice(1);
+    setFamilyNameEng(input);
+  };
+
+  const testFamilyNameEngRegax = (input: string) => {
+    if (input && !ENGLISH_REGAX.test(input)) {
+      alert("[Warning] 영어가 아니거나 형식이 이상함..");
+      setFamilyNameEng("");
+      return;
+    }
+  };
+
+  const testBirthRegax = (input: string) => {
+    if (input && !BIRTH_REGAX.test(input)) {
+      alert("[Warning] 생년월일이 0000-00-00 형식에 맞지 않음");
+      setBitrh("");
+      return;
+    }
+  };
 
   const validateRegistration = () => {
     if (!korName) {
@@ -133,120 +177,86 @@ const PlayerRegisterBox = () => {
     }
   };
 
-  const testKorNameRegax = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value && !KOREAN_REGAX.test(e.target.value)) {
-      alert("[Warning] 한글 이름이 한글이 아니거나 형식이 이상함..");
-      setKorName("");
-      return;
-    }
-  };
-
-  const testEngNameRegax = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    setState: Function
-  ) => {
-    if (e.target.value && !ENGLISH_REGAX.test(e.target.value)) {
-      alert("[Warning] 영어가 아니거나 형식이 이상함..");
-      setState("");
-      return;
-    }
-  };
-
-  const testBirthRegax = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value && !BIRTH_REGAX.test(e.target.value)) {
-      alert("[Warning] 생년월일이 0000-00-00 형식에 맞지 않음");
-      setBitrh("");
-      return;
-    }
-  };
-
-  const handleBackNoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (NUMBER_REGAX.test(e.target.value)) {
-      setBackNo(Number(e.target.value));
+  const handleBackNoChange = (input: string) => {
+    if (NUMBER_REGAX.test(input)) {
+      setBackNo(Number(input));
     }
   };
 
   return (
     <>
       <div className="register_info_area">
-        선수 등록
-        <p>
-          <span>이름(한글) : </span>
-          <input
-            value={korName}
-            onBlur={testKorNameRegax}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setKorName(e.target.value)
-            }
-            maxLength={10}
-          />
-        </p>
-        <p>
-          <span>First Name (English, 띄어쓰기 불가) : </span>
-          <input
-            value={firstNameEng}
-            onBlur={(e: React.ChangeEvent<HTMLInputElement>) =>
-              testEngNameRegax(e, setFirstNameEng)
-            }
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setFirstNameEng(
-                e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
-              )
-            }
-            maxLength={15}
-          />
-        </p>
-        <p>
-          <span>Family Name (English) : </span>
-          <input
-            value={familyNameEng}
-            onBlur={(e: React.ChangeEvent<HTMLInputElement>) =>
-              testEngNameRegax(e, setFamilyNameEng)
-            }
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setFamilyNameEng(
-                e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
-              )
-            }
-            maxLength={15}
-          />
-        </p>
-        <p>
-          <span>생년월일(0000-00-00) : </span>
-          <input
-            value={birth}
-            onBlur={testBirthRegax}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setBitrh(e.target.value)
-            }
-          />
-        </p>
-        <p>
-          <span>포지션 : </span>
-          <SelectBox value={positions} useStateFunc={setPosition} />
-        </p>
-        <p>
-          <span>등번호(숫자만 입력가능) : </span>
-          <input value={backNo} onChange={handleBackNoChange} maxLength={3} />
-        </p>
-        <p>
-          <span>좌우명(최대 30자) : </span>
+        <p className="register_title">선수 등록</p>
+        <CustomizedInput
+          title={"이름(한글) : "}
+          value={korName}
+          className={"name"}
+          onBlur={testKorNameRegax}
+          onChange={setKorName}
+          maxLength={10}
+        />
+        <CustomizedInput
+          title={"First Name (English) : "}
+          value={firstNameEng}
+          className={"first_name_eng"}
+          onBlur={testFirstNameEngRegax}
+          onChange={handleFirstNameEngInput}
+          maxLength={15}
+        />
+        <CustomizedInput
+          title={"Family Name (English) : "}
+          value={familyNameEng}
+          className={"family_name_eng"}
+          onBlur={testFamilyNameEngRegax}
+          onChange={handleFamilyNameEngInput}
+          maxLength={15}
+        />
+        <CustomizedInput
+          title={"생년월일(0000-00-00) : "}
+          value={birth}
+          className={"birth"}
+          onBlur={testBirthRegax}
+          onChange={setBitrh}
+        />
+        <CustomizedSelectBox
+          title={"포지션 :"}
+          value={positions}
+          className={"pisition"}
+          useStateFunc={setPosition}
+        />
+        <CustomizedInput
+          title={"등번호(숫자만) : "}
+          value={String(backNo)}
+          className={"backNo"}
+          onChange={handleBackNoChange}
+          maxLength={3}
+        />
+        <div className="moto_area">
+          <span> Moto(최대 30자) : </span>
           <textarea
-            maxLength={30}
             value={moto}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-              setMoto(e.target.value)
-            }
+            className={"moto"}
+            maxLength={30}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              setMoto(e.target.value);
+            }}
           />
-        </p>
-        <span>"프로필 이미지 등록 (등록안하면 기본이미지로 보임): "</span>
+        </div>
         <ImageUploader
+          title="프로필 이미지 등록 (등록안하면 기본이미지로 보임): "
           setImgFile={setProfileImageFile}
           imageFile={profileImageFile}
         />
-        <button onClick={handlePlayerRegister} className="register_btn">
+        <Button
+          fullWidth={true}
+          size="large"
+          variant="contained"
+          color="primary"
+          onClick={handlePlayerRegister}
+          className="register_btn"
+        >
           선수 등록하기
-        </button>
+        </Button>
       </div>
       <PlayerList players={players} />
     </>
