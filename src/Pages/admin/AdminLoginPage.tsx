@@ -1,8 +1,4 @@
 import { useState } from "react";
-import {
-  TEMP_ADMIN_ID,
-  TEMP_ADMIN_PW,
-} from "../../CommonConstant/CommonConstant";
 import { useAppDispatch } from "../../Store/config";
 import { setLoginState } from "../../Store/Slices/LoginSlice";
 import "./AdminLoginPage.scss";
@@ -24,7 +20,10 @@ const AdminLoginPage = () => {
   };
 
   const handleLogin = () => {
-    if (id === TEMP_ADMIN_ID && password === TEMP_ADMIN_PW) {
+    if (
+      id === process.env.REACT_APP_ADMIN_ID &&
+      password === process.env.REACT_APP_ADMIN_PW
+    ) {
       dispatch(setLoginState(true));
       alert("로그인 성공!!");
     } else {

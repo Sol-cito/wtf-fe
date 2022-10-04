@@ -4,11 +4,13 @@ import {
   GetParameter,
   postApiCall,
   PostParameter,
+  putApiCall,
+  PutParameter,
 } from "./ApiCall";
 
 export async function getAllPlayersAPI(): Promise<PlayerModel[]> {
   const getParameter: GetParameter = {
-    url: "player/all",
+    url: "player",
   };
   const result: PlayerModel[] = await getApiCall(getParameter);
   return result;
@@ -31,12 +33,23 @@ export async function registerNewPlayerAPI(
   formData: FormData
 ): Promise<PlayerModel> {
   const postParameter: PostParameter = {
-    url: "player/register",
+    url: "player",
     data: formData,
     headerData: {
       "Content-Type": "multipart/form-data",
     },
   };
   const result: PlayerModel = await postApiCall(postParameter);
+  return result;
+}
+
+export async function modifyPlayerAPI(
+  playerModel: PlayerModel
+): Promise<PlayerModel> {
+  const putParameter: PutParameter = {
+    url: "player",
+    data: playerModel,
+  };
+  const result: PlayerModel = await putApiCall(putParameter);
   return result;
 }

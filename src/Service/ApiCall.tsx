@@ -13,6 +13,12 @@ export interface PostParameter {
   headerData?: AxiosRequestHeaders;
 }
 
+export interface PutParameter {
+  url: string;
+  data?: any;
+  headerData?: AxiosRequestHeaders;
+}
+
 export async function getApiCall(getParameter: GetParameter): Promise<any> {
   const requestConfig: AxiosRequestConfig = {
     url: getParameter.url,
@@ -29,6 +35,17 @@ export async function postApiCall(postParameter: PostParameter): Promise<any> {
     method: HttpMethod.POST,
     data: postParameter.data,
     headers: postParameter.headerData,
+  };
+  const result = await baseApiCall(requestConfig);
+  return result.data;
+}
+
+export async function putApiCall(putParameter: PutParameter): Promise<any> {
+  const requestConfig: AxiosRequestConfig = {
+    url: putParameter.url,
+    method: HttpMethod.PUT,
+    data: putParameter.data,
+    headers: putParameter.headerData,
   };
   const result = await baseApiCall(requestConfig);
   return result.data;
