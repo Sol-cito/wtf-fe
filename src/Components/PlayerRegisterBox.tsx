@@ -248,7 +248,6 @@ const PlayerRegisterBox = () => {
           imageFile={profileImageFile}
         />
         <Button
-          fullWidth={true}
           size="large"
           variant="contained"
           color="primary"
@@ -258,7 +257,7 @@ const PlayerRegisterBox = () => {
           선수 등록하기
         </Button>
       </div>
-      <PlayerList players={players} />
+      <PlayerList players={players} title="< 현재 등록된 선수 명단 >" />
     </>
   );
 };

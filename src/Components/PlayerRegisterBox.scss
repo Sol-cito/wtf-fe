@@ -34,7 +34,30 @@
 
   .register_btn {
     font-size: 2vw;
-    // width: 15vw;
+    width: fit-content;
     margin: 3vh 0 3vh 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .register_info_area {
+    .register_title {
+      font-size: 6vw;
+      font-weight: 800;
+    }
+
+    .moto_area {
+      span {
+        font-size: 4vw;
+        font-weight: 600;
+      }
+      textarea {
+        font-size: 4vw;
+      }
+    }
+
+    .register_btn {
+      font-size: 4vw;
+    }
   }
 }

@@ -1,12 +1,23 @@
 .register_page_container {
+  margin-top: 7vh;
   text-align: center;
 
   p {
+    font-weight: 600;
     font-size: 2vw;
     margin-top: 0;
   }
 
   .registered_player_board {
     margin-bottom: 2vh;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .register_page_container {
+    p {
+      font-weight: 600;
+      font-size: 4vw;
+    }
   }
 }

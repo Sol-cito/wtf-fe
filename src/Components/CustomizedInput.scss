@@ -10,3 +10,17 @@
   margin: 3vh 0 3vh 0;
   height: 30vh;
 }
+
+@media only screen and (max-width: 768px) {
+  .customized_input {
+    span {
+      font-weight: 700;
+      font-size: 4vw;
+    }
+
+    .customized_input_input {
+      height: 5vh;
+      font-size: 4vw;
+    }
+  }
+}

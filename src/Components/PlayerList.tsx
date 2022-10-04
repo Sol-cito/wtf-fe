@@ -1,4 +1,5 @@
 import {
+  Checkbox,
   Paper,
   Table,
   TableBody,
@@ -12,18 +13,25 @@ import { PlayerModel } from "../Models/PlayerModel";
 import "./PlayerList.scss";
 
 export interface PlayerListProps {
+  title?: string;
+  isCheckboxVisible?: boolean;
   players: PlayerModel[];
 }
 
 const PlayerList = (props: PlayerListProps) => {
   return (
     <div className="register_page_container">
-      <p>- 현재 등록된 선수 명단 -</p>
+      <p>{props.title}</p>
       <TableContainer className="registered_player_board" component={Paper}>
         <Table aria-label="simple table" stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell>no</TableCell>
+              {props.isCheckboxVisible ? (
+                <>
+                  <TableCell>check</TableCell>
+                </>
+              ) : null}
               <TableCell>이름</TableCell>
               <TableCell>First Name</TableCell>
               <TableCell>Family Name</TableCell>
@@ -40,6 +48,11 @@ const PlayerList = (props: PlayerListProps) => {
                   return (
                     <TableRow key={idx}>
                       <TableCell>{idx + 1}</TableCell>
+                      {props.isCheckboxVisible ? (
+                        <>
+                          <Checkbox />
+                        </>
+                      ) : null}
                       <TableCell>{ele.name}</TableCell>
                       <TableCell>{ele.firstNameEng}</TableCell>
                       <TableCell>{ele.familyNameEng}</TableCell>

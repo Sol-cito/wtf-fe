@@ -11,19 +11,35 @@
   overflow-y: auto;
 
   .admin_menu_container {
-    display: flex;
-    justify-content: center;
+    background-color: rgb(199, 199, 199);
+    padding: 3vh 0 3vh 0;
+    border-bottom: 1px solid black;
 
     button {
-      margin-right: 1vw;
+      margin: 1vw;
     }
+
     .player_register {
-      font-size: 3vw;
-      width: 30vw;
+      font-size: 2vw;
+      width: fit-content;
     }
   }
 
   .fragment_container {
-    margin-top: 5vh;
+    margin: 5vh 0 10vh 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .admin_background {
+    .admin_menu_container {
+      .player_register {
+        font-size: 4vw;
+      }
+
+      button {
+        margin: 3vw;
+      }
+    }
   }
 }
