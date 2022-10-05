@@ -5,7 +5,7 @@ import Header from "./Header";
 import ContactPage from "./Pages/AboutPage";
 import AdminLoginPage from "./Pages/admin/AdminLoginPage";
 import AdminPage from "./Pages/admin/AdminPage";
-import PlayerRegisterBox from "./Components/PlayerRegisterBox";
+import PlayerInfoInputBox from "./Components/PlayerInfoInputBox";
 import MainPage from "./Pages/MainPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import { useAppSelector } from "./Store/config";
@@ -26,14 +26,6 @@ const App = () => {
               path="/admin"
               element={isLogin ? <AdminPage /> : <AdminLoginPage />}
             />
-            {isLogin ? (
-              <>
-                <Route
-                  path="/admin/player/register"
-                  element={<PlayerRegisterBox />}
-                />
-              </>
-            ) : null}
           </Routes>
         </div>
         <Footer />

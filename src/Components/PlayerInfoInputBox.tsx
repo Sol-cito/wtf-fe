@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   BIRTH_REGAX,
   ENGLISH_REGAX,
@@ -7,20 +7,20 @@ import {
   NUMBER_REGAX,
 } from "../CommonConstant/CommonConstant";
 import { PlayerModel } from "../Models/PlayerModel";
-import {
-  getAllPlayersAPI,
-  getPlayersByNameAPI,
-  registerNewPlayerAPI,
-} from "../Service/PlayerService";
+import { getPlayersByNameAPI } from "../Service/PlayerService";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedSelectBox from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
-import PlayerList from "./PlayerList";
-import "./PlayerRegisterBox.scss";
+import "./PlayerInfoInputBox.scss";
 
-const PlayerRegisterBox = () => {
-  const [players, setPlayers] = useState<PlayerModel[]>([]);
+export interface PlayerInfoInputBoxProps {
+  title: string;
+  playerInfo?: PlayerModel;
+  validateFunction?: Function;
+  executeFunction: Function;
+}
 
+const PlayerInfoInputBox = (props: PlayerInfoInputBoxProps) => {
   const [korName, setKorName] = useState<string>("");
   const [firstNameEng, setFirstNameEng] = useState<string>("");
   const [familyNameEng, setFamilyNameEng] = useState<string>("");
@@ -42,15 +42,6 @@ const PlayerRegisterBox = () => {
     setMoto("");
     setProfileImageFile(undefined);
   };
-
-  const getAllRegisteredPlayers = async () => {
-    const res = await getAllPlayersAPI();
-    setPlayers(res);
-  };
-
-  useEffect(() => {
-    getAllRegisteredPlayers();
-  }, []);
 
   const testKorNameRegax = (input: string) => {
     if (input && !KOREAN_REGAX.test(input)) {
@@ -94,7 +85,39 @@ const PlayerRegisterBox = () => {
     }
   };
 
-  const validateRegistration = () => {
+  const handleBackNoChange = (input: string) => {
+    if (NUMBER_REGAX.test(input)) {
+      setBackNo(Number(input));
+    }
+  };
+
+  const handleExcuteBtnOnclick = () => {
+    if (!validateInputData()) {
+      return;
+    }
+    let confirmRes = window.confirm(
+      "기입하고자 하는 선수 정보가 아래 내용이 맞습니까? \n" +
+        "\n   - 한글 이름 : " +
+        korName +
+        "\n   - 영문 이름 : " +
+        firstNameEng +
+        "\n   - 영문 성 : " +
+        familyNameEng +
+        "\n   - 생년월일 : " +
+        birth +
+        "\n   - 포지션 : " +
+        position +
+        "\n   - 등번호 : " +
+        backNo +
+        "\n   - 좌우명 : " +
+        moto
+    );
+    if (confirmRes) {
+      proceedExecution();
+    }
+  };
+
+  const validateInputData = () => {
     if (!korName) {
       alert("한글 이름 입력 안됨");
       return false;
@@ -118,33 +141,11 @@ const PlayerRegisterBox = () => {
     return true;
   };
 
-  const handlePlayerRegister = () => {
-    if (!validateRegistration()) {
-      return;
+  const proceedExecution = async () => {
+    if (props.validateFunction) {
+      const res = await props.validateFunction();
+      if (!res) return;
     }
-    let confirmRes = window.confirm(
-      "등록하고자 하는 선수 정보가 아래 내용이 맞습니까? \n" +
-        "\n   - 한글 이름 : " +
-        korName +
-        "\n   - 영문 이름 : " +
-        firstNameEng +
-        "\n   - 영문 성 : " +
-        familyNameEng +
-        "\n   - 생년월일 : " +
-        birth +
-        "\n   - 포지션 : " +
-        position +
-        "\n   - 등번호 : " +
-        backNo +
-        "\n   - 좌우명 : " +
-        moto
-    );
-    if (confirmRes) {
-      registerPlayer();
-    }
-  };
-
-  const registerPlayer = async () => {
     const playerByNameRes: PlayerModel[] = await getPlayersByNameAPI(korName);
     if (0 < playerByNameRes.length) {
       let confirmRes = window.confirm(
@@ -167,26 +168,21 @@ const PlayerRegisterBox = () => {
       formData.append("image", profileImageFile);
     }
 
-    const registerRes: PlayerModel = await registerNewPlayerAPI(formData);
-    if (registerRes) {
-      alert("등록 성공! " + registerRes.name);
-      getAllRegisteredPlayers();
-      initState();
-    } else {
-      alert("[ERROR] 등록 실패...개발자에게 문의 ㄱㄱ");
-    }
-  };
-
-  const handleBackNoChange = (input: string) => {
-    if (NUMBER_REGAX.test(input)) {
-      setBackNo(Number(input));
-    }
+    // const registerRes: PlayerModel = await registerNewPlayerAPI(formData);
+    // if (registerRes) {
+    //   alert("등록 성공! " + registerRes.name);
+    //   getAllRegisteredPlayers();
+    //   initState();
+    // } else {
+    //   alert("[ERROR] 등록 실패...개발자에게 문의 ㄱㄱ");
+    // }
+    const executionRes = await props.executeFunction();
   };
 
   return (
     <>
       <div className="register_info_area">
-        <p className="register_title">선수 등록</p>
+        <p className="register_title">{props.title}</p>
         <CustomizedInput
           title={"이름(한글) : "}
           value={korName}
@@ -243,7 +239,7 @@ const PlayerRegisterBox = () => {
           />
         </div>
         <ImageUploader
-          title="프로필 이미지 등록 (등록안하면 기본이미지로 보임): "
+          title="프로필 이미지(업로드 안하면 기본이미지로 보임): "
           setImgFile={setProfileImageFile}
           imageFile={profileImageFile}
         />
@@ -251,14 +247,13 @@ const PlayerRegisterBox = () => {
           size="large"
           variant="contained"
           color="primary"
-          onClick={handlePlayerRegister}
+          onClick={handleExcuteBtnOnclick}
           className="register_btn"
         >
-          선수 등록하기
+          {props.title}
         </Button>
       </div>
-      <PlayerList players={players} title="< 현재 등록된 선수 명단 >" />
     </>
   );
 };
-export default PlayerRegisterBox;
+export default PlayerInfoInputBox;

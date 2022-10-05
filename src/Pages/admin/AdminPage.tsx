@@ -1,13 +1,14 @@
 import { Button } from "@material-ui/core";
 import { useState } from "react";
-import PlayerRegisterBox from "../../Components/PlayerRegisterBox";
 import "./AdminPage.scss";
+import PlayerModificationFragment from "./PlayerModificationFragment";
+import PlayerRegistrationFragment from "./PlayerRegistrationFragment";
 
 const AdminPage = () => {
   const [fragment, setFragment] = useState<React.ReactElement>();
 
-  const handleRegisterClick = () => {
-    setFragment(<PlayerRegisterBox />);
+  const handleFragmentButtonClick = (fragment: React.ReactElement) => {
+    setFragment(fragment);
   };
 
   return (
@@ -17,7 +18,9 @@ const AdminPage = () => {
           size="large"
           variant="contained"
           color="primary"
-          onClick={handleRegisterClick}
+          onClick={() =>
+            handleFragmentButtonClick(<PlayerRegistrationFragment />)
+          }
           className="player_register"
         >
           선수 등록
@@ -27,7 +30,9 @@ const AdminPage = () => {
           size="large"
           variant="contained"
           color="primary"
-          // onClick={}
+          onClick={() =>
+            handleFragmentButtonClick(<PlayerModificationFragment />)
+          }
           className="player_register"
         >
           선수 정보 수정
