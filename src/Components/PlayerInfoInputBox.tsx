@@ -7,7 +7,6 @@ import {
   NUMBER_REGAX,
 } from "../CommonConstant/CommonConstant";
 import { PlayerModel } from "../Models/PlayerModel";
-import { getPlayersByNameAPI } from "../Service/PlayerService";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedSelectBox from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
@@ -17,6 +16,7 @@ export interface PlayerInfoInputBoxProps {
   title: string;
   playerInfo?: PlayerModel;
   validateFunction?: Function;
+  initFunction?: Function;
   executeFunction: Function;
 }
 
@@ -143,15 +143,8 @@ const PlayerInfoInputBox = (props: PlayerInfoInputBoxProps) => {
 
   const proceedExecution = async () => {
     if (props.validateFunction) {
-      const res = await props.validateFunction();
+      const res = await props.validateFunction(korName);
       if (!res) return;
-    }
-    const playerByNameRes: PlayerModel[] = await getPlayersByNameAPI(korName);
-    if (0 < playerByNameRes.length) {
-      let confirmRes = window.confirm(
-        "[Warning] 동일 이름으로 등록된 선수가 이미 있습니다. 그래도 등록하시겠습니까? \n"
-      );
-      if (!confirmRes) return;
     }
 
     const formData: FormData = new FormData();
@@ -168,15 +161,16 @@ const PlayerInfoInputBox = (props: PlayerInfoInputBoxProps) => {
       formData.append("image", profileImageFile);
     }
 
-    // const registerRes: PlayerModel = await registerNewPlayerAPI(formData);
-    // if (registerRes) {
-    //   alert("등록 성공! " + registerRes.name);
-    //   getAllRegisteredPlayers();
-    //   initState();
-    // } else {
-    //   alert("[ERROR] 등록 실패...개발자에게 문의 ㄱㄱ");
-    // }
-    const executionRes = await props.executeFunction();
+    const executionRes: PlayerModel = await props.executeFunction(formData);
+    if (executionRes) {
+      alert("Success!! " + executionRes.name);
+      initState();
+      if (props.initFunction) {
+        props.initFunction();
+      }
+    } else {
+      alert("[ERROR] 요청 실패...개발자에게 문의 ㄱㄱ");
+    }
   };
 
   return (

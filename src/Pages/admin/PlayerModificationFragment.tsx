@@ -28,6 +28,7 @@ const PlayerModificationFragment = () => {
         title={"선수 수정"}
         // playerInfo={}
         // validateFunction={}
+        initFunction={getAllRegisteredPlayers}
         executeFunction={() => {}}
       />
     </>
