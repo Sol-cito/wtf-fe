@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ANONYMOUS_PROFILE_IMG_PATH } from "../CommonConstant/ImgSrcConstant";
 import { PlayerModel } from "../Models/PlayerModel";
 import "./PlayerPhoto.scss";
 
@@ -8,6 +9,9 @@ export interface PlayerPhotoProps {
 
 const PlayerPhoto = (props: PlayerPhotoProps) => {
   const [isHovering, setIsHovering] = useState<boolean>(false);
+  const [profileImgSrc, setProfileImgSrc] = useState<string>(
+    props.player.profileImgSrc || ANONYMOUS_PROFILE_IMG_PATH
+  );
 
   const handleOnMouseOver = () => {
     setIsHovering(true);
@@ -15,6 +19,10 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
 
   const handleOnMouseLeave = () => {
     setIsHovering(false);
+  };
+
+  const handleImgOnError = () => {
+    setProfileImgSrc(ANONYMOUS_PROFILE_IMG_PATH);
   };
 
   return (
@@ -30,12 +38,7 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
           <p>{props.player.firstNameEng}</p>
         </div>
       ) : null}
-      <img
-        src={
-          props.player.profileImgSrc ||
-          "/img/player/anonymous_profile_no_background.png"
-        }
-      />
+      <img src={profileImgSrc} onError={handleImgOnError} />
     </div>
   );
 };
