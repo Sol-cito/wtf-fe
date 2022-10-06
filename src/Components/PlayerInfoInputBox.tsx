@@ -1,12 +1,12 @@
 import { Button } from "@material-ui/core";
-import { useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import {
   BIRTH_REGAX,
   ENGLISH_REGAX,
   KOREAN_REGAX,
   NUMBER_REGAX,
 } from "../CommonConstant/CommonConstant";
-import { PlayerModel } from "../Models/PlayerModel";
+import { PlayerModel, PlayerMultipartModel } from "../Models/PlayerModel";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedSelectBox from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
@@ -15,33 +15,43 @@ import "./PlayerInfoInputBox.scss";
 export interface PlayerInfoInputBoxProps {
   title: string;
   playerInfo?: PlayerModel;
-  validateFunction?: Function;
-  initFunction?: Function;
-  executeFunction: Function;
+  handleOnClick: Function;
 }
 
-const PlayerInfoInputBox = (props: PlayerInfoInputBoxProps) => {
-  const [korName, setKorName] = useState<string>("");
-  const [firstNameEng, setFirstNameEng] = useState<string>("");
-  const [familyNameEng, setFamilyNameEng] = useState<string>("");
-  const [birth, setBitrh] = useState<string>("");
-  const [position, setPosition] = useState<string>("GK");
-  const [backNo, setBackNo] = useState<number>(0);
-  const [moto, setMoto] = useState<string>("");
+const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
+  const [playerId, setPlayerId] = useState<number>(props.playerInfo?.id || -1);
+  const [korName, setKorName] = useState<string>(props.playerInfo?.name || "");
+  const [firstNameEng, setFirstNameEng] = useState<string>(
+    props.playerInfo?.firstNameEng || ""
+  );
+  const [familyNameEng, setFamilyNameEng] = useState<string>(
+    props.playerInfo?.familyNameEng || ""
+  );
+  const [birth, setBitrh] = useState<string>(props.playerInfo?.birth || "");
+  const [position, setPosition] = useState<string>(
+    props.playerInfo?.position || "GK"
+  );
+  const [backNo, setBackNo] = useState<number>(props.playerInfo?.backNo || 0);
+  const [moto, setMoto] = useState<string>(props.playerInfo?.moto || "");
   const [profileImageFile, setProfileImageFile] = useState<File>();
 
-  const positions = ["GK", "FW", "MF", "DF"];
+  const allPositions: string[] = ["GK", "FW", "MF", "DF"];
 
   const initState = () => {
+    setPlayerId(-1);
     setKorName("");
     setFirstNameEng("");
     setFamilyNameEng("");
     setBitrh("");
-    setPosition("");
+    setPosition("GK");
     setBackNo(0);
     setMoto("");
     setProfileImageFile(undefined);
   };
+
+  useImperativeHandle(ref, () => ({
+    initState,
+  }));
 
   const testKorNameRegax = (input: string) => {
     if (input && !KOREAN_REGAX.test(input)) {
@@ -91,86 +101,22 @@ const PlayerInfoInputBox = (props: PlayerInfoInputBoxProps) => {
     }
   };
 
-  const handleExcuteBtnOnclick = () => {
-    if (!validateInputData()) {
-      return;
-    }
-    let confirmRes = window.confirm(
-      "기입하고자 하는 선수 정보가 아래 내용이 맞습니까? \n" +
-        "\n   - 한글 이름 : " +
-        korName +
-        "\n   - 영문 이름 : " +
-        firstNameEng +
-        "\n   - 영문 성 : " +
-        familyNameEng +
-        "\n   - 생년월일 : " +
-        birth +
-        "\n   - 포지션 : " +
-        position +
-        "\n   - 등번호 : " +
-        backNo +
-        "\n   - 좌우명 : " +
-        moto
-    );
-    if (confirmRes) {
-      proceedExecution();
-    }
-  };
-
-  const validateInputData = () => {
-    if (!korName) {
-      alert("한글 이름 입력 안됨");
-      return false;
-    }
-    if (!firstNameEng) {
-      alert("영문 이름 입력 안됨");
-      return false;
-    }
-    if (!familyNameEng) {
-      alert("영문 성 입력 안됨");
-      return false;
-    }
-    if (!birth) {
-      alert("생년월일 입력 안됨");
-      return false;
-    }
-    if (!moto) {
-      alert("좌우명 입력 안됨");
-      return false;
-    }
-    return true;
-  };
-
-  const proceedExecution = async () => {
-    if (props.validateFunction) {
-      const res = await props.validateFunction(korName);
-      if (!res) return;
-    }
-
-    const formData: FormData = new FormData();
-    formData.append("name", korName);
-    formData.append("firstNameEng", firstNameEng);
-    formData.append("familyNameEng", familyNameEng);
-    formData.append("birth", birth);
-    formData.append("position", position);
-    formData.append("backNo", String(backNo));
-    formData.append("moto", moto);
-    formData.append("curYn", "Y");
-
-    if (profileImageFile) {
-      formData.append("image", profileImageFile);
-    }
-
-    const executionRes: PlayerModel = await props.executeFunction(formData);
-    if (executionRes) {
-      alert("Success!! " + executionRes.name);
-      initState();
-      if (props.initFunction) {
-        props.initFunction();
-      }
-    } else {
-      alert("[ERROR] 요청 실패...개발자에게 문의 ㄱㄱ");
-    }
+  const handleBtnOnClick = () => {
+    const player: PlayerModel = {
+      id: playerId,
+      name: korName,
+      firstNameEng: firstNameEng,
+      familyNameEng: familyNameEng,
+      birth: birth,
+      position: position,
+      backNo: backNo,
+      moto: moto,
+    };
+    const inputRes: PlayerMultipartModel = {
+      player: player,
+      profileImageFile: profileImageFile,
+    };
+    props.handleOnClick(inputRes);
   };
 
   return (
@@ -210,7 +156,8 @@ const PlayerInfoInputBox = (props: PlayerInfoInputBoxProps) => {
         />
         <CustomizedSelectBox
           title={"포지션 :"}
-          value={positions}
+          value={position}
+          options={allPositions}
           className={"pisition"}
           useStateFunc={setPosition}
         />
@@ -241,7 +188,7 @@ const PlayerInfoInputBox = (props: PlayerInfoInputBoxProps) => {
           size="large"
           variant="contained"
           color="primary"
-          onClick={handleExcuteBtnOnclick}
+          onClick={handleBtnOnClick}
           className="register_btn"
         >
           {props.title}
@@ -249,5 +196,5 @@ const PlayerInfoInputBox = (props: PlayerInfoInputBoxProps) => {
       </div>
     </>
   );
-};
+});
 export default PlayerInfoInputBox;

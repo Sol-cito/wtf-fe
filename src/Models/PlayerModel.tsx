@@ -1,4 +1,5 @@
 export interface PlayerModel {
+  id: number;
   name: string;
   firstNameEng: string;
   familyNameEng: string;
@@ -8,4 +9,9 @@ export interface PlayerModel {
   moto: string;
   profileImgSrc?: string;
   curYn?: string;
+}
+
+export interface PlayerMultipartModel {
+  player: PlayerModel;
+  profileImageFile?: File;
 }

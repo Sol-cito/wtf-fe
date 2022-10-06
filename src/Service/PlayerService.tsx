@@ -49,6 +49,9 @@ export async function modifyPlayerAPI(
   const putParameter: PutParameter = {
     url: "player",
     data: playerModel,
+    headerData: {
+      "Content-Type": "multipart/form-data",
+    },
   };
   const result: PlayerModel = await putApiCall(putParameter);
   return result;

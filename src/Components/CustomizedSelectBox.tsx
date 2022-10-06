@@ -3,7 +3,8 @@ import "./CustomizedSelectBox.scss";
 
 export interface CustomizedSelectBox {
   title: string;
-  value: string[];
+  value: string;
+  options: string[];
   className?: string;
   useStateFunc: Function;
 }
@@ -16,8 +17,12 @@ const CustomizedSelectBox = (props: CustomizedSelectBox) => {
   return (
     <div className={"customized_select_box " + props.className}>
       <span>{props.title} </span>
-      <select className="select_each" onChange={handleOnChange}>
-        {props.value.map((element, idx) => (
+      <select
+        className="select_each"
+        onChange={handleOnChange}
+        value={props.value}
+      >
+        {props.options.map((element, idx) => (
           <option className="select_option" key={idx} value={element}>
             {element}
           </option>

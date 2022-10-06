@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PlayerInfoInputBox from "../../Components/PlayerInfoInputBox";
 import PlayerList from "../../Components/PlayerList";
 import { PlayerModel } from "../../Models/PlayerModel";
-import { getAllPlayersAPI } from "../../Service/PlayerService";
+import { getAllPlayersAPI, modifyPlayerAPI } from "../../Service/PlayerService";
 import "./PlayerRegistrationFragment.scss";
 
 const PlayerModificationFragment = () => {
@@ -26,10 +26,7 @@ const PlayerModificationFragment = () => {
       />
       <PlayerInfoInputBox
         title={"선수 수정"}
-        // playerInfo={}
-        // validateFunction={}
-        initFunction={getAllRegisteredPlayers}
-        executeFunction={() => {}}
+        handleOnClick={getAllRegisteredPlayers}
       />
     </>
   );
