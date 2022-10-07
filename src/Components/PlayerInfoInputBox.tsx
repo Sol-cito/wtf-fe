@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
-import { forwardRef, useImperativeHandle, useState } from "react";
+import moment from "moment";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import {
   BIRTH_REGAX,
   ENGLISH_REGAX,
@@ -19,23 +20,29 @@ export interface PlayerInfoInputBoxProps {
 }
 
 const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
-  const [playerId, setPlayerId] = useState<number>(props.playerInfo?.id || -1);
-  const [korName, setKorName] = useState<string>(props.playerInfo?.name || "");
-  const [firstNameEng, setFirstNameEng] = useState<string>(
-    props.playerInfo?.firstNameEng || ""
-  );
-  const [familyNameEng, setFamilyNameEng] = useState<string>(
-    props.playerInfo?.familyNameEng || ""
-  );
-  const [birth, setBitrh] = useState<string>(props.playerInfo?.birth || "");
-  const [position, setPosition] = useState<string>(
-    props.playerInfo?.position || "GK"
-  );
-  const [backNo, setBackNo] = useState<number>(props.playerInfo?.backNo || 0);
-  const [moto, setMoto] = useState<string>(props.playerInfo?.moto || "");
+  const [playerId, setPlayerId] = useState<number>(-1);
+  const [korName, setKorName] = useState<string>("");
+  const [firstNameEng, setFirstNameEng] = useState<string>("");
+  const [familyNameEng, setFamilyNameEng] = useState<string>("");
+  const [birth, setBitrh] = useState<string>("");
+  const [position, setPosition] = useState<string>("GK");
+  const [backNo, setBackNo] = useState<number>(0);
+  const [moto, setMoto] = useState<string>("");
   const [profileImageFile, setProfileImageFile] = useState<File>();
 
   const allPositions: string[] = ["GK", "FW", "MF", "DF"];
+
+  useEffect(() => {
+    if (!props.playerInfo) return;
+    setPlayerId(props.playerInfo.id);
+    setKorName(props.playerInfo.name);
+    setFirstNameEng(props.playerInfo.firstNameEng);
+    setFamilyNameEng(props.playerInfo.familyNameEng);
+    setBitrh(moment(props.playerInfo.birth).format("YYYY-MM-DD"));
+    setPosition(props.playerInfo.position);
+    setBackNo(props.playerInfo.backNo);
+    setMoto(props.playerInfo.moto);
+  }, [props.playerInfo]);
 
   const initState = () => {
     setPlayerId(-1);

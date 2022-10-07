@@ -8,7 +8,10 @@ import {
   getPlayersByNameAPI,
   registerNewPlayerAPI,
 } from "../../Service/PlayerService";
-import { createFormData } from "../../Service/UtilityService";
+import {
+  createFormData,
+  validatePlayerInputData,
+} from "../../Service/UtilityService";
 import "./PlayerRegistrationFragment.scss";
 
 const PlayerRegistrationFragment = () => {
@@ -30,18 +33,6 @@ const PlayerRegistrationFragment = () => {
     getAllRegisteredPlayers();
   }, []);
 
-  const validateInputData = (player: PlayerModel) => {
-    for (let res of Object.entries(player)) {
-      let key: string = res[0];
-      let value: string = res[1];
-      if (value.length == 0) {
-        alert("[Warning] " + key + " 입력되지 않음");
-        return false;
-      }
-    }
-    return true;
-  };
-
   const validateDuplicatePlayerName = async (korName: string) => {
     const playerByNameRes: PlayerModel[] = await getPlayersByNameAPI(korName);
     if (0 < playerByNameRes.length) {
@@ -56,7 +47,7 @@ const PlayerRegistrationFragment = () => {
   const handleRegistrationOnClick = async (
     playerMultipartModel: PlayerMultipartModel
   ) => {
-    if (!validateInputData(playerMultipartModel.player)) return;
+    if (!validatePlayerInputData(playerMultipartModel.player)) return;
     if (!(await validateDuplicatePlayerName(playerMultipartModel.player.name)))
       return;
     setPlayerMultipartModel(playerMultipartModel);

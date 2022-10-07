@@ -1,6 +1,9 @@
 import {
   Checkbox,
+  CheckboxClassKey,
   Paper,
+  Radio,
+  RadioGroup,
   Table,
   TableBody,
   TableCell,
@@ -11,14 +14,30 @@ import {
 import moment from "moment";
 import { PlayerModel } from "../Models/PlayerModel";
 import "./PlayerList.scss";
+import { useState } from "react";
 
 export interface PlayerListProps {
   title?: string;
-  isCheckboxVisible?: boolean;
+  isRadioButtonVisible?: boolean;
+  setSelectedPlayer?: Function;
   players: PlayerModel[];
 }
 
 const PlayerList = (props: PlayerListProps) => {
+  const [selectedRadioId, setSelectedRadioId] = useState<number>(-1);
+
+  const handleRadioOnClick = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    player: PlayerModel
+  ) => {
+    setSelectedRadioId(Number(e.target.id));
+    if (props.setSelectedPlayer) {
+      props.setSelectedPlayer(player);
+    }
+
+    console.log(player);
+  };
+
   return (
     <div className="register_page_container">
       <p>{props.title}</p>
@@ -27,9 +46,9 @@ const PlayerList = (props: PlayerListProps) => {
           <TableHead>
             <TableRow>
               <TableCell>no</TableCell>
-              {props.isCheckboxVisible ? (
+              {props.isRadioButtonVisible ? (
                 <>
-                  <TableCell>check</TableCell>
+                  <TableCell>선택</TableCell>
                 </>
               ) : null}
               <TableCell>이름</TableCell>
@@ -48,10 +67,18 @@ const PlayerList = (props: PlayerListProps) => {
                   return (
                     <TableRow key={idx}>
                       <TableCell>{idx + 1}</TableCell>
-                      {props.isCheckboxVisible ? (
-                        <>
-                          <Checkbox />
-                        </>
+                      {props.isRadioButtonVisible ? (
+                        <TableCell>
+                          <Radio
+                            id={String(ele.id)}
+                            checked={selectedRadioId === ele.id}
+                            onChange={(
+                              e: React.ChangeEvent<HTMLInputElement>
+                            ) => {
+                              handleRadioOnClick(e, ele);
+                            }}
+                          />
+                        </TableCell>
                       ) : null}
                       <TableCell>{ele.name}</TableCell>
                       <TableCell>{ele.firstNameEng}</TableCell>
