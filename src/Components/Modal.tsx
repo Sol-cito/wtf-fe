@@ -1,6 +1,7 @@
 import { useAppDispatch } from "../Store/config";
 import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";
 import "./Modal.scss";
+import TransparentBackground from "./TransparentBackground";
 
 export interface ModalProps {
   showModal: boolean;
@@ -23,7 +24,7 @@ const Modal = (props: ModalProps) => {
     <>
       {props.showModal ? (
         <>
-          <div className="modal_back_shadow" onClick={onClickModalClose} />
+          <TransparentBackground onClick={onClickModalClose} />
           <div className="modal_background" style={props.backgroundStyle}>
             <p className="modal_header" onClick={onClickModalClose}>
               X

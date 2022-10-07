@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import CustomizedConfirm from "../../Components/CustomizedConfirm";
 import PlayerInfoInputBox from "../../Components/PlayerInfoInputBox";
 import PlayerList from "../../Components/PlayerList";
 import { PlayerModel, PlayerMultipartModel } from "../../Models/PlayerModel";
@@ -7,10 +8,16 @@ import {
   getPlayersByNameAPI,
   registerNewPlayerAPI,
 } from "../../Service/PlayerService";
+import { createFormData } from "../../Service/UtilityService";
 import "./PlayerRegistrationFragment.scss";
 
 const PlayerRegistrationFragment = () => {
   const [players, setPlayers] = useState<PlayerModel[]>([]);
+  const [playerMultipartModel, setPlayerMultipartModel] =
+    useState<PlayerMultipartModel>();
+
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [confirmContents, setConfirmContents] = useState<string>("");
 
   const initStateRef: React.Ref<any> = useRef({});
 
@@ -52,42 +59,41 @@ const PlayerRegistrationFragment = () => {
     if (!validateInputData(playerMultipartModel.player)) return;
     if (!(await validateDuplicatePlayerName(playerMultipartModel.player.name)))
       return;
-
-    let confirmRes = window.confirm(
-      "기입하고자 하는 선수 정보가 아래 내용이 맞습니까? \n" +
-        "\n   - 한글 이름 : " +
+    setPlayerMultipartModel(playerMultipartModel);
+    setConfirmContents(
+      "- 한글 이름 : " +
         playerMultipartModel.player.name +
-        "\n   - 영문 이름 : " +
+        "\n- 영문 이름 : " +
         playerMultipartModel.player.firstNameEng +
-        "\n   - 영문 성 : " +
+        "\n- 영문 성 : " +
         playerMultipartModel.player.familyNameEng +
-        "\n   - 생년월일 : " +
+        "\n- 생년월일 : " +
         playerMultipartModel.player.birth +
-        "\n   - 포지션 : " +
+        "\n- 포지션 : " +
         playerMultipartModel.player.position +
-        "\n   - 등번호 : " +
+        "\n- 등번호 : " +
         playerMultipartModel.player.backNo +
-        "\n   - 좌우명 : " +
+        "\n- 좌우명 : " +
         playerMultipartModel.player.moto
     );
-    if (!confirmRes) return;
-    const formData: FormData = new FormData();
-    if (playerMultipartModel.player.id > -1) {
-      formData.append("id", String(playerMultipartModel.player.id));
-    }
-    formData.append("name", playerMultipartModel.player.name);
-    formData.append("firstNameEng", playerMultipartModel.player.firstNameEng);
-    formData.append("familyNameEng", playerMultipartModel.player.familyNameEng);
-    formData.append("birth", playerMultipartModel.player.birth);
-    formData.append("position", playerMultipartModel.player.position);
-    formData.append("backNo", String(playerMultipartModel.player.backNo));
-    formData.append("moto", playerMultipartModel.player.moto);
-    formData.append("curYn", "Y");
+    setShowConfirm(true);
+  };
 
-    if (playerMultipartModel.player.profileImgSrc) {
-      formData.append("image", playerMultipartModel.player.profileImgSrc);
+  const handleOnConfirm = async () => {
+    let map: Map<string, string | Blob> = new Map<string, string | Blob>();
+    map.set("name", playerMultipartModel!.player.name);
+    map.set("firstNameEng", playerMultipartModel!.player.firstNameEng);
+    map.set("familyNameEng", playerMultipartModel!.player.familyNameEng);
+    map.set("birth", playerMultipartModel!.player.birth);
+    map.set("position", playerMultipartModel!.player.position);
+    map.set("backNo", String(playerMultipartModel!.player.backNo));
+    map.set("moto", playerMultipartModel!.player.moto);
+    map.set("curYn", "Y");
+    if (playerMultipartModel!.profileImageFile) {
+      map.set("image", playerMultipartModel!.profileImageFile);
     }
 
+    const formData: FormData = createFormData(map);
     const registrationResult: PlayerModel = await registerNewPlayerAPI(
       formData
     );
@@ -98,6 +104,7 @@ const PlayerRegistrationFragment = () => {
     } else {
       alert("[ERROR] 요청 실패...개발자에게 문의 ㄱㄱ");
     }
+    setShowConfirm(false);
   };
 
   return (
@@ -107,6 +114,15 @@ const PlayerRegistrationFragment = () => {
         title={"선수 등록"}
         handleOnClick={handleRegistrationOnClick}
         ref={initStateRef}
+      />
+      <CustomizedConfirm
+        show={showConfirm}
+        confirmQuestion={"입력한 선수 정보를 한번 더 확인해주세용."}
+        contents={confirmContents}
+        onClickConfirm={handleOnConfirm}
+        onClickCancel={() => {
+          setShowConfirm(false);
+        }}
       />
     </>
   );
