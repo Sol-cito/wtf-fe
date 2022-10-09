@@ -44,11 +44,11 @@ export async function registerNewPlayerAPI(
 }
 
 export async function modifyPlayerAPI(
-  playerModel: PlayerModel
+  formData: FormData
 ): Promise<PlayerModel> {
   const putParameter: PutParameter = {
     url: "player",
-    data: playerModel,
+    data: formData,
     headerData: {
       "Content-Type": "multipart/form-data",
     },

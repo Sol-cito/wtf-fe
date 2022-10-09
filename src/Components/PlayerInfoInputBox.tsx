@@ -8,6 +8,8 @@ import {
   NUMBER_REGAX,
 } from "../CommonConstant/CommonConstant";
 import { PlayerModel, PlayerMultipartModel } from "../Models/PlayerModel";
+import { createFormData } from "../Service/UtilityService";
+import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedSelectBox from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
@@ -16,10 +18,13 @@ import "./PlayerInfoInputBox.scss";
 export interface PlayerInfoInputBoxProps {
   title: string;
   playerInfo?: PlayerModel;
-  handleOnClick: Function;
+  handlePlayerMultiPart: Function;
 }
 
 const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [confirmContents, setConfirmContents] = useState<string>("");
+
   const [playerId, setPlayerId] = useState<number>(-1);
   const [korName, setKorName] = useState<string>("");
   const [firstNameEng, setFirstNameEng] = useState<string>("");
@@ -29,6 +34,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   const [backNo, setBackNo] = useState<number>(0);
   const [moto, setMoto] = useState<string>("");
   const [profileImageFile, setProfileImageFile] = useState<File>();
+
+  const [playerMultipartModel, setPlayerMultipartModel] =
+    useState<PlayerMultipartModel>();
 
   const allPositions: string[] = ["GK", "FW", "MF", "DF"];
 
@@ -108,6 +116,18 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
     }
   };
 
+  const validatePlayerInputData = (player: PlayerModel) => {
+    for (let res of Object.entries(player)) {
+      let key: string = res[0];
+      let value: string = res[1];
+      if (value.length == 0) {
+        alert("[Warning] " + key + " 입력되지 않음");
+        return false;
+      }
+    }
+    return true;
+  };
+
   const handleBtnOnClick = () => {
     const player: PlayerModel = {
       id: playerId,
@@ -119,11 +139,50 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
       backNo: backNo,
       moto: moto,
     };
+    if (!validatePlayerInputData(player)) return;
+
     const inputRes: PlayerMultipartModel = {
       player: player,
       profileImageFile: profileImageFile,
     };
-    props.handleOnClick(inputRes);
+    setPlayerMultipartModel(inputRes);
+    setConfirmContents(
+      "- 한글 이름 : " +
+        inputRes.player.name +
+        "\n- 영문 이름 : " +
+        inputRes.player.firstNameEng +
+        "\n- 영문 성 : " +
+        inputRes.player.familyNameEng +
+        "\n- 생년월일 : " +
+        inputRes.player.birth +
+        "\n- 포지션 : " +
+        inputRes.player.position +
+        "\n- 등번호 : " +
+        inputRes.player.backNo +
+        "\n- 좌우명 : " +
+        inputRes.player.moto
+    );
+    setShowConfirm(true);
+  };
+
+  const handleOnConfirm = async () => {
+    let map: Map<string, string | Blob> = new Map<string, string | Blob>();
+    map.set("id", String(playerMultipartModel!.player.id));
+    map.set("name", playerMultipartModel!.player.name);
+    map.set("firstNameEng", playerMultipartModel!.player.firstNameEng);
+    map.set("familyNameEng", playerMultipartModel!.player.familyNameEng);
+    map.set("birth", playerMultipartModel!.player.birth);
+    map.set("position", playerMultipartModel!.player.position);
+    map.set("backNo", String(playerMultipartModel!.player.backNo));
+    map.set("moto", playerMultipartModel!.player.moto);
+    map.set("curYn", "Y");
+    if (playerMultipartModel!.profileImageFile) {
+      map.set("image", playerMultipartModel!.profileImageFile);
+    }
+
+    const formData: FormData = createFormData(map);
+    await props.handlePlayerMultiPart(playerMultipartModel!.player, formData);
+    setShowConfirm(false);
   };
 
   return (
@@ -200,6 +259,15 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         >
           {props.title}
         </Button>
+        <CustomizedConfirm
+          show={showConfirm}
+          confirmQuestion={"입력한 선수 정보를 한번 더 확인해주세용."}
+          contents={confirmContents}
+          onClickConfirm={handleOnConfirm}
+          onClickCancel={() => {
+            setShowConfirm(false);
+          }}
+        />
       </div>
     </>
   );
