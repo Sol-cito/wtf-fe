@@ -1,4 +1,5 @@
 import { useState } from "react";
+import CustomizedPopup from "../../Components/CustomizedPopup";
 import { useAppDispatch } from "../../Store/config";
 import { setLoginState } from "../../Store/Slices/LoginSlice";
 import "./AdminLoginPage.scss";
@@ -6,6 +7,11 @@ import "./AdminLoginPage.scss";
 const AdminLoginPage = () => {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const [popupTitle, setPopupTitle] = useState<string>("");
+  const [popupContents, setPopupContents] = useState<string>("");
+  const [popupShow, setPopupShow] = useState<boolean>(false);
+  const [isLoginSuccess, setIsLoginSuccess] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
@@ -24,11 +30,14 @@ const AdminLoginPage = () => {
       id === process.env.REACT_APP_ADMIN_ID &&
       password === process.env.REACT_APP_ADMIN_PW
     ) {
-      dispatch(setLoginState(true));
-      alert("로그인 성공!!");
+      setPopupTitle("[Success] 로그인 성공!");
+      setPopupContents("");
+      setIsLoginSuccess(true);
     } else {
-      alert("[Error] 로그인 실패 : Id와 Password를 다시 확인하세요.");
+      setPopupTitle("[Error] 로그인 실패");
+      setPopupContents("Id와 Password를 다시 확인하세요");
     }
+    setPopupShow(true);
   };
 
   return (
@@ -49,6 +58,17 @@ const AdminLoginPage = () => {
           <button onClick={handleLogin}>로그인</button>
         </div>
       </div>
+      <CustomizedPopup
+        title={popupTitle}
+        contents={popupContents}
+        show={popupShow}
+        onClickOk={() => {
+          setPopupShow(false);
+          if (isLoginSuccess) {
+            dispatch(setLoginState(true));
+          }
+        }}
+      />
     </>
   );
 };

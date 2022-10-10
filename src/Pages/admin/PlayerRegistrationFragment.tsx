@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import CustomizedPopup from "../../Components/CustomizedPopup";
 import PlayerInfoInputBox from "../../Components/PlayerInfoInputBox";
 import PlayerList from "../../Components/PlayerList";
 import { PlayerModel } from "../../Models/PlayerModel";
@@ -12,6 +13,9 @@ import "./PlayerRegistrationFragment.scss";
 const PlayerRegistrationFragment = () => {
   const [players, setPlayers] = useState<PlayerModel[]>([]);
   const initStateRef: React.Ref<any> = useRef({});
+
+  const [popupTitle, setPopupTitle] = useState<string>("");
+  const [popupShow, setPopupShow] = useState<boolean>(false);
 
   const getAllRegisteredPlayers = async () => {
     const res = await getAllPlayersAPI();
@@ -42,12 +46,15 @@ const PlayerRegistrationFragment = () => {
       formData
     );
     if (registrationResult) {
-      alert("Player Registration Success!! " + registrationResult.name);
+      setPopupTitle(
+        "[Success] Player Registration Success!! " + registrationResult.name
+      );
       getAllRegisteredPlayers();
       initStateRef.current.initState();
     } else {
-      alert("[ERROR] 요청 실패...개발자에게 문의 ㄱㄱ");
+      setPopupTitle("[ERROR] 요청 실패...개발자에게 문의 ㄱㄱ");
     }
+    setPopupShow(true);
   };
 
   return (
@@ -57,6 +64,13 @@ const PlayerRegistrationFragment = () => {
         title={"선수 등록"}
         handlePlayerMultiPart={handlePlayerMultiPart}
         ref={initStateRef}
+      />
+      <CustomizedPopup
+        title={popupTitle}
+        show={popupShow}
+        onClickOk={() => {
+          setPopupShow(false);
+        }}
       />
     </>
   );

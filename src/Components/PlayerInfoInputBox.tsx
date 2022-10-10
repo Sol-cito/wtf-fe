@@ -11,6 +11,7 @@ import { PlayerModel, PlayerMultipartModel } from "../Models/PlayerModel";
 import { createFormData } from "../Service/UtilityService";
 import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
+import CustomizedPopup from "./CustomizedPopup";
 import CustomizedSelectBox from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
 import "./PlayerInfoInputBox.scss";
@@ -34,6 +35,10 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   const [backNo, setBackNo] = useState<number>(0);
   const [moto, setMoto] = useState<string>("");
   const [profileImageFile, setProfileImageFile] = useState<File>();
+
+  const [popupTitle, setPopupTitle] = useState<string>("");
+  const [popupContents, setPopupContents] = useState<string>("");
+  const [popupShow, setPopupShow] = useState<boolean>(false);
 
   const [playerMultipartModel, setPlayerMultipartModel] =
     useState<PlayerMultipartModel>();
@@ -70,7 +75,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
 
   const testKorNameRegax = (input: string) => {
     if (input && !KOREAN_REGAX.test(input)) {
-      alert("[Warning] 한글 이름이 한글이 아니거나 형식이 이상함..");
+      setPopupTitle("[Error] 한글 이름 입력값 확인");
+      setPopupContents("한글 이름이 한글이 아니거나 형식이 이상함..");
+      setPopupShow(true);
       setKorName("");
       return;
     }
@@ -83,7 +90,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
 
   const testFirstNameEngRegax = (input: string) => {
     if (input && !ENGLISH_REGAX.test(input)) {
-      alert("[Warning] 영어가 아니거나 형식이 이상함..");
+      setPopupTitle("[Error] First name 입력값 확인");
+      setPopupContents("영어가 아니거나 형식이 이상함..");
+      setPopupShow(true);
       setFirstNameEng("");
       return;
     }
@@ -96,7 +105,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
 
   const testFamilyNameEngRegax = (input: string) => {
     if (input && !ENGLISH_REGAX.test(input)) {
-      alert("[Warning] 영어가 아니거나 형식이 이상함..");
+      setPopupTitle("[Error] Family name 입력값 확인");
+      setPopupContents("영어가 아니거나 형식이 이상함..");
+      setPopupShow(true);
       setFamilyNameEng("");
       return;
     }
@@ -104,7 +115,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
 
   const testBirthRegax = (input: string) => {
     if (input && !BIRTH_REGAX.test(input)) {
-      alert("[Warning] 생년월일이 0000-00-00 형식에 맞지 않음");
+      setPopupTitle("[Error] 생년월일 입력값 확인");
+      setPopupContents("생년월일이 0000-00-00 형식에 맞지 않음");
+      setPopupShow(true);
       setBitrh("");
       return;
     }
@@ -121,7 +134,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
       let key: string = res[0];
       let value: string = res[1];
       if (value.length == 0) {
-        alert("[Warning] " + key + " 입력되지 않음");
+        setPopupTitle("[Error] 필수값 미입력");
+        setPopupContents(key + " 입력되지 않음");
+        setPopupShow(true);
         return false;
       }
     }
@@ -266,6 +281,14 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
           onClickConfirm={handleOnConfirm}
           onClickCancel={() => {
             setShowConfirm(false);
+          }}
+        />
+        <CustomizedPopup
+          title={popupTitle}
+          show={popupShow}
+          contents={popupContents}
+          onClickOk={() => {
+            setPopupShow(false);
           }}
         />
       </div>
