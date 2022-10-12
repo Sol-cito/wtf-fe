@@ -4,7 +4,6 @@ import { PlayerModel } from "../Models/PlayerModel";
 import "./PlayerPhoto.scss";
 
 export interface PlayerPhotoProps {
-  id?: number;
   player: PlayerModel;
 }
 

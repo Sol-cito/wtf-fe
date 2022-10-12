@@ -29,6 +29,19 @@ export async function getPlayersByNameAPI(
   return result;
 }
 
+export async function getPlayersByPositionAPI(
+  position: string
+): Promise<PlayerModel[]> {
+  const getParameter: GetParameter = {
+    url: "player",
+    params: {
+      position: position,
+    },
+  };
+  const result: PlayerModel[] = await getApiCall(getParameter);
+  return result;
+}
+
 export async function registerNewPlayerAPI(
   formData: FormData
 ): Promise<PlayerModel> {

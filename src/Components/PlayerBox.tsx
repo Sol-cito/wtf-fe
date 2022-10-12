@@ -13,7 +13,7 @@ const PlayerBox = (props: PlayerBoxProps) => {
       <p className="player_box_title">{props.title}</p>
       <div className="player_photos_area">
         {props.players.map((ele, idx) => {
-          return <PlayerPhoto id={idx} player={ele} />;
+          return <PlayerPhoto key={idx} player={ele} />;
         })}
       </div>
     </div>

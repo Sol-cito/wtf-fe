@@ -5,9 +5,9 @@ import Header from "./Header";
 import ContactPage from "./Pages/AboutPage";
 import AdminLoginPage from "./Pages/admin/AdminLoginPage";
 import AdminPage from "./Pages/admin/AdminPage";
-import PlayerInfoInputBox from "./Components/PlayerInfoInputBox";
 import MainPage from "./Pages/MainPage";
 import NotFoundPage from "./Pages/NotFoundPage";
+import PlayerPage from "./Pages/PlayerPage";
 import { useAppSelector } from "./Store/config";
 
 const App = () => {
@@ -21,6 +21,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/about" element={<ContactPage />} />
+            <Route path="/players" element={<PlayerPage />} />
             <Route path="*" element={<NotFoundPage />} />
             <Route
               path="/admin"
