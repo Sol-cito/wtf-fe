@@ -1,6 +1,6 @@
 import { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
 import { HttpMethod } from "../Models/Enum/EnumAboutHttp";
-import baseApiCall from "./BaseApiCall";
+import BaseApiCall, { AxiosResponseModel } from "./BaseApiCall";
 
 export interface GetParameter {
   url: string;
@@ -25,7 +25,7 @@ export async function getApiCall(getParameter: GetParameter): Promise<any> {
     method: HttpMethod.GET,
     params: getParameter.params,
   };
-  const result = await baseApiCall(requestConfig);
+  const result = await BaseApiCall(requestConfig);
   return result.data;
 }
 
@@ -36,7 +36,7 @@ export async function postApiCall(postParameter: PostParameter): Promise<any> {
     data: postParameter.data,
     headers: postParameter.headerData,
   };
-  const result = await baseApiCall(requestConfig);
+  const result: AxiosResponseModel = await BaseApiCall(requestConfig);
   return result.data;
 }
 
@@ -47,6 +47,6 @@ export async function putApiCall(putParameter: PutParameter): Promise<any> {
     data: putParameter.data,
     headers: putParameter.headerData,
   };
-  const result = await baseApiCall(requestConfig);
+  const result = await BaseApiCall(requestConfig);
   return result.data;
 }
