@@ -5,10 +5,11 @@
     img {
       display: block;
       object-fit: cover;
+      max-height: 65vh;
     }
   }
   .info_area {
-    margin-top: 2vh;
+    padding: 10vh 5vh 3vh 5vh;
     color: white;
 
     .moto_area {

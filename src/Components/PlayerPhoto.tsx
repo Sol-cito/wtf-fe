@@ -5,6 +5,7 @@ import "./PlayerPhoto.scss";
 
 export interface PlayerPhotoProps {
   player: PlayerModel;
+  onClick?: Function;
 }
 
 const PlayerPhoto = (props: PlayerPhotoProps) => {
@@ -12,6 +13,12 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
   const [profileImgSrc, setProfileImgSrc] = useState<string>(
     props.player.profileImgSrc || ANONYMOUS_PROFILE_IMG_PATH
   );
+
+  const handleOnClick = () => {
+    if (props.onClick) {
+      props.onClick(props.player);
+    }
+  };
 
   const handleOnMouseOver = () => {
     setIsHovering(true);
@@ -28,6 +35,7 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
   return (
     <div
       className="photo_container"
+      onClick={handleOnClick}
       onMouseOver={handleOnMouseOver}
       onMouseLeave={handleOnMouseLeave}
     >

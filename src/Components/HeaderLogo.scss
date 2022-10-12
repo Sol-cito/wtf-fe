@@ -3,7 +3,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 20vw;
 
   #logo_image {
     margin-right: 20px;
@@ -14,12 +13,14 @@
     color: white;
     font-size: 25px;
     font-weight: bolder;
+    min-width: 10vw;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .header_logo {
     justify-content: center;
+
     #logo_image {
       width: 6vw;
     }

@@ -1,15 +1,15 @@
 import { useAppDispatch } from "../Store/config";
 import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";
-import "./Modal.scss";
+import "./CustomizedModal.scss";
 import TransparentBackground from "./TransparentBackground";
 
-export interface ModalProps {
+export interface CustomizedModalProps {
   showModal: boolean;
   includedComponent?: React.ReactElement;
   backgroundStyle?: {};
 }
 
-const Modal = (props: ModalProps) => {
+const CustomizedModal = (props: CustomizedModalProps) => {
   const dispatch = useAppDispatch();
 
   const onClickModalClose = () => {
@@ -36,4 +36,4 @@ const Modal = (props: ModalProps) => {
     </>
   );
 };
-export default Modal;
+export default CustomizedModal;

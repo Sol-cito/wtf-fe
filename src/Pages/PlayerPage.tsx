@@ -4,6 +4,8 @@ import "./PlayerPage.scss";
 import PlayerBox from "../Components/PlayerBox";
 import { getPlayersByPositionAPI } from "../Service/PlayerService";
 import { Position } from "../Models/Enum/EnumsAboutPlayer";
+import PageContainer from "../Components/PageContainer";
+import { SALLWOW_BLACK } from "../CommonConstant/StringColorConstant";
 
 const PlayerPage = () => {
   const [forwardPlayers, setForwardPlayers] = useState<PlayerModel[]>([]);
@@ -39,12 +41,30 @@ const PlayerPage = () => {
   }, []);
 
   return (
-    <div className="player_page_container">
-      <PlayerBox players={goalyPlayers} />
-      <PlayerBox players={forwardPlayers} />
-      <PlayerBox players={midfielderPlayers} />
-      <PlayerBox players={defenderPlayers} />
-    </div>
+    <>
+      <PageContainer
+        includedComponent={
+          <PlayerBox title={Position.GK} players={goalyPlayers} />
+        }
+      />
+      <PageContainer
+        boxColor={SALLWOW_BLACK}
+        includedComponent={
+          <PlayerBox title={Position.FW} players={forwardPlayers} />
+        }
+      />
+      <PageContainer
+        includedComponent={
+          <PlayerBox title={Position.MF} players={midfielderPlayers} />
+        }
+      />
+      <PageContainer
+        boxColor={SALLWOW_BLACK}
+        includedComponent={
+          <PlayerBox title={Position.DF} players={defenderPlayers} />
+        }
+      />
+    </>
   );
 };
 export default PlayerPage;

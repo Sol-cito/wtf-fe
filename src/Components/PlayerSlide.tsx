@@ -5,13 +5,13 @@ import { getAllPlayersAPI } from "../Service/PlayerService";
 import PlayerPhoto from "./PlayerPhoto";
 import { useAppDispatch, useAppSelector } from "../Store/config";
 import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";
-import Modal from "./Modal";
 import PlayerModalBox from "./PlayerModalBox";
 import { isMobile } from "react-device-detect";
 import {
   PLAYER_MODAL_BACKGROUND_STYLE_BROWSER,
   PLAYER_MODAL_BACKGROUND_STYLE_MOBILE,
 } from "../CommonConstant/ImgSrcConstant";
+import CustomizedModal from "./CustomizedModal";
 
 const PlayerSlide = () => {
   const [players, setPlayers] = useState<PlayerModel[]>([]);
@@ -73,20 +73,18 @@ const PlayerSlide = () => {
             ? players.map((player, idx) => {
                 if (player.curYn === "Y") {
                   return (
-                    <div
+                    <PlayerPhoto
                       key={idx}
-                      className="player_info_container"
-                      onClick={() => handleOnPlayerPhotoClick(player)}
-                    >
-                      <PlayerPhoto player={player} />
-                    </div>
+                      player={player}
+                      onClick={handleOnPlayerPhotoClick}
+                    />
                   );
                 }
               })
             : null}
         </div>
       </div>
-      <Modal
+      <CustomizedModal
         showModal={modalShow}
         includedComponent={<PlayerModalBox />}
         backgroundStyle={
