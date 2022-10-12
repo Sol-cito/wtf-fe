@@ -7,7 +7,7 @@ import { getAllPlayersAPI, modifyPlayerAPI } from "../../Service/PlayerService";
 import "./PlayerRegistrationFragment.scss";
 
 const PlayerModificationFragment = () => {
-  const [players, setPlayers] = useState<PlayerModel[]>([]);
+  const [players, setPlayers] = useState<PlayerModel[]>();
   const [selectedPlayer, setSelectedPlayer] = useState<PlayerModel>();
 
   const [popupTitle, setPopupTitle] = useState<string>("");
@@ -15,9 +15,11 @@ const PlayerModificationFragment = () => {
 
   const getAllRegisteredPlayers = async () => {
     const res: PlayerModel[] = await getAllPlayersAPI();
-    setPlayers(res);
-    if (!selectedPlayer) {
-      setSelectedPlayer(res[0]);
+    if (res) {
+      setPlayers(res);
+      if (!selectedPlayer) {
+        setSelectedPlayer(res[0]);
+      }
     }
   };
 

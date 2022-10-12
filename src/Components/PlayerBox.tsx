@@ -33,15 +33,17 @@ const PlayerBox = (props: PlayerBoxProps) => {
     <div className="player_box">
       <p className="player_box_title">{props.title}</p>
       <div className="player_photos_area">
-        {props.players.map((ele, idx) => {
-          return (
-            <PlayerPhoto
-              key={idx}
-              player={ele}
-              onClick={handleOnPlayerPhotoClick}
-            />
-          );
-        })}
+        {props.players &&
+          props.players.length > 0 &&
+          props.players.map((ele, idx) => {
+            return (
+              <PlayerPhoto
+                key={idx}
+                player={ele}
+                onClick={handleOnPlayerPhotoClick}
+              />
+            );
+          })}
       </div>
       <CustomizedModal
         showModal={modalShow}

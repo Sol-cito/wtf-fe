@@ -11,14 +11,15 @@ import {
 import moment from "moment";
 import { useState, useEffect } from "react";
 import { PlayerModel } from "../Models/PlayerModel";
+import CustomizedSpinner from "./CustomizedSpinner";
 import "./PlayerList.scss";
 
 export interface PlayerListProps {
+  players?: PlayerModel[];
   title?: string;
   isRadioButtonVisible?: boolean;
   initialSelectedRadioId?: number;
   setSelectedPlayer?: Function;
-  players: PlayerModel[];
 }
 
 const PlayerList = (props: PlayerListProps) => {
@@ -99,6 +100,7 @@ const PlayerList = (props: PlayerListProps) => {
           </TableBody>
         </Table>
       </TableContainer>
+      {!props.players ? <CustomizedSpinner color="black" /> : null}
     </div>
   );
 };

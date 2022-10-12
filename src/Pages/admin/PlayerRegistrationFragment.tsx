@@ -11,7 +11,7 @@ import {
 import "./PlayerRegistrationFragment.scss";
 
 const PlayerRegistrationFragment = () => {
-  const [players, setPlayers] = useState<PlayerModel[]>([]);
+  const [players, setPlayers] = useState<PlayerModel[]>();
   const initStateRef: React.Ref<any> = useRef({});
 
   const [popupTitle, setPopupTitle] = useState<string>("");
@@ -19,7 +19,7 @@ const PlayerRegistrationFragment = () => {
 
   const getAllRegisteredPlayers = async () => {
     const res: PlayerModel[] = await getAllPlayersAPI();
-    setPlayers(res);
+    if (res) setPlayers(res);
   };
 
   useEffect(() => {

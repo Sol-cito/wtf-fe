@@ -22,11 +22,13 @@ const CustomizedSelectBox = (props: CustomizedSelectBox) => {
         onChange={handleOnChange}
         value={props.value}
       >
-        {props.options.map((element, idx) => (
-          <option className="select_option" key={idx} value={element}>
-            {element}
-          </option>
-        ))}
+        {props.options &&
+          props.options.length > 0 &&
+          props.options.map((element, idx) => (
+            <option className="select_option" key={idx} value={element}>
+              {element}
+            </option>
+          ))}
       </select>
     </div>
   );
