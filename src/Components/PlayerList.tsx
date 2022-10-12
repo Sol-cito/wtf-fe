@@ -1,9 +1,6 @@
 import {
-  Checkbox,
-  CheckboxClassKey,
   Paper,
   Radio,
-  RadioGroup,
   Table,
   TableBody,
   TableCell,
@@ -12,13 +9,14 @@ import {
   TableRow,
 } from "@material-ui/core";
 import moment from "moment";
+import { useState, useEffect } from "react";
 import { PlayerModel } from "../Models/PlayerModel";
 import "./PlayerList.scss";
-import { useState } from "react";
 
 export interface PlayerListProps {
   title?: string;
   isRadioButtonVisible?: boolean;
+  initialSelectedRadioId?: number;
   setSelectedPlayer?: Function;
   players: PlayerModel[];
 }
@@ -34,9 +32,11 @@ const PlayerList = (props: PlayerListProps) => {
     if (props.setSelectedPlayer) {
       props.setSelectedPlayer(player);
     }
-
-    console.log(player);
   };
+
+  useEffect(() => {
+    setSelectedRadioId(props.initialSelectedRadioId || -1);
+  }, [props.initialSelectedRadioId]);
 
   return (
     <div className="register_page_container">

@@ -18,7 +18,7 @@ const PlayerRegistrationFragment = () => {
   const [popupShow, setPopupShow] = useState<boolean>(false);
 
   const getAllRegisteredPlayers = async () => {
-    const res = await getAllPlayersAPI();
+    const res: PlayerModel[] = await getAllPlayersAPI();
     setPlayers(res);
   };
 
@@ -59,12 +59,12 @@ const PlayerRegistrationFragment = () => {
 
   return (
     <>
-      <PlayerList players={players} title={"< 현재 등록된 선수 명단 >"} />
       <PlayerInfoInputBox
         title={"선수 등록"}
         handlePlayerMultiPart={handlePlayerMultiPart}
         ref={initStateRef}
       />
+      <PlayerList players={players} title={"< 현재 등록된 선수 명단 >"} />
       <CustomizedPopup
         title={popupTitle}
         show={popupShow}

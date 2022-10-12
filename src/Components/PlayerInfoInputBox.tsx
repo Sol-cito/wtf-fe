@@ -56,6 +56,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
     setPosition(props.playerInfo.position);
     setBackNo(props.playerInfo.backNo);
     setMoto(props.playerInfo.moto);
+    setCurYn(props.playerInfo.curYn);
   }, [props.playerInfo]);
 
   const initState = () => {

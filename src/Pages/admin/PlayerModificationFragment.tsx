@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CustomizedPopup from "../../Components/CustomizedPopup";
 import PlayerInfoInputBox from "../../Components/PlayerInfoInputBox";
 import PlayerList from "../../Components/PlayerList";
-import { PlayerModel, PlayerMultipartModel } from "../../Models/PlayerModel";
+import { PlayerModel } from "../../Models/PlayerModel";
 import { getAllPlayersAPI, modifyPlayerAPI } from "../../Service/PlayerService";
 import "./PlayerRegistrationFragment.scss";
 
@@ -14,8 +14,11 @@ const PlayerModificationFragment = () => {
   const [popupShow, setPopupShow] = useState<boolean>(false);
 
   const getAllRegisteredPlayers = async () => {
-    const res = await getAllPlayersAPI();
+    const res: PlayerModel[] = await getAllPlayersAPI();
     setPlayers(res);
+    if (!selectedPlayer) {
+      setSelectedPlayer(res[0]);
+    }
   };
 
   useEffect(() => {
@@ -41,16 +44,17 @@ const PlayerModificationFragment = () => {
 
   return (
     <>
+      <PlayerInfoInputBox
+        title={"선수 정보 수정"}
+        handlePlayerMultiPart={handlePlayerMultiPart}
+        playerInfo={selectedPlayer}
+      />
       <PlayerList
         players={players}
         title={"< 현재 등록된 선수 명단 >"}
+        initialSelectedRadioId={selectedPlayer?.id}
         isRadioButtonVisible={true}
         setSelectedPlayer={setSelectedPlayer}
-      />
-      <PlayerInfoInputBox
-        title={"선수 수정"}
-        handlePlayerMultiPart={handlePlayerMultiPart}
-        playerInfo={selectedPlayer}
       />
       <CustomizedPopup
         title={popupTitle}
