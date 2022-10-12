@@ -58,6 +58,7 @@ const PlayerList = (props: PlayerListProps) => {
               <TableCell>포지션</TableCell>
               <TableCell>등번호</TableCell>
               <TableCell>좌우명</TableCell>
+              <TableCell>활동여부</TableCell>
               <TableCell>profileImgSrc</TableCell>
             </TableRow>
           </TableHead>
@@ -89,6 +90,7 @@ const PlayerList = (props: PlayerListProps) => {
                       <TableCell>{ele.position}</TableCell>
                       <TableCell>{ele.backNo}</TableCell>
                       <TableCell>{ele.moto}</TableCell>
+                      <TableCell>{ele.curYn}</TableCell>
                       <TableCell>{ele.profileImgSrc}</TableCell>
                     </TableRow>
                   );

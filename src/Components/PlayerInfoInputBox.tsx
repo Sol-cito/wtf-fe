@@ -34,6 +34,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   const [position, setPosition] = useState<string>("GK");
   const [backNo, setBackNo] = useState<number>(0);
   const [moto, setMoto] = useState<string>("");
+  const [curYn, setCurYn] = useState<string>("Y");
   const [profileImageFile, setProfileImageFile] = useState<File>();
 
   const [popupTitle, setPopupTitle] = useState<string>("");
@@ -153,6 +154,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
       position: position,
       backNo: backNo,
       moto: moto,
+      curYn: curYn,
     };
     if (!validatePlayerInputData(player)) return;
 
@@ -175,7 +177,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         "\n- 등번호 : " +
         inputRes.player.backNo +
         "\n- 좌우명 : " +
-        inputRes.player.moto
+        inputRes.player.moto +
+        "\n- 현재 활동 여부 : " +
+        inputRes.player.curYn
     );
     setShowConfirm(true);
   };
@@ -190,7 +194,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
     map.set("position", playerMultipartModel!.player.position);
     map.set("backNo", String(playerMultipartModel!.player.backNo));
     map.set("moto", playerMultipartModel!.player.moto);
-    map.set("curYn", "Y");
+    map.set("curYn", playerMultipartModel!.player.curYn);
     if (playerMultipartModel!.profileImageFile) {
       map.set("image", playerMultipartModel!.profileImageFile);
     }
@@ -260,6 +264,13 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
             }}
           />
         </div>
+        <CustomizedSelectBox
+          title={"현재활동여부"}
+          value={curYn}
+          options={["Y", "N"]}
+          className={"curYn"}
+          useStateFunc={setCurYn}
+        />
         <ImageUploader
           title="프로필 이미지(업로드 안하면 기본이미지로 보임): "
           setImgFile={setProfileImageFile}

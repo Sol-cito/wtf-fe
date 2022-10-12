@@ -8,7 +8,7 @@ export interface PlayerModel {
   backNo: number;
   moto: string;
   profileImgSrc?: string;
-  curYn?: string;
+  curYn: string;
 }
 
 export interface PlayerMultipartModel {

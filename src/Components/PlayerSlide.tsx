@@ -71,15 +71,17 @@ const PlayerSlide = () => {
         >
           {players && players.length > 0
             ? players.map((player, idx) => {
-                return (
-                  <div
-                    key={idx}
-                    className="player_info_container"
-                    onClick={() => handleOnPlayerPhotoClick(player)}
-                  >
-                    <PlayerPhoto player={player} />
-                  </div>
-                );
+                if (player.curYn === "Y") {
+                  return (
+                    <div
+                      key={idx}
+                      className="player_info_container"
+                      onClick={() => handleOnPlayerPhotoClick(player)}
+                    >
+                      <PlayerPhoto player={player} />
+                    </div>
+                  );
+                }
               })
             : null}
         </div>
