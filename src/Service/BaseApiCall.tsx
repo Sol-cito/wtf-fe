@@ -27,6 +27,7 @@ async function baseApiCall(requestConfig: AxiosRequestConfig): Promise<any> {
     return axiosResponse;
   } catch (e: any) {
     axiosResponse.successOrNot = SuccessOrNot.N;
+    alert("Error code : " + e.code + "\n" + "Error message : " + e.message);
     return axiosResponse;
   }
 }
