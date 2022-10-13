@@ -1,7 +1,10 @@
 .player_info_container {
   display: flex;
+  margin-left: 3vw;
 
   .photo_area {
+    margin-top: 15vh;
+
     img {
       display: block;
       object-fit: cover;
@@ -72,13 +75,14 @@
       display: flex;
       justify-content: center;
       img {
-        width: 50vw;
+        width: 70vw;
         object-fit: cover;
       }
     }
 
     .info_area {
       margin-top: 4vh;
+      padding: 0;
       margin-bottom: 4vh;
       text-align: center;
 
