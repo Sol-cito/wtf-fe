@@ -7,6 +7,7 @@ import HEADER_CONSTANT_DATA from "./CommonConstant/HeaderConstant";
 import { useAppDispatch, useAppSelector } from "./Store/config";
 import { setHeaderBtn } from "./Store/Slices/HeaderBtnSlice";
 import { BrowserView, MobileView } from "react-device-detect";
+import HamburgerBtn from "./Components/HamburgerBtn";
 
 const Header = () => {
   const location = useLocation();
@@ -37,7 +38,9 @@ const Header = () => {
           })}
         </div>
       </BrowserView>
-      <MobileView></MobileView>
+      <MobileView className="mobile_header">
+        <HamburgerBtn />
+      </MobileView>
     </div>
   );
 };
