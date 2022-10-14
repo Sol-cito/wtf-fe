@@ -30,11 +30,14 @@
 @media only screen and (max-width: 768px) {
   .header {
     display: flex;
+    position: relative;
     align-items: center;
+    min-height: 2vh;
     line-height: 1vh;
+    z-index: 6;
 
     .logo_area {
-      margin-left: 0;
+      margin-left: 4vw;
       padding: 1vh;
     }
   }

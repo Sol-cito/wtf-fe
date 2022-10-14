@@ -1,0 +1,15 @@
+.hamburger_menu_area {
+  position: absolute;
+  right: 0;
+  z-index: 5;
+  transition: all ease 0.5s;
+
+  .header_menu_btn_area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    min-height: 10vh;
+    background-color: white;
+  }
+}

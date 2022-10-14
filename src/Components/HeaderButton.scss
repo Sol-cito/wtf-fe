@@ -19,3 +19,25 @@
     font-family: Arial, Helvetica, sans-serif;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .header_button {
+    height: inherit;
+    margin-left: 0;
+    text-decoration: none;
+
+    .button_name {
+      color: rgb(192, 192, 192);
+      font-weight: 700;
+      font-family: Arial, Helvetica, sans-serif;
+
+      &.active {
+        color: black;
+      }
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ import "./HeaderButton.scss";
 export interface ButtonProps {
   btnName: string;
   url: string;
+  onClick?: Function;
 }
 
 const HeaderButton = (props: ButtonProps) => {
@@ -14,6 +15,7 @@ const HeaderButton = (props: ButtonProps) => {
 
   const handleOnClick = () => {
     dispatch(setHeaderBtn(props.btnName));
+    if (props.onClick) props.onClick();
   };
 
   const changeFirstLetterUpperCase = (target: string) => {
