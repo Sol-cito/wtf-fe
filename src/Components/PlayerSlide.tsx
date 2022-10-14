@@ -51,9 +51,6 @@ const PlayerSlide = () => {
 
   return (
     <>
-      <div className="intro_title_area">
-        <span className="intro_title"> Players </span>
-      </div>
       {isLoading ? (
         <>
           <CustomizedSpinner />

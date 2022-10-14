@@ -4,3 +4,11 @@
     padding: 10vh 0 10vh 0;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .App {
+    .body {
+      padding: 0 0 10vh 0;
+    }
+  }
+}

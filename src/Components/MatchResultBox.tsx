@@ -20,10 +20,7 @@ const MatchResultBox = () => {
   }, []);
 
   return (
-    <div>
-      <div className="match_box_title_area">
-        <span className="match_box_title"> Recent Match Results </span>
-      </div>
+    <>
       {isLoading ? (
         <>
           <CustomizedSpinner />
@@ -33,7 +30,7 @@ const MatchResultBox = () => {
           return <MatchResult key={idx} matchResult={matchResult} />;
         })
       )}
-    </div>
+    </>
   );
 };
 export default MatchResultBox;

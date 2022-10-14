@@ -13,10 +13,15 @@ const MainPage = () => {
         includedComponent={<MainTeamPhotoBox />}
       />
       <PageContainer
+        title="Players"
         boxColor={SALLWOW_BLACK}
         includedComponent={<PlayerSlide />}
       />
-      <PageContainer boxColor={BLACK} includedComponent={<MatchResultBox />} />
+      <PageContainer
+        title="Recent Match Results"
+        boxColor={BLACK}
+        includedComponent={<MatchResultBox />}
+      />
     </>
   );
 };

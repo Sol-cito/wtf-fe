@@ -1,9 +1,26 @@
+.page_title_container {
+  margin: 1vw 0 1vw 0;
+  p {
+    color: white;
+    font-size: 3vw;
+    font-weight: 700;
+    width: fit-content;
+  }
+}
+
 .page_container {
   padding: 1vh 15vw 1vh 15vw;
   overflow: hidden;
 }
 
 @media only screen and (max-width: 768px) {
+  .page_title_container {
+    p {
+      color: white;
+      font-size: 7vw;
+    }
+  }
+
   .page_container {
     font-size: 3vw;
     padding: 1vh 5vw 1vh 5vw;
