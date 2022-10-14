@@ -8,7 +8,7 @@
   right: 0;
   width: 40vw;
   min-height: 20vh;
-  z-index: 12;
+  z-index: 10;
 
   p {
     margin: 0;
@@ -22,6 +22,7 @@
   }
 
   .btn_area {
+    margin-top: 2vh;
     display: flex;
     justify-content: space-between;
 
@@ -29,6 +30,27 @@
       margin: 5vw 5vw 0 5vw;
       width: 10vw;
       font-size: 1.5vw;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .confirm_box {
+    width: 70vw;
+    p {
+      font-size: 5vw;
+    }
+
+    .contents_area {
+      white-space: pre-wrap;
+      font-size: 4vw;
+    }
+
+    .btn_area {
+      .button {
+        width: fit-content;
+        font-size: 3vw;
+      }
     }
   }
 }

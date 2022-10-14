@@ -70,7 +70,10 @@ const Header = () => {
       <MobileView>
         {showHamburgerMenuBtns ? (
           <>
-            <TransparentBackground onClick={handleOnClickShadowBackground} />
+            <TransparentBackground
+              zIndex={2}
+              onClick={handleOnClickShadowBackground}
+            />
           </>
         ) : null}
         <HamburgerMenu

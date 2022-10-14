@@ -14,7 +14,7 @@ const CustomizedPopup = (props: CustomizedPopupProps) => {
     <>
       {props.show ? (
         <>
-          <TransparentBackground />
+          <TransparentBackground zIndex={9} />
           <div className="popup_box">
             <div>
               <p>{props.title}</p>

@@ -15,7 +15,7 @@ const CustomizedConfirm = (props: CustomizedConfirmProps) => {
     <>
       {props.show ? (
         <>
-          <TransparentBackground />
+          <TransparentBackground zIndex={9} />
           <div className="confirm_box">
             <div>
               <p>{props.confirmQuestion}</p>
