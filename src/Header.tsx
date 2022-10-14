@@ -16,7 +16,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
 
   const [hamburgerTranslateYValue, setHamburgerTranslateYValue] =
-    useState<number>(50);
+    useState<number>(-100);
 
   const [showHamburgerMenuBtns, setShowHamburgerMenuBtns] =
     useState<boolean>(false);
