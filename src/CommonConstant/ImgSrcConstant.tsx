@@ -2,7 +2,7 @@ export const MAIN_TEAM_PHOTO_SRC = "img/team/team_photo_2.jpg";
 
 export const PLAYER_MODAL_BACKGROUND_STYLE_BROWSER = {
   background: "url(/img/etc/player_modal_background.jpg)",
-  backgroundSize: "contain",
+  backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
 };
 

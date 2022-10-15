@@ -1,5 +1,9 @@
 .not_found_container {
-  color: white;
+  color: yellow;
   margin: 20vh 0 20vh 0;
   text-align: center;
+
+  a {
+    color: white;
+  }
 }

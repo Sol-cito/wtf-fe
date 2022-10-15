@@ -71,7 +71,7 @@ const Header = () => {
         {showHamburgerMenuBtns ? (
           <>
             <TransparentBackground
-              zIndex={2}
+              zIndex={3}
               onClick={handleOnClickShadowBackground}
             />
           </>
