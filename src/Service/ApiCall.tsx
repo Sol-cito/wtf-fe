@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
-import { HttpMethod } from "../Models/Enum/EnumAboutHttp";
+import { HttpMethod } from "../Models/Enum/CommonEnum";
 import BaseApiCall, { AxiosResponseModel } from "./BaseApiCall";
 
 export interface GetParameter {

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./PlayerPage.scss";
 import PlayerBox from "../Components/PlayerBox";
 import { getPlayersByPositionAPI } from "../Service/PlayerService";
-import { Position } from "../Models/Enum/EnumsAboutPlayer";
+import { Position } from "../Models/Enum/CommonEnum";
 import PageContainer from "../Components/PageContainer";
 import { SALLWOW_BLACK } from "../CommonConstant/StringColorConstant";
 import CustomizedSpinner from "../Components/CustomizedSpinner";

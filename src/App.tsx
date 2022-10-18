@@ -6,6 +6,7 @@ import ContactPage from "./Pages/AboutPage";
 import AdminLoginPage from "./Pages/admin/AdminLoginPage";
 import AdminPage from "./Pages/admin/AdminPage";
 import MainPage from "./Pages/MainPage";
+import MatchPage from "./Pages/MatchPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import PlayerPage from "./Pages/PlayerPage";
 import { useAppSelector } from "./Store/config";
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/" element={<MainPage />} />
             <Route path="/about" element={<ContactPage />} />
             <Route path="/players" element={<PlayerPage />} />
+            <Route path="/match" element={<MatchPage />} />
             <Route path="*" element={<NotFoundPage />} />
             <Route
               path="/admin"

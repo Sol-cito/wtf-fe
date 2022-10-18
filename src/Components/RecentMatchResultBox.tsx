@@ -1,16 +1,19 @@
 import { MatchResultModel } from "../Models/MatchResultModel";
 import { useState, useEffect } from "react";
-import "./MatchResultBox.scss";
+import "./RecentMatchResultBox.scss";
 import MatchResult from "./MatchResult";
-import { getRecentMatchAPI } from "../Service/MatchService";
 import CustomizedSpinner from "./CustomizedSpinner";
+import { getMatchResultAPI, MatchResultProps } from "../Service/MatchService";
 
-const MatchResultBox = () => {
+const RecentMatchResultBox = () => {
   const [recentResult, setRecentResult] = useState<MatchResultModel[]>();
   const [isLoading, setIsLoding] = useState<boolean>(true);
 
   const getRecentResult = async () => {
-    const res = await getRecentMatchAPI();
+    const matchResultProps: MatchResultProps = {
+      startIdx: 0,
+    };
+    const res = await getMatchResultAPI(matchResultProps);
     setRecentResult(res);
     if (res) setIsLoding(false);
   };
@@ -33,4 +36,4 @@ const MatchResultBox = () => {
     </>
   );
 };
-export default MatchResultBox;
+export default RecentMatchResultBox;

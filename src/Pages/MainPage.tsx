@@ -1,7 +1,7 @@
 import { BLACK, SALLWOW_BLACK } from "../CommonConstant/StringColorConstant";
 import PageContainer from "../Components/PageContainer";
 import MainTeamPhotoBox from "../Components/MainPageTeamPhotoBox";
-import MatchResultBox from "../Components/MatchResultBox";
+import MatchResultBox from "../Components/RecentMatchResultBox";
 import PlayerSlide from "../Components/PlayerSlide";
 import "./MainPage.scss";
 

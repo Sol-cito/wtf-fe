@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { SuccessOrNot } from "../Models/Enum/EnumAboutHttp";
+import { SuccessOrNot } from "../Models/Enum/CommonEnum";
 
 export interface AxiosResponseModel {
   successOrNot: string;
