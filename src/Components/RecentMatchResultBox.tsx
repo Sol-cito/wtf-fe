@@ -12,6 +12,7 @@ const RecentMatchResultBox = () => {
   const getRecentResult = async () => {
     const matchResultProps: MatchResultProps = {
       startIdx: 0,
+      limit: 3,
     };
     const res = await getMatchResultAPI(matchResultProps);
     setRecentResult(res);

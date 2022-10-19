@@ -10,20 +10,15 @@ const AllMatchResult = () => {
   const [matchResult, setMatchResult] = useState<MatchResultModel[]>([]);
   const [isLoading, setIsLoding] = useState<boolean>(true);
 
-  const getRecentResult = async () => {
+  const getMatchResult = async () => {
     setIsLoding(true);
-    const matchResultProps: MatchResultProps = {
-      startIdx: 0,
-      limit: 5,
-      order: QueryOrder.DESC,
-    };
-    const res = await getMatchResultAPI(matchResultProps);
+    const res = await getMatchResultAPI();
     setMatchResult(res);
     setIsLoding(false);
   };
 
   useEffect(() => {
-    getRecentResult();
+    getMatchResult();
   }, []);
 
   return (

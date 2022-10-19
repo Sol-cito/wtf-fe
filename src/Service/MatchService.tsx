@@ -3,20 +3,20 @@ import { MatchResultModel } from "../Models/MatchResultModel";
 import { getApiCall, GetParameter } from "./ApiCall";
 
 export interface MatchResultProps {
-  startIdx: number;
+  startIdx?: number;
   limit?: number;
   order?: QueryOrder;
 }
 
 export async function getMatchResultAPI(
-  props: MatchResultProps
+  props?: MatchResultProps
 ): Promise<MatchResultModel[]> {
   const getParameter: GetParameter = {
     url: "match",
     params: {
-      startIdx: props.startIdx,
-      limit: props.limit,
-      order: props.order,
+      startIdx: props?.startIdx,
+      limit: props?.limit,
+      order: props?.order,
     },
   };
   const result: MatchResultModel[] = await getApiCall(getParameter);
