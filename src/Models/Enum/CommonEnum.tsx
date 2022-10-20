@@ -17,6 +17,6 @@ export enum Position {
 }
 
 export enum QueryOrder {
-  ASC = "asc",
-  DESC = "desc",
+  ASC = "ASC",
+  DESC = "DESC",
 }

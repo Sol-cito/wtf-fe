@@ -5,7 +5,10 @@ import "./MatchPage.scss";
 const MatchPage = () => {
   return (
     <>
-      <PageContainer includedComponent={<AllMatchResult />} />
+      <PageContainer
+        includedComponent={<AllMatchResult />}
+        title={"All Match Result"}
+      />
     </>
   );
 };

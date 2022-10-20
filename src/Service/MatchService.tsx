@@ -2,10 +2,15 @@ import { QueryOrder } from "../Models/Enum/CommonEnum";
 import { MatchResultModel } from "../Models/MatchResultModel";
 import { getApiCall, GetParameter } from "./ApiCall";
 
+export interface QueryProps {
+  entityFieldName: string;
+  order: QueryOrder;
+}
+
 export interface MatchResultProps {
   startIdx?: number;
   limit?: number;
-  order?: QueryOrder;
+  queryProps?: QueryProps;
 }
 
 export async function getMatchResultAPI(
@@ -16,7 +21,7 @@ export async function getMatchResultAPI(
     params: {
       startIdx: props?.startIdx,
       limit: props?.limit,
-      order: props?.order,
+      order: props?.queryProps,
     },
   };
   const result: MatchResultModel[] = await getApiCall(getParameter);
