@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import MatchResult from "../Components/MatchResult";
-import { QueryOrder } from "../Models/Enum/CommonEnum";
+import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
 import { MatchResultModel } from "../Models/MatchResultModel";
-import {
-  getMatchResultAPI,
-  MatchResultProps,
-  QueryProps,
-} from "../Service/MatchService";
+import { getMatchResultAPI, MatchResultProps } from "../Service/MatchService";
 import "./AllMatchResult.scss";
 import CustomizedSpinner from "./CustomizedSpinner";
 
@@ -20,9 +16,9 @@ const AllMatchResult = () => {
     setIsLoding(true);
     const matchResultProps: MatchResultProps = {
       startIdx: resultStartIdx,
-      queryProps: {
+      order: {
         entityFieldName: "matchDate",
-        order: QueryOrder.DESC,
+        orderSortKeyword: OrderSortKeyword.DESC,
       },
     };
     const res = await getMatchResultAPI(matchResultProps);

@@ -16,7 +16,7 @@ export enum Position {
   GK = "GK",
 }
 
-export enum QueryOrder {
+export enum OrderSortKeyword {
   ASC = "ASC",
   DESC = "DESC",
 }
