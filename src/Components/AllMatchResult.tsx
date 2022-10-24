@@ -7,15 +7,26 @@ import "./AllMatchResult.scss";
 import CustomizedSpinner from "./CustomizedSpinner";
 
 const AllMatchResult = () => {
-  const [matchResult, setMatchResult] = useState<MatchResultModel[]>();
+  const MATCH_RESULTLIMIT: number = 3;
+
+  const [matchResult, setMatchResult] = useState<MatchResultModel[]>([]);
   const [isLoading, setIsLoding] = useState<boolean>(true);
 
   const [resultStartIdx, setResultStartIdx] = useState<number>(0);
+
+  const handleShowMoreOnClick = () => {
+    setResultStartIdx(resultStartIdx + 3);
+  };
+
+  useEffect(() => {
+    getMatchResult();
+  }, [resultStartIdx]);
 
   const getMatchResult = async () => {
     setIsLoding(true);
     const matchResultProps: MatchResultProps = {
       startIdx: resultStartIdx,
+      limit: MATCH_RESULTLIMIT,
       order: {
         entityFieldName: "matchDate",
         orderSortKeyword: OrderSortKeyword.DESC,
@@ -23,7 +34,7 @@ const AllMatchResult = () => {
     };
     const res = await getMatchResultAPI(matchResultProps);
     if (res) {
-      setMatchResult(res);
+      setMatchResult(matchResult.concat(res));
       setIsLoding(false);
     }
   };
@@ -37,10 +48,13 @@ const AllMatchResult = () => {
       {isLoading ? (
         <CustomizedSpinner />
       ) : (
-        matchResult!.map((ele, idx) => {
+        matchResult.map((ele, idx) => {
           return <MatchResult matchResult={ele} key={idx} />;
         })
       )}
+      <div className="show_more" onClick={handleShowMoreOnClick}>
+        더 보기
+      </div>
     </>
   );
 };
