@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./AdminPage.scss";
 import PlayerModificationFragment from "./PlayerModificationFragment";
 import PlayerRegistrationFragment from "./PlayerRegistrationFragment";
+import TeamRegisterFragment from "./TeamRegisterFragment";
 
 const AdminPage = () => {
   const [fragment, setFragment] = useState<React.ReactElement>();
@@ -33,7 +34,7 @@ const AdminPage = () => {
           onClick={() =>
             handleFragmentButtonClick(<PlayerModificationFragment />)
           }
-          className="player_register"
+          className="player_modification"
         >
           선수 정보 수정
         </Button>
@@ -42,8 +43,10 @@ const AdminPage = () => {
           size="large"
           variant="contained"
           color="primary"
-          // onClick={}
-          className="player_register"
+          onClick={() => {
+            alert("기능 개발중");
+          }}
+          className="player_delete"
         >
           등록 선수 삭제
         </Button>
@@ -52,8 +55,18 @@ const AdminPage = () => {
           size="large"
           variant="contained"
           color="primary"
+          onClick={() => handleFragmentButtonClick(<TeamRegisterFragment />)}
+          className="team_register"
+        >
+          팀 등록
+        </Button>
+
+        <Button
+          size="large"
+          variant="contained"
+          color="primary"
           // onClick={}
-          className="player_register"
+          className="match_result_register"
         >
           매치 결과 등록
         </Button>
