@@ -4,6 +4,7 @@ import "./RecentMatchResultBox.scss";
 import MatchResult from "./MatchResult";
 import CustomizedSpinner from "./CustomizedSpinner";
 import { getMatchResultAPI, MatchResultProps } from "../Service/MatchService";
+import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
 
 const RecentMatchResultBox = () => {
   const [recentResult, setRecentResult] = useState<MatchResultModel[]>();
@@ -13,6 +14,10 @@ const RecentMatchResultBox = () => {
     const matchResultProps: MatchResultProps = {
       startIdx: 0,
       limit: 3,
+      order: {
+        entityFieldName: "matchDate",
+        orderSortKeyword: OrderSortKeyword.DESC,
+      },
     };
     const res = await getMatchResultAPI(matchResultProps);
     setRecentResult(res);

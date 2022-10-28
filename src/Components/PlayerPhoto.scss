@@ -46,9 +46,11 @@
     }
     img:hover {
       transform: none;
+      opacity: 1;
     }
     .overlay_text {
       visibility: hidden;
+      animation: none;
     }
   }
 }
