@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ANONYMOUS_PROFILE_IMG_PATH } from "../CommonConstant/ImgSrcConstant";
 import { PlayerModel } from "../Models/PlayerModel";
+import CustomizedImage from "./CustomizedImage";
 import "./PlayerPhoto.scss";
 
 export interface PlayerPhotoProps {
@@ -28,10 +29,6 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
     setIsHovering(false);
   };
 
-  const handleImgOnError = () => {
-    setProfileImgSrc(ANONYMOUS_PROFILE_IMG_PATH);
-  };
-
   return (
     <div
       className="photo_container"
@@ -46,7 +43,10 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
           <p>{props.player.firstNameEng}</p>
         </div>
       ) : null}
-      <img src={profileImgSrc} onError={handleImgOnError} />
+      <CustomizedImage
+        src={profileImgSrc}
+        onErrorImgSrc={ANONYMOUS_PROFILE_IMG_PATH}
+      />
     </div>
   );
 };
