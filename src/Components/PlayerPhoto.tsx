@@ -11,10 +11,6 @@ export interface PlayerPhotoProps {
 
 const PlayerPhoto = (props: PlayerPhotoProps) => {
   const [isHovering, setIsHovering] = useState<boolean>(false);
-  const [profileImgSrc, setProfileImgSrc] = useState<string>(
-    props.player.profileImgSrc || ANONYMOUS_PROFILE_IMG_PATH
-  );
-
   const handleOnClick = () => {
     if (props.onClick) {
       props.onClick(props.player);
@@ -44,7 +40,7 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
         </div>
       ) : null}
       <CustomizedImage
-        src={profileImgSrc}
+        src={props.player.profileImgSrc}
         onErrorImgSrc={ANONYMOUS_PROFILE_IMG_PATH}
       />
     </div>
