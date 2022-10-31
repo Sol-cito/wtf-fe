@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./CustomizedImage.scss";
 
 export interface CustomizedImageProps {
+  id?: string;
   src: string | undefined | null;
   onErrorImgSrc: string;
 }
@@ -19,7 +20,7 @@ const CustomizedImage = (props: CustomizedImageProps) => {
 
   return (
     <>
-      <img src={imageSrc} onError={handleImgOnError} />
+      <img id={props.id || ""} src={imageSrc} onError={handleImgOnError} />
     </>
   );
 };

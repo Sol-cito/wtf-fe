@@ -16,6 +16,8 @@ export const IMAGE_SRC_PREFIX = process.env.REACT_APP_IMAGE_SRC_PREFIX;
 export const ANONYMOUS_PROFILE_IMG_PATH =
   "/img/player/anonymous_profile_no_background.png";
 
+export const WTF_LOGO_IMG_PATH = "/team/logo_yellow.jpg";
+
 export const TEAM_MARK_NO_LOGO_IMG_PATH =
   "/img/otherteam/team_mark_no_logo.jpg";
 
