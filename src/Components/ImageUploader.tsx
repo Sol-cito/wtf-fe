@@ -39,9 +39,9 @@ const ImageUploader = (props: ImageUploaderProps) => {
     fileReader.readAsDataURL(profileImage);
     fileReader.onloadend = () => {
       setPreviewImage(fileReader.result as string);
+      event.target.value = "";
     };
     setImagePlaceholder(profileImage.name);
-    event.target.value = "";
   };
 
   const handleDeleteImage = () => {
@@ -69,7 +69,11 @@ const ImageUploader = (props: ImageUploaderProps) => {
             placeholder={imagePlaceholder || "Upload your profile image"}
           />
         </div>
-        <label id="input_label" htmlFor="actual_upload_input">
+        <label
+          id="input_label"
+          onClick={handleDeleteImage}
+          htmlFor="actual_upload_input"
+        >
           이미지 올리기
         </label>
         {previewImageSrc ? (
