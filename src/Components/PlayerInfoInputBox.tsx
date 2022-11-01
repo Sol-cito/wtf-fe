@@ -8,7 +8,11 @@ import {
   NUMBER_REGAX,
 } from "../CommonConstant/CommonConstant";
 import { PlayerModel, PlayerMultipartModel } from "../Models/PlayerModel";
-import { createFormData } from "../Service/UtilityService";
+import { getImageBySrc } from "../Service/ImageService";
+import {
+  createFormData,
+  getImageFileNameWithExtension,
+} from "../Service/UtilityService";
 import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
@@ -35,6 +39,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   const [backNo, setBackNo] = useState<number>(0);
   const [moto, setMoto] = useState<string>("");
   const [curYn, setCurYn] = useState<string>("Y");
+  const [profileImageSrc, setProfileImageSrc] = useState<string>();
   const [profileImageFile, setProfileImageFile] = useState<File>();
 
   const [popupTitle, setPopupTitle] = useState<string>("");
@@ -57,6 +62,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
     setBackNo(props.playerInfo.backNo);
     setMoto(props.playerInfo.moto);
     setCurYn(props.playerInfo.curYn);
+    setProfileImageSrc(props.playerInfo.profileImgSrc);
   }, [props.playerInfo]);
 
   const initState = () => {
@@ -163,6 +169,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
       player: player,
       profileImageFile: profileImageFile,
     };
+
     setPlayerMultipartModel(inputRes);
     setConfirmContents(
       "- 한글 이름 : " +
@@ -180,7 +187,11 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         "\n- 좌우명 : " +
         inputRes.player.moto +
         "\n- 현재 활동 여부 : " +
-        inputRes.player.curYn
+        inputRes.player.curYn +
+        "\n- 프로필사진 : " +
+        (profileImageFile
+          ? profileImageFile.name
+          : getImageFileNameWithExtension(profileImageSrc) || "이미지 없음")
     );
     setShowConfirm(true);
   };
@@ -273,9 +284,11 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
           useStateFunc={setCurYn}
         />
         <ImageUploader
-          title="프로필 이미지(업로드 안하면 기본이미지로 보임): "
-          setImgFile={setProfileImageFile}
+          title="프로필 이미지(필수 아님): "
+          initialImageSrc={profileImageSrc}
+          setInitialImageSrc={setProfileImageSrc}
           imageFile={profileImageFile}
+          setImgFile={setProfileImageFile}
         />
         <Button
           size="large"

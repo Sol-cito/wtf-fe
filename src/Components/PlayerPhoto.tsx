@@ -40,7 +40,12 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
         </div>
       ) : null}
       <CustomizedImage
-        src={props.player.profileImgSrc}
+        src={
+          props.player.profileImgSrc
+            ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
+              props.player.profileImgSrc
+            : null
+        }
         onErrorImgSrc={ANONYMOUS_PROFILE_IMG_PATH}
       />
     </div>

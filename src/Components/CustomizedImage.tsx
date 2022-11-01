@@ -1,21 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { NOT_FOUND_IMG_PATH } from "../CommonConstant/ImgSrcConstant";
 import "./CustomizedImage.scss";
 
 export interface CustomizedImageProps {
   id?: string;
   src: string | undefined | null;
-  onErrorImgSrc: string;
+  onErrorImgSrc?: string;
 }
 
 const CustomizedImage = (props: CustomizedImageProps) => {
   const [imageSrc, setImageSrc] = useState<string>(
-    props.src
-      ? process.env.REACT_APP_IMAGE_SRC_PREFIX + props.src
-      : props.onErrorImgSrc
+    props.src || NOT_FOUND_IMG_PATH
   );
 
+  useEffect(() => {
+    setImageSrc(props.src || NOT_FOUND_IMG_PATH);
+  }, [props.src]);
+
   const handleImgOnError = () => {
-    setImageSrc(props.onErrorImgSrc);
+    setImageSrc(props.onErrorImgSrc || NOT_FOUND_IMG_PATH);
   };
 
   return (

@@ -29,14 +29,8 @@
 
 @media only screen and (max-width: 768px) {
   .admin_background {
-    .admin_menu_container {
-      .player_register {
-        font-size: 4vw;
-      }
-
-      button {
-        margin: 3vw;
-      }
+    .admin_menu_container * {
+      font-size: 4vw;
     }
   }
 }

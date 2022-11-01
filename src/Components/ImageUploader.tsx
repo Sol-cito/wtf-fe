@@ -1,17 +1,34 @@
+import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { getImageFileNameWithExtension } from "../Service/UtilityService";
+import CustomizedImage from "./CustomizedImage";
 import "./ImageUploader.scss";
 
 export interface ImageUploaderProps {
   title?: string;
+  initialImageSrc?: string;
+  setInitialImageSrc?: Function;
   imageFile?: File;
   setImgFile: Function;
 }
 
 const ImageUploader = (props: ImageUploaderProps) => {
-  const [profileImgBase64, setProfileImgBase64] = useState<string>();
+  const [previewImageSrc, setPreviewImage] = useState<string>();
+  const [imagePlaceholder, setImagePlaceholder] = useState<string>();
 
   useEffect(() => {
-    setProfileImgBase64(undefined);
+    if (!props.initialImageSrc) {
+      handleDeleteImage();
+      return;
+    }
+    setPreviewImage(
+      process.env.REACT_APP_IMAGE_SRC_PREFIX + props.initialImageSrc
+    );
+    setImagePlaceholder(getImageFileNameWithExtension(props.initialImageSrc));
+  }, [props.initialImageSrc]);
+
+  useEffect(() => {
+    setImagePlaceholder(props.imageFile?.name);
   }, [props.imageFile]);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,25 +38,55 @@ const ImageUploader = (props: ImageUploaderProps) => {
     let fileReader: FileReader = new FileReader();
     fileReader.readAsDataURL(profileImage);
     fileReader.onloadend = () => {
-      setProfileImgBase64(fileReader.result as string);
+      setPreviewImage(fileReader.result as string);
     };
+    setImagePlaceholder(profileImage.name);
+  };
+
+  const handleDeleteImage = () => {
+    setImagePlaceholder("");
+    setPreviewImage("");
+    props.setImgFile();
+    if (props.setInitialImageSrc) props.setInitialImageSrc();
   };
 
   return (
     <div className="profile_image_area">
       <p>{props.title}</p>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageUpload}
-        multiple={false}
-      />
-      {profileImgBase64 ? (
-        <>
-          <p> * 이미지 미리보기 * </p>
-          <img src={profileImgBase64} />
-        </>
-      ) : null}
+      <div className="file_box">
+        <input
+          id="actual_upload_input"
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          multiple={false}
+        />
+        <div>
+          <input
+            id="fake_upload_input"
+            disabled={true}
+            placeholder={imagePlaceholder || "Upload your profile image"}
+          />
+        </div>
+        <label id="input_label" htmlFor="actual_upload_input">
+          이미지 올리기
+        </label>
+        {previewImageSrc ? (
+          <>
+            <Button
+              id="delete_btn"
+              size="large"
+              variant="contained"
+              color="primary"
+              onClick={handleDeleteImage}
+            >
+              지우기
+            </Button>
+            <p> * 이미지 미리보기 * </p>
+            <CustomizedImage src={previewImageSrc} />
+          </>
+        ) : null}
+      </div>
     </div>
   );
 };
