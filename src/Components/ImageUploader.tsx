@@ -41,6 +41,7 @@ const ImageUploader = (props: ImageUploaderProps) => {
       setPreviewImage(fileReader.result as string);
     };
     setImagePlaceholder(profileImage.name);
+    event.target.value = "";
   };
 
   const handleDeleteImage = () => {

@@ -44,7 +44,7 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
           props.player.profileImgSrc
             ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
               props.player.profileImgSrc
-            : null
+            : ANONYMOUS_PROFILE_IMG_PATH
         }
         onErrorImgSrc={ANONYMOUS_PROFILE_IMG_PATH}
       />
