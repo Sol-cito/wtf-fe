@@ -1,6 +1,12 @@
 import { Button } from "@material-ui/core";
 import moment from "moment";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+  useRef,
+} from "react";
 import {
   BIRTH_REGAX,
   ENGLISH_REGAX,
@@ -8,7 +14,6 @@ import {
   NUMBER_REGAX,
 } from "../CommonConstant/CommonConstant";
 import { PlayerModel, PlayerMultipartModel } from "../Models/PlayerModel";
-import { getImageBySrc } from "../Service/ImageService";
 import {
   createFormData,
   getImageFileNameWithExtension,
@@ -28,6 +33,8 @@ export interface PlayerInfoInputBoxProps {
 }
 
 const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
+  const deleteImageRef: React.Ref<any> = useRef({});
+
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [confirmContents, setConfirmContents] = useState<string>("");
 
@@ -40,8 +47,8 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   const [backNo, setBackNo] = useState<number>(0);
   const [moto, setMoto] = useState<string>("");
   const [curYn, setCurYn] = useState<string>("Y");
-  const [profileImageSrc, setProfileImageSrc] = useState<string>();
-  const [profileImageFile, setProfileImageFile] = useState<File>();
+  const [profileImgSrc, setProfileImgSrc] = useState<string>();
+  const [profileImgFile, setProfileImgFile] = useState<File>();
 
   const [popupTitle, setPopupTitle] = useState<string>("");
   const [popupContents, setPopupContents] = useState<string>("");
@@ -65,7 +72,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
     setBackNo(props.playerInfo.backNo);
     setMoto(props.playerInfo.moto);
     setCurYn(props.playerInfo.curYn);
-    setProfileImageSrc(props.playerInfo.profileImgSrc);
+    setProfileImgSrc(props.playerInfo.profileImgSrc);
   }, [props.playerInfo]);
 
   const initState = () => {
@@ -77,7 +84,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
     setPosition("GK");
     setBackNo(0);
     setMoto("");
-    setProfileImageFile(undefined);
+    setProfileImgSrc("");
+    setProfileImgFile(undefined);
+    deleteImageRef.current.handleDeleteImage();
   };
 
   useImperativeHandle(ref, () => ({
@@ -144,7 +153,10 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
     for (let res of Object.entries(player)) {
       let key: string = res[0];
       let value: string = res[1];
-      if (value.length == 0) {
+
+      if (key === "profileImgSrc") continue;
+
+      if (!value || value.length == 0) {
         setPopupTitle("[Error] 필수값 미입력");
         setPopupContents(key + " 입력되지 않음");
         setPopupShow(true);
@@ -164,13 +176,14 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
       position: position,
       backNo: backNo,
       moto: moto,
+      profileImgSrc: profileImgSrc,
       curYn: curYn,
     };
     if (!validatePlayerInputData(player)) return;
 
     const inputRes: PlayerMultipartModel = {
       player: player,
-      profileImageFile: profileImageFile,
+      profileImgFile: profileImgFile,
     };
 
     setPlayerMultipartModel(inputRes);
@@ -192,9 +205,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         "\n- 현재 활동 여부 : " +
         inputRes.player.curYn +
         "\n- 프로필사진 : " +
-        (profileImageFile
-          ? profileImageFile.name
-          : getImageFileNameWithExtension(profileImageSrc) || "이미지 없음")
+        (profileImgFile
+          ? profileImgFile.name
+          : getImageFileNameWithExtension(profileImgSrc) || "이미지 없음")
     );
     setShowConfirm(true);
   };
@@ -213,8 +226,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
     map.set("backNo", String(playerMultipartModel!.player.backNo));
     map.set("moto", playerMultipartModel!.player.moto);
     map.set("curYn", playerMultipartModel!.player.curYn);
-    if (playerMultipartModel!.profileImageFile) {
-      map.set("image", playerMultipartModel!.profileImageFile);
+    map.set("profileImgSrc", playerMultipartModel!.player.profileImgSrc || "");
+    if (playerMultipartModel!.profileImgFile) {
+      map.set("image", playerMultipartModel!.profileImgFile);
     }
 
     const formData: FormData = createFormData(map);
@@ -292,10 +306,11 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         />
         <ImageUploader
           title="프로필 이미지(필수 아님): "
-          initialImageSrc={profileImageSrc}
-          setInitialImageSrc={setProfileImageSrc}
-          imageFile={profileImageFile}
-          setImgFile={setProfileImageFile}
+          initialImageSrc={profileImgSrc}
+          setInitialImageSrc={setProfileImgSrc}
+          imageFile={profileImgFile}
+          setImgFile={setProfileImgFile}
+          ref={deleteImageRef}
         />
         <Button
           size="large"

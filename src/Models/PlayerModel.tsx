@@ -13,5 +13,5 @@ export interface PlayerModel {
 
 export interface PlayerMultipartModel {
   player: PlayerModel;
-  profileImageFile?: File;
+  profileImgFile?: File;
 }

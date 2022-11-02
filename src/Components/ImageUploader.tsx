@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import { getImageFileNameWithExtension } from "../Service/UtilityService";
 import CustomizedImage from "./CustomizedImage";
 import "./ImageUploader.scss";
@@ -12,9 +12,13 @@ export interface ImageUploaderProps {
   setImgFile: Function;
 }
 
-const ImageUploader = (props: ImageUploaderProps) => {
+const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
   const [previewImageSrc, setPreviewImage] = useState<string>();
   const [imagePlaceholder, setImagePlaceholder] = useState<string>();
+
+  useImperativeHandle(ref, () => ({
+    handleDeleteImage,
+  }));
 
   useEffect(() => {
     if (!props.initialImageSrc) {
@@ -94,6 +98,6 @@ const ImageUploader = (props: ImageUploaderProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default ImageUploader;
