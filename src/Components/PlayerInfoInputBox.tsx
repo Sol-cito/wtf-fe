@@ -19,6 +19,7 @@ import CustomizedPopup from "./CustomizedPopup";
 import CustomizedSelectBox from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
 import "./PlayerInfoInputBox.scss";
+import WaitingBackground from "./WaitingBackground";
 
 export interface PlayerInfoInputBoxProps {
   title: string;
@@ -45,6 +46,8 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   const [popupTitle, setPopupTitle] = useState<string>("");
   const [popupContents, setPopupContents] = useState<string>("");
   const [popupShow, setPopupShow] = useState<boolean>(false);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [playerMultipartModel, setPlayerMultipartModel] =
     useState<PlayerMultipartModel>();
@@ -197,6 +200,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   };
 
   const handleOnConfirm = async () => {
+    setShowConfirm(false);
+    setIsLoading(true);
+
     let map: Map<string, string | Blob> = new Map<string, string | Blob>();
     map.set("id", String(playerMultipartModel!.player.id));
     map.set("name", playerMultipartModel!.player.name);
@@ -212,8 +218,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
     }
 
     const formData: FormData = createFormData(map);
+
     await props.handlePlayerMultiPart(playerMultipartModel!.player, formData);
-    setShowConfirm(false);
+    setIsLoading(false);
   };
 
   return (
@@ -317,6 +324,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
           }}
         />
       </div>
+      {isLoading ? <WaitingBackground /> : null}
     </>
   );
 });
