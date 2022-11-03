@@ -98,7 +98,7 @@ const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
           onClick={handleDeleteImage}
           htmlFor="actual_upload_input"
         >
-          이미지 올리기 (3MB 이하)
+          이미지 올리기 ({MAX_IMAGE_UPLOAD_SIZE / (1024 * 1024)}MB 이하)
         </label>
         {previewImageSrc ? (
           <>
