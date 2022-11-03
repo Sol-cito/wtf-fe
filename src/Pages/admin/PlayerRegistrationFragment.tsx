@@ -41,7 +41,8 @@ const PlayerRegistrationFragment = () => {
     palyer: PlayerModel,
     formData: FormData
   ) => {
-    await validateDuplicatePlayerName(palyer.name);
+    const validateRes = await validateDuplicatePlayerName(palyer.name);
+    if (!validateRes) return;
     const registrationResult: PlayerModel = await registerNewPlayerAPI(
       formData
     );
