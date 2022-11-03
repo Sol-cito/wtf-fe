@@ -1,7 +1,9 @@
+import { WTF_LOGO_IMG_PATH } from "./ImgConstant";
+
 const HEADER_CONSTANT_DATA = {
   headerLogo: {
     name: "W T F",
-    srcLink: "/img/logo_yellow.jpg",
+    srcLink: WTF_LOGO_IMG_PATH,
   },
 
   headerButton: [
