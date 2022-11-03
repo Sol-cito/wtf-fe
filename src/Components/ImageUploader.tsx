@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import { getImageFileNameWithExtension } from "../Service/UtilityService";
 import CustomizedImage from "./CustomizedImage";
+import CustomizedPopup from "./CustomizedPopup";
 import "./ImageUploader.scss";
 
 export interface ImageUploaderProps {
@@ -10,11 +11,16 @@ export interface ImageUploaderProps {
   setInitialImageSrc?: Function;
   imageFile?: File;
   setImgFile: Function;
+  maxImageSize?: number;
 }
 
 const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
+  const MAX_IMAGE_SIZE = props.maxImageSize || 3 * 1024 * 1024;
+
   const [previewImageSrc, setPreviewImage] = useState<string>();
   const [imagePlaceholder, setImagePlaceholder] = useState<string>();
+
+  const [imageSizePopupShow, setImageSizePopupShow] = useState<boolean>(false);
 
   useImperativeHandle(ref, () => ({
     handleDeleteImage,
@@ -37,6 +43,10 @@ const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]) return;
+    if (event.target.files[0].size > MAX_IMAGE_SIZE) {
+      setImageSizePopupShow(true);
+      return;
+    }
     props.setImgFile(event.target.files[0]);
     let profileImage: File = event.target.files[0];
     let fileReader: FileReader = new FileReader();
@@ -66,6 +76,16 @@ const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
           onChange={handleImageUpload}
           multiple={false}
         />
+        <CustomizedPopup
+          title={"File Size is too big!"}
+          contents={
+            "파일 사이즈가 " + MAX_IMAGE_SIZE / (1024 * 1024) + "MB 이상입니다."
+          }
+          show={imageSizePopupShow}
+          onClickOk={() => {
+            setImageSizePopupShow(false);
+          }}
+        />
         <div>
           <input
             id="fake_upload_input"
@@ -78,7 +98,7 @@ const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
           onClick={handleDeleteImage}
           htmlFor="actual_upload_input"
         >
-          이미지 올리기
+          이미지 올리기 (3MB 이하)
         </label>
         {previewImageSrc ? (
           <>
