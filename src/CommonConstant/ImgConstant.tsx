@@ -19,7 +19,7 @@ export const ANONYMOUS_PROFILE_IMG_PATH =
 export const WTF_LOGO_IMG_PATH = "/team/logo_yellow.jpg";
 
 export const TEAM_MARK_NO_LOGO_IMG_PATH =
-  "/img/otherteam/team_mark_no_logo.jpg";
+  "/img/otherteam/team_mark_no_logo.png";
 
 export const NOT_FOUND_IMG_PATH = "/img/etc/not_found.png";
 
