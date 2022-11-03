@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NOT_FOUND_IMG_PATH } from "../CommonConstant/ImgSrcConstant";
+import { NOT_FOUND_IMG_PATH } from "../CommonConstant/ImgConstant";
 import "./CustomizedImage.scss";
 
 export interface CustomizedImageProps {

@@ -1,4 +1,4 @@
-import { MAIN_TEAM_PHOTO_SRC } from "../CommonConstant/ImgSrcConstant";
+import { MAIN_TEAM_PHOTO_SRC } from "../CommonConstant/ImgConstant";
 import { MAIN_PAGE_BOX_TYPING } from "../CommonConstant/TextConstant";
 import TextTypingBox from "./TextTypingBox";
 import "./MainPageTeamPhotoBox.scss";

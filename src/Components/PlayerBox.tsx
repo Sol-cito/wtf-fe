@@ -2,7 +2,7 @@ import { isMobile } from "react-device-detect";
 import {
   PLAYER_MODAL_BACKGROUND_STYLE_BROWSER,
   PLAYER_MODAL_BACKGROUND_STYLE_MOBILE,
-} from "../CommonConstant/ImgSrcConstant";
+} from "../CommonConstant/ImgConstant";
 import { PlayerModel } from "../Models/PlayerModel";
 import { useAppDispatch, useAppSelector } from "../Store/config";
 import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";

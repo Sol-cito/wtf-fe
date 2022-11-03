@@ -10,7 +10,7 @@ import { isMobile } from "react-device-detect";
 import {
   PLAYER_MODAL_BACKGROUND_STYLE_BROWSER,
   PLAYER_MODAL_BACKGROUND_STYLE_MOBILE,
-} from "../CommonConstant/ImgSrcConstant";
+} from "../CommonConstant/ImgConstant";
 import CustomizedModal from "./CustomizedModal";
 import CustomizedSpinner from "./CustomizedSpinner";
 

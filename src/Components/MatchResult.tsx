@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   TEAM_MARK_NO_LOGO_IMG_PATH,
   WTF_LOGO_IMG_PATH,
-} from "../CommonConstant/ImgSrcConstant";
+} from "../CommonConstant/ImgConstant";
 import { MatchResultModel } from "../Models/MatchResultModel";
 import CustomizedImage from "./CustomizedImage";
 import "./MatchResult.scss";

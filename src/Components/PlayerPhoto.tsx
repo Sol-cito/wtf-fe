@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ANONYMOUS_PROFILE_IMG_PATH } from "../CommonConstant/ImgSrcConstant";
+import { ANONYMOUS_PROFILE_IMG_PATH } from "../CommonConstant/ImgConstant";
 import { PlayerModel } from "../Models/PlayerModel";
 import CustomizedImage from "./CustomizedImage";
 import "./PlayerPhoto.scss";

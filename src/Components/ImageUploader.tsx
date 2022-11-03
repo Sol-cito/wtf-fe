@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import { useEffect, useState, useImperativeHandle, forwardRef } from "react";
+import { MAX_IMAGE_UPLOAD_SIZE } from "../CommonConstant/ImgConstant";
 import { getImageFileNameWithExtension } from "../Service/UtilityService";
 import CustomizedImage from "./CustomizedImage";
 import CustomizedPopup from "./CustomizedPopup";
@@ -11,12 +12,9 @@ export interface ImageUploaderProps {
   setInitialImageSrc?: Function;
   imageFile?: File;
   setImgFile: Function;
-  maxImageSize?: number;
 }
 
 const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
-  const MAX_IMAGE_SIZE = props.maxImageSize || 3 * 1024 * 1024;
-
   const [previewImageSrc, setPreviewImage] = useState<string>();
   const [imagePlaceholder, setImagePlaceholder] = useState<string>();
 
@@ -43,7 +41,7 @@ const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || !event.target.files[0]) return;
-    if (event.target.files[0].size > MAX_IMAGE_SIZE) {
+    if (event.target.files[0].size > MAX_IMAGE_UPLOAD_SIZE) {
       setImageSizePopupShow(true);
       return;
     }
@@ -79,7 +77,9 @@ const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
         <CustomizedPopup
           title={"File Size is too big!"}
           contents={
-            "파일 사이즈가 " + MAX_IMAGE_SIZE / (1024 * 1024) + "MB 이상입니다."
+            "파일 사이즈가 " +
+            MAX_IMAGE_UPLOAD_SIZE / (1024 * 1024) +
+            "MB 이상입니다."
           }
           show={imageSizePopupShow}
           onClickOk={() => {

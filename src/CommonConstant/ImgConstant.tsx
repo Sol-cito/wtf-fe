@@ -22,3 +22,5 @@ export const TEAM_MARK_NO_LOGO_IMG_PATH =
   "/img/otherteam/team_mark_no_logo.jpg";
 
 export const NOT_FOUND_IMG_PATH = "/img/etc/not_found.png";
+
+export const MAX_IMAGE_UPLOAD_SIZE = 1 * 1024 * 1024;
