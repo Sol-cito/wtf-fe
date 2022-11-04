@@ -7,6 +7,7 @@ import CustomizedPopup from "./CustomizedPopup";
 import "./ImageUploader.scss";
 
 export interface ImageUploaderProps {
+  fileInputId: string;
   title?: string;
   initialImageSrc?: string;
   setInitialImageSrc?: Function;
@@ -68,7 +69,8 @@ const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
       <p>{props.title}</p>
       <div className="file_box">
         <input
-          id="actual_upload_input"
+          id={props.fileInputId}
+          className="actual_upload_input"
           type="file"
           accept="image/*"
           onChange={handleImageUpload}
@@ -88,15 +90,15 @@ const ImageUploader = forwardRef((props: ImageUploaderProps, ref) => {
         />
         <div>
           <input
-            id="fake_upload_input"
+            className="fake_upload_input"
             disabled={true}
             placeholder={imagePlaceholder || "Upload your profile image"}
           />
         </div>
         <label
-          id="input_label"
+          className="input_label"
           onClick={handleDeleteImage}
-          htmlFor="actual_upload_input"
+          htmlFor={props.fileInputId}
         >
           이미지 올리기 ({MAX_IMAGE_UPLOAD_SIZE / (1024 * 1024)}MB 이하)
         </label>

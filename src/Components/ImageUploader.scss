@@ -8,10 +8,10 @@
   }
 
   .file_box {
-    #actual_upload_input {
+    .actual_upload_input {
       display: none;
     }
-    #input_label {
+    .input_label {
       margin: 1vw;
       padding: 1vw;
       color: white;
@@ -19,7 +19,7 @@
       border: 1px solid;
       cursor: pointer;
     }
-    #fake_upload_input {
+    .fake_upload_input {
       line-height: 1.75;
       height: max-content;
       width: 50%;

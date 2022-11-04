@@ -61,6 +61,7 @@ const PlayerList = (props: PlayerListProps) => {
               <TableCell>좌우명</TableCell>
               <TableCell>활동여부</TableCell>
               <TableCell>profileImgSrc</TableCell>
+              <TableCell>profileTorsoImgSrc</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -93,6 +94,7 @@ const PlayerList = (props: PlayerListProps) => {
                       <TableCell>{ele.moto}</TableCell>
                       <TableCell>{ele.curYn}</TableCell>
                       <TableCell>{ele.profileImgSrc}</TableCell>
+                      <TableCell>{ele.profileTorsoImgSrc}</TableCell>
                     </TableRow>
                   );
                 })

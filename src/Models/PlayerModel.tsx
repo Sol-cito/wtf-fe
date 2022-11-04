@@ -8,10 +8,12 @@ export interface PlayerModel {
   backNo: number;
   moto: string;
   profileImgSrc?: string;
+  profileTorsoImgSrc?: string;
   curYn: string;
 }
 
 export interface PlayerMultipartModel {
   player: PlayerModel;
   profileImgFile?: File;
+  profileTorsoImgFile?: File;
 }
