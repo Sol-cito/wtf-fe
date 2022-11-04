@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import CustomizedPopup from "../../Components/CustomizedPopup";
 import PlayerInfoInputBox from "../../Components/PlayerInfoInputBox";
 import PlayerList from "../../Components/PlayerList";
+import WaitingBackground from "../../Components/WaitingBackground";
 import { PlayerModel } from "../../Models/PlayerModel";
 import {
   getAllPlayersAPI,
@@ -17,9 +18,13 @@ const PlayerRegistrationFragment = () => {
   const [popupTitle, setPopupTitle] = useState<string>("");
   const [popupShow, setPopupShow] = useState<boolean>(false);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const getAllRegisteredPlayers = async () => {
+    setIsLoading(true);
     const res: PlayerModel[] = await getAllPlayersAPI();
     if (res) setPlayers(res);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -66,6 +71,7 @@ const PlayerRegistrationFragment = () => {
         ref={initStateRef}
       />
       <PlayerList players={players} title={"< 현재 등록된 선수 명단 >"} />
+      {isLoading ? <WaitingBackground /> : null}
       <CustomizedPopup
         title={popupTitle}
         show={popupShow}

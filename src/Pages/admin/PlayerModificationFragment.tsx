@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import CustomizedPopup from "../../Components/CustomizedPopup";
+import CustomizedSpinner from "../../Components/CustomizedSpinner";
 import PlayerInfoInputBox from "../../Components/PlayerInfoInputBox";
 import PlayerList from "../../Components/PlayerList";
+import WaitingBackground from "../../Components/WaitingBackground";
 import { PlayerModel } from "../../Models/PlayerModel";
 import { getAllPlayersAPI, modifyPlayerAPI } from "../../Service/PlayerService";
 import "./PlayerRegistrationFragment.scss";
@@ -13,7 +15,10 @@ const PlayerModificationFragment = () => {
   const [popupTitle, setPopupTitle] = useState<string>("");
   const [popupShow, setPopupShow] = useState<boolean>(false);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const getAllRegisteredPlayers = async () => {
+    setIsLoading(true);
     const res: PlayerModel[] = await getAllPlayersAPI();
     if (res) {
       setPlayers(res);
@@ -21,6 +26,7 @@ const PlayerModificationFragment = () => {
         setSelectedPlayer(res[0]);
       }
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -58,6 +64,7 @@ const PlayerModificationFragment = () => {
         isRadioButtonVisible={true}
         setSelectedPlayer={setSelectedPlayer}
       />
+      {isLoading ? <WaitingBackground /> : null}
       <CustomizedPopup
         title={popupTitle}
         show={popupShow}

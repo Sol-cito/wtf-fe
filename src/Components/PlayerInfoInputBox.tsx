@@ -218,7 +218,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         "\n- 상반신 사진 : " +
         (profileTorsoImgFile
           ? profileTorsoImgFile.name
-          : getImageFileNameWithExtension(profileTorsoImgFile) || "이미지 없음")
+          : getImageFileNameWithExtension(profileTorsoImgSrc) || "이미지 없음")
     );
     setShowConfirm(true);
   };
