@@ -1,5 +1,7 @@
 import moment from "moment";
+import { ANONYMOUS_PROFILE_IMG_PATH } from "../CommonConstant/ImgConstant";
 import { useAppSelector } from "../Store/config";
+import CustomizedImage from "./CustomizedImage";
 import "./PlayerModalBox.scss";
 
 const PlayerModalBox = () => {
@@ -10,7 +12,15 @@ const PlayerModalBox = () => {
       {player ? (
         <div className="player_info_container">
           <div className="photo_area">
-            <img src="/img/player/anonymous_profile_no_background.png" />
+            <CustomizedImage
+              src={
+                process.env.REACT_APP_IMAGE_SRC_PREFIX
+                  ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
+                    player.profileTorsoImgSrc
+                  : ANONYMOUS_PROFILE_IMG_PATH
+              }
+              onErrorImgSrc={ANONYMOUS_PROFILE_IMG_PATH}
+            />
           </div>
           <div className="info_area">
             <div className="moto_area">"{player.moto}"</div>

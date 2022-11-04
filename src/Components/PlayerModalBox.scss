@@ -4,11 +4,13 @@
 
   .photo_area {
     margin-top: 15vh;
+    max-width: 20vw;
 
     img {
       display: block;
       object-fit: cover;
-      max-height: 65vh;
+      height: 50vh;
+      max-width: inherit;
     }
   }
   .info_area {
@@ -74,8 +76,10 @@
     .photo_area {
       display: flex;
       justify-content: center;
+      max-width: inherit;
+
       img {
-        width: 70vw;
+        max-width: 90%;
         object-fit: cover;
       }
     }
