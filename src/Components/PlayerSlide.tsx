@@ -62,12 +62,12 @@ const PlayerSlide = () => {
               <img
                 id="arrow_left"
                 src="/img/etc/arrow_pointing_left.png"
-                onClick={() => handleOnSlideBtnClick(-1)}
+                onClick={() => handleOnSlideBtnClick(1)}
               />
               <img
                 id="arrow_right"
                 src="/img/etc/arrow_pointing_right.png"
-                onClick={() => handleOnSlideBtnClick(1)}
+                onClick={() => handleOnSlideBtnClick(-1)}
               />
             </div>
             <div
