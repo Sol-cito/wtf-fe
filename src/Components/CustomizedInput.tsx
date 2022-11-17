@@ -8,6 +8,7 @@ export interface CustomizedInputProps {
   onBlur?: Function;
   onChange?: Function;
   maxLength?: number;
+  placeHolder?: string;
 }
 
 const CustomizedInput = (props: CustomizedInputProps) => {
@@ -28,6 +29,7 @@ const CustomizedInput = (props: CustomizedInputProps) => {
         onBlur={handleOnBlur}
         onChange={handleOnChange}
         maxLength={props.maxLength}
+        placeholder={props.placeHolder}
       />
     </div>
   );
