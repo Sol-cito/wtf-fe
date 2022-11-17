@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import CustomizedPopup from "../../Components/CustomizedPopup";
 import TeamInfoInputBox from "../../Components/TeamInfoInputBox";
 import TeamList from "../../Components/TeamList";
-import { PlayerModel } from "../../Models/PlayerModel";
 import { TeamModel } from "../../Models/TeamModel";
-import { modifyPlayerAPI } from "../../Service/PlayerService";
-import { getAllTeams } from "../../Service/TeamService";
+import { getAllTeams, registerNewTeamAPI } from "../../Service/TeamService";
 import "./TeamRegisterFragment.scss";
 
 const TeamRegisterFragment = () => {
@@ -30,12 +28,11 @@ const TeamRegisterFragment = () => {
   }, []);
 
   const handleTeamMultiPart = async (team: TeamModel, formData: FormData) => {
-    // const registrationResult: TeamModel = await modifyPlayerAPI(formData);
-    const registrationResult = null;
+    const registrationResult: TeamModel = await registerNewTeamAPI(formData);
     if (registrationResult) {
-      // setPopupTitle(
-      //   "[Success] Team Registration Success!! " + registrationResult.name
-      // );
+      setPopupTitle(
+        "[Success] Team Registration Success!! " + registrationResult.name
+      );
       getAllTeams();
     } else {
       setPopupTitle("[ERROR] 요청 실패...개발자에게 문의 ㄱㄱ");

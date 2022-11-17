@@ -1,27 +1,16 @@
 import { Button } from "@material-ui/core";
-import moment from "moment";
 import {
   forwardRef,
   useEffect,
   useImperativeHandle,
-  useState,
   useRef,
+  useState,
 } from "react";
-import {
-  BIRTH_REGAX,
-  ENGLISH_REGAX,
-  KOREAN_REGAX,
-  NUMBER_REGAX,
-} from "../CommonConstant/CommonConstant";
 import { TeamModel, TeamMultipartModel } from "../Models/TeamModel";
-import {
-  createFormData,
-  getImageFileNameWithExtension,
-} from "../Service/UtilityService";
+import { getImageFileNameWithExtension } from "../Service/UtilityService";
 import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
-import CustomizedSelectBox from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
 import "./PlayerInfoInputBox.scss";
 import WaitingBackground from "./WaitingBackground";
@@ -128,7 +117,7 @@ const TeamInfoInputBox = forwardRef((props: TeamInfoInputBoxProps, ref) => {
     formData.append("name", teamMultipartModel!.team.name);
     formData.append("honetown", teamMultipartModel!.team.hometown || "");
     formData.append("teamLogoSrc", teamMultipartModel!.team.teamLogoSrc || "");
-    // await props.handlePlayerMultiPart(teamMultipartModel!.team, formData);
+    await props.handleTeamMultiPart(teamMultipartModel!.team, formData);
     setIsLoading(false);
   };
 
