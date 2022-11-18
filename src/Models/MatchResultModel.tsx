@@ -1,11 +1,14 @@
+import { WinOrLoseOrDraw, YesOrNo } from "./Enum/CommonEnum";
+
 export interface MatchResultModel {
+  id: number;
   opposingTeamName: string;
-  opposingTeamLogoSrc: string;
+  opposingTeamLogoSrc?: string;
   matchTypeName: string;
   matchLocation: string;
   goalsScored: number;
   goalsLost: number;
-  matchResult: string;
-  shootOutYn: string;
-  matchDate: string;
+  matchResult: WinOrLoseOrDraw;
+  shootOutYn: YesOrNo;
+  matchDate: Date;
 }

@@ -20,3 +20,14 @@ export enum OrderSortKeyword {
   ASC = "ASC",
   DESC = "DESC",
 }
+
+export enum YesOrNo {
+  YES = "Y",
+  NO = "N",
+}
+
+export enum WinOrLoseOrDraw {
+  WIN = "WIN",
+  LOSE = "LOSE",
+  DRAW = "DRAW",
+}

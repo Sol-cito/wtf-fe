@@ -36,9 +36,10 @@ const MatchResult = (props: MatchResultProps) => {
         <CustomizedImage
           id="opposing_team_logo"
           src={
-            process.env.REACT_APP_IMAGE_SRC_PREFIX +
-              props.matchResult.opposingTeamLogoSrc ||
-            TEAM_MARK_NO_LOGO_IMG_PATH
+            props.matchResult.opposingTeamLogoSrc
+              ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
+                props.matchResult.opposingTeamLogoSrc
+              : TEAM_MARK_NO_LOGO_IMG_PATH
           }
           onErrorImgSrc={TEAM_MARK_NO_LOGO_IMG_PATH}
         />

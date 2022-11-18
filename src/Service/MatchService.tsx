@@ -1,6 +1,11 @@
 import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
 import { MatchResultModel } from "../Models/MatchResultModel";
-import { getApiCall, GetParameter } from "./ApiCall";
+import {
+  getApiCall,
+  GetParameter,
+  postApiCall,
+  PostParameter,
+} from "./ApiCall";
 
 export interface OrderProps {
   entityFieldName: string;
@@ -19,11 +24,22 @@ export async function getMatchResultAPI(
   const getParameter: GetParameter = {
     url: "match",
     params: {
-      startIdx: props?.startIdx,
+      startIdx: props?.startIdx || 0,
       limit: props?.limit,
       order: props?.order,
     },
   };
   const result: MatchResultModel[] = await getApiCall(getParameter);
+  return result;
+}
+
+export async function registerNewMatchResultAPI(
+  matchResultModel: MatchResultModel
+): Promise<MatchResultModel> {
+  const postParameter: PostParameter = {
+    url: "match",
+    data: matchResultModel,
+  };
+  const result: MatchResultModel = await postApiCall(postParameter);
   return result;
 }
