@@ -4,7 +4,7 @@ import TeamInfoInputBox from "../../Components/TeamInfoInputBox";
 import TeamList from "../../Components/TeamList";
 import WaitingBackground from "../../Components/WaitingBackground";
 import { TeamModel } from "../../Models/TeamModel";
-import { getAllTeams, registerNewTeamAPI } from "../../Service/TeamService";
+import { getAllTeamsAPI, registerNewTeamAPI } from "../../Service/TeamService";
 import "./TeamRegisterFragment.scss";
 
 const TeamRegisterFragment = () => {
@@ -19,7 +19,7 @@ const TeamRegisterFragment = () => {
 
   const getAllTeamList = async () => {
     setIsLoading(true);
-    const res: TeamModel[] = await getAllTeams();
+    const res: TeamModel[] = await getAllTeamsAPI();
     if (res) {
       setTeams(res);
     }

@@ -10,10 +10,12 @@ import { WinOrLoseOrDraw, YesOrNo } from "../Models/Enum/CommonEnum";
 import { MatchResultModel } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
 import { TeamModel, TeamMultipartModel } from "../Models/TeamModel";
+import { getAllTeamsAPI } from "../Service/TeamService";
 import { getImageFileNameWithExtension } from "../Service/UtilityService";
 import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
+import CustomizedSelectBox from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
 import "./PlayerInfoInputBox.scss";
 import WaitingBackground from "./WaitingBackground";
@@ -32,7 +34,8 @@ const MatchResultInputBox = forwardRef(
     const [confirmContents, setConfirmContents] = useState<string>("");
 
     const [matchId, setMatchId] = useState<number>(-1);
-    const [opposingTeam, setOpposingTeam] = useState<string>("");
+
+    const [opposingTeamName, setOpposingTeamName] = useState<string>("");
     const [matchTypeName, setMatchTypeName] = useState<string>("");
     const [matchLocation, setMatchLocation] = useState<string>("");
     const [goalScored, setGoalScored] = useState<number>(-1);
@@ -51,10 +54,34 @@ const MatchResultInputBox = forwardRef(
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const [opposintTeamOptions, setOpposintTeamOptions] = useState<string[]>(
+      []
+    );
+
+    const getAllTeamList = async () => {
+      setIsLoading(true);
+      const res: TeamModel[] = await getAllTeamsAPI();
+      if (res) {
+        let nameList: string[] = res
+          .map((ele) => {
+            return ele.name;
+          })
+          .filter((ele) => {
+            return ele !== "WTF";
+          });
+        setOpposintTeamOptions(nameList);
+      }
+      setIsLoading(false);
+    };
+
+    useEffect(() => {
+      getAllTeamList();
+    }, []);
+
     useEffect(() => {
       if (!props.matchResult) return;
       setMatchId(props.matchResult.id);
-      setOpposingTeam(props.matchResult.opposingTeamName);
+      setOpposingTeamName(props.matchResult.opposingTeamName);
       setMatchTypeName(props.matchResult.matchTypeName);
       setMatchLocation(props.matchResult.matchLocation);
       setGoalScored(props.matchResult.goalsScored);
@@ -66,7 +93,7 @@ const MatchResultInputBox = forwardRef(
 
     const initState = () => {
       setMatchId(-1);
-      setOpposingTeam("");
+      setOpposingTeamName("");
       setMatchTypeName("");
       setMatchLocation("");
       setGoalScored(-1);
@@ -85,6 +112,8 @@ const MatchResultInputBox = forwardRef(
         let key: string = res[0];
         let value: string = res[1];
 
+        if (key === "opposingTeamName") continue;
+
         if (!value || value.length == 0) {
           setPopupTitle("[Error] 필수값 미입력");
           setPopupContents(key + " 입력되지 않음");
@@ -98,7 +127,7 @@ const MatchResultInputBox = forwardRef(
     const handleBtnOnClick = () => {
       const matchResult: MatchResultModel = {
         id: matchId,
-        opposingTeamName: opposingTeam || "",
+        opposingTeamName: opposingTeamName || "",
         matchTypeName: matchTypeName || "",
         matchLocation: matchLocation || "",
         goalsScored: goalScored,
@@ -131,6 +160,13 @@ const MatchResultInputBox = forwardRef(
       <>
         <div className="register_info_area">
           <p className="register_title">{props.title}</p>
+          <CustomizedSelectBox
+            title={"상대팀 :"}
+            value={opposingTeamName}
+            options={opposintTeamOptions}
+            className={"pisition"}
+            useStateFunc={setOpposingTeamName}
+          />
           <CustomizedInput
             title={"경기 장소 : "}
             value={matchLocation}

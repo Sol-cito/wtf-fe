@@ -6,7 +6,7 @@ import {
   PostParameter,
 } from "./ApiCall";
 
-export async function getAllTeams(): Promise<TeamModel[]> {
+export async function getAllTeamsAPI(): Promise<TeamModel[]> {
   const getParameter: GetParameter = {
     url: "team",
   };
