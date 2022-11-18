@@ -30,7 +30,7 @@ const TeamInfoInputBox = forwardRef((props: TeamInfoInputBoxProps, ref) => {
   const [teamId, setTeamId] = useState<number>(-1);
   const [name, setName] = useState<string>("");
   const [hometown, setHometown] = useState<string>("");
-  const [teamLogoSrc, setteamLogoSrc] = useState<string>();
+  const [teamLogoSrc, setTeamLogoSrc] = useState<string>();
   const [teamLogoImgFile, setTeamLogoImgFile] = useState<File>();
 
   const [teamMultipartModel, setTeamMultipartModel] =
@@ -53,7 +53,7 @@ const TeamInfoInputBox = forwardRef((props: TeamInfoInputBoxProps, ref) => {
     setTeamId(-1);
     setName("");
     setHometown("");
-    setteamLogoSrc("");
+    setTeamLogoSrc("");
     setTeamLogoImgFile(undefined);
     deleteImageRef.current.handleDeleteImage();
   };
@@ -99,7 +99,7 @@ const TeamInfoInputBox = forwardRef((props: TeamInfoInputBoxProps, ref) => {
         inputRes.team.name +
         "\n- 연고지 : " +
         inputRes.team.hometown +
-        "\n- 프로필사진 : " +
+        "\n- 로고사진 : " +
         (teamLogoImgFile
           ? teamLogoImgFile.name
           : getImageFileNameWithExtension(teamLogoSrc) || "이미지 없음")
@@ -115,9 +115,10 @@ const TeamInfoInputBox = forwardRef((props: TeamInfoInputBoxProps, ref) => {
 
     formData.append("id", String(teamMultipartModel!.team.id));
     formData.append("name", teamMultipartModel!.team.name);
-    formData.append("honetown", teamMultipartModel!.team.hometown || "");
+    formData.append("hometown", teamMultipartModel!.team.hometown || "");
     formData.append("teamLogoSrc", teamMultipartModel!.team.teamLogoSrc || "");
-    await props.handleTeamMultiPart(teamMultipartModel!.team, formData);
+    formData.append("image", teamLogoImgFile || new Blob());
+    await props.handleTeamMultiPart(formData);
     setIsLoading(false);
   };
 
@@ -145,7 +146,7 @@ const TeamInfoInputBox = forwardRef((props: TeamInfoInputBoxProps, ref) => {
           fileInputId="profile_img"
           title="팀 로고(필수 아님): "
           initialImageSrc={teamLogoSrc}
-          setInitialImageSrc={setteamLogoSrc}
+          setInitialImageSrc={setTeamLogoSrc}
           imageFile={teamLogoImgFile}
           setImgFile={setTeamLogoImgFile}
           ref={deleteImageRef}

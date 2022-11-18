@@ -1,42 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CustomizedPopup from "../../Components/CustomizedPopup";
 import TeamInfoInputBox from "../../Components/TeamInfoInputBox";
 import TeamList from "../../Components/TeamList";
+import WaitingBackground from "../../Components/WaitingBackground";
 import { TeamModel } from "../../Models/TeamModel";
 import { getAllTeams, registerNewTeamAPI } from "../../Service/TeamService";
 import "./TeamRegisterFragment.scss";
 
 const TeamRegisterFragment = () => {
+  const initStateRef: React.Ref<any> = useRef({});
+
   const [teams, setTeams] = useState<TeamModel[]>();
-  const [selectedTeam, setSelectedTeam] = useState<TeamModel>();
 
   const [popupTitle, setPopupTitle] = useState<string>("");
   const [popupShow, setPopupShow] = useState<boolean>(false);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const getAllTeamList = async () => {
+    setIsLoading(true);
     const res: TeamModel[] = await getAllTeams();
     if (res) {
       setTeams(res);
-      if (!selectedTeam) {
-        setSelectedTeam(res[0]);
-      }
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     getAllTeamList();
   }, []);
 
-  const handleTeamMultiPart = async (team: TeamModel, formData: FormData) => {
+  const handleTeamMultiPart = async (formData: FormData) => {
     const registrationResult: TeamModel = await registerNewTeamAPI(formData);
     if (registrationResult) {
       setPopupTitle(
         "[Success] Team Registration Success!! " + registrationResult.name
       );
-      getAllTeams();
     } else {
       setPopupTitle("[ERROR] 요청 실패...개발자에게 문의 ㄱㄱ");
     }
+    initStateRef.current.initState();
+    getAllTeamList();
     setPopupShow(true);
   };
 
@@ -45,13 +49,14 @@ const TeamRegisterFragment = () => {
       <TeamInfoInputBox
         title={"팀 등록"}
         handleTeamMultiPart={handleTeamMultiPart}
-        // playerInfo={selectedPlayer}
+        ref={initStateRef}
       />
       <TeamList
         teams={teams}
         title={"< 현재 등록된 팀 >"}
         isRadioButtonVisible={false}
       />
+      {isLoading ? <WaitingBackground /> : null}
       <CustomizedPopup
         title={popupTitle}
         show={popupShow}
