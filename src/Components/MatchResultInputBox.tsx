@@ -167,6 +167,13 @@ const MatchResultInputBox = forwardRef(
             className={"pisition"}
             useStateFunc={setOpposingTeamName}
           />
+          <CustomizedSelectBox
+            title={"매치 종류 :"}
+            value={opposingTeamName}
+            options={opposintTeamOptions}
+            className={"match_type"}
+            useStateFunc={setMatchTypeName}
+          />
           <CustomizedInput
             title={"경기 장소 : "}
             value={matchLocation}
@@ -174,6 +181,37 @@ const MatchResultInputBox = forwardRef(
             onChange={setMatchLocation}
             maxLength={15}
             placeHolder={"최대길이 15자"}
+          />
+          <CustomizedInput
+            title={"득점 : "}
+            value={matchLocation}
+            className={"number"}
+            onChange={setGoalScored}
+            maxLength={2}
+            placeHolder={"숫자만"}
+          />
+          <CustomizedInput
+            title={"실점 : "}
+            value={matchLocation}
+            className={"number"}
+            onChange={setGoalLost}
+            maxLength={2}
+            placeHolder={"숫자만"}
+          />
+          <CustomizedSelectBox
+            title={"승부차기 여부 : "}
+            value={"Y"}
+            options={["Y", "N"]}
+            className={"shoot_out_yn"}
+            useStateFunc={setShootoutYn}
+          />
+          <CustomizedInput
+            title={"시합 날짜 : "}
+            value={matchLocation}
+            className={"number"}
+            onChange={setMatchDate}
+            maxLength={2}
+            placeHolder={"숫자만"}
           />
           <Button
             size="large"
