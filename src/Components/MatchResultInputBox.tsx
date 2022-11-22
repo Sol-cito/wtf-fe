@@ -1,4 +1,5 @@
 import { Button } from "@material-ui/core";
+import moment from "moment";
 import {
   forwardRef,
   useEffect,
@@ -6,17 +7,17 @@ import {
   useRef,
   useState,
 } from "react";
+import { DATE_REGAX, NUMBER_REGAX } from "../CommonConstant/CommonConstant";
 import { WinOrLoseOrDraw, YesOrNo } from "../Models/Enum/CommonEnum";
 import { MatchResultModel } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
-import { TeamModel, TeamMultipartModel } from "../Models/TeamModel";
+import { TeamModel } from "../Models/TeamModel";
+import { getAllMatchTypeAPI } from "../Service/MatchService";
 import { getAllTeamsAPI } from "../Service/TeamService";
-import { getImageFileNameWithExtension } from "../Service/UtilityService";
 import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
-import CustomizedSelectBox from "./CustomizedSelectBox";
-import ImageUploader from "./ImageUploader";
+import CustomizedSelectBox, { CustomizedOptions } from "./CustomizedSelectBox";
 import "./PlayerInfoInputBox.scss";
 import WaitingBackground from "./WaitingBackground";
 
@@ -36,15 +37,22 @@ const MatchResultInputBox = forwardRef(
     const [matchId, setMatchId] = useState<number>(-1);
 
     const [opposingTeamName, setOpposingTeamName] = useState<string>("");
+    const [opposingTeamId, setOpposingTeamId] = useState<number>(-1);
+
     const [matchTypeName, setMatchTypeName] = useState<string>("");
+    const [matchTypeId, setMatchTypeId] = useState<number>(-1);
+
     const [matchLocation, setMatchLocation] = useState<string>("");
-    const [goalScored, setGoalScored] = useState<number>(-1);
-    const [goalLost, setGoalLost] = useState<number>(-1);
+    const [goalScored, setGoalScored] = useState<number>(0);
+    const [goalLost, setGoalLost] = useState<number>(0);
     const [matchResultWL, setMatchResultWL] = useState<WinOrLoseOrDraw>(
       WinOrLoseOrDraw.WIN
     );
-    const [shootoutYn, setShootoutYn] = useState<YesOrNo>(YesOrNo.YES);
-    const [matchDate, setMatchDate] = useState<Date>();
+    const [shootoutYn, setShootoutYn] = useState<YesOrNo>(YesOrNo.NO);
+
+    const [matchDate, setMatchDate] = useState<string>(
+      String(moment(new Date()).format("YYYY-MM-DD"))
+    );
 
     const [matchResult, setMatchResult] = useState<MatchResultModel>();
 
@@ -54,31 +62,65 @@ const MatchResultInputBox = forwardRef(
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const [opposintTeamOptions, setOpposintTeamOptions] = useState<string[]>(
-      []
-    );
+    const [opposingTeamOptions, setOpposingTeamOptions] = useState<
+      CustomizedOptions[]
+    >([]);
+    const [matchTypeOptions, setMathTypeOptions] = useState<
+      CustomizedOptions[]
+    >([]);
 
-    const getAllTeamList = async () => {
+    const shootoutOptions: CustomizedOptions[] = [
+      { value: "Y" },
+      { value: "N" },
+    ];
+
+    const matchResultWLOptions: CustomizedOptions[] = [
+      { value: "WIN" },
+      { value: "LOSE" },
+      { value: "DRAW" },
+    ];
+
+    const getAllTeamListAndMathTypes = async () => {
       setIsLoading(true);
       const res: TeamModel[] = await getAllTeamsAPI();
       if (res) {
-        let nameList: string[] = res
+        let teamNameOptions: CustomizedOptions[] = res
           .map((ele) => {
-            return ele.name;
+            return {
+              id: ele.id,
+              value: ele.name,
+            };
           })
           .filter((ele) => {
-            return ele !== "WTF";
+            return ele.value !== "WTF";
           });
-        setOpposintTeamOptions(nameList);
+        setOpposingTeamOptions(teamNameOptions);
+        setOpposingTeamName(teamNameOptions[0].value);
       }
+
+      const matchTypes: MatchTypeModel[] = await getAllMatchTypeAPI();
+      if (matchTypes) {
+        let matchTypeOptions: CustomizedOptions[] = matchTypes.map((ele) => {
+          return {
+            id: ele.id,
+            value:
+              ele.matchTypeName +
+              (ele.matchSeason ? " (" + ele.matchSeason + ")" : ""),
+          };
+        });
+        setMathTypeOptions(matchTypeOptions);
+        setMatchTypeName(matchTypeOptions[0].value);
+      }
+
       setIsLoading(false);
     };
 
     useEffect(() => {
-      getAllTeamList();
+      getAllTeamListAndMathTypes();
     }, []);
 
     useEffect(() => {
+      // TO-DO : 수정시
       if (!props.matchResult) return;
       setMatchId(props.matchResult.id);
       setOpposingTeamName(props.matchResult.opposingTeamName);
@@ -94,27 +136,53 @@ const MatchResultInputBox = forwardRef(
     const initState = () => {
       setMatchId(-1);
       setOpposingTeamName("");
+      setOpposingTeamId(-1);
       setMatchTypeName("");
+      setMatchTypeId(-1);
       setMatchLocation("");
-      setGoalScored(-1);
-      setGoalLost(-1);
+      setGoalScored(0);
+      setGoalLost(0);
       setMatchResultWL(WinOrLoseOrDraw.WIN);
       setShootoutYn(YesOrNo.YES);
-      setMatchDate(undefined);
+      setMatchDate(String(moment(new Date()).format("YYYY-MM-DD")));
     };
 
     useImperativeHandle(ref, () => ({
       initState,
     }));
 
+    const handleGoalScoredChange = (input: string) => {
+      if (NUMBER_REGAX.test(input)) {
+        setGoalScored(Number(input));
+      }
+    };
+
+    const handleGoalLostChange = (input: string) => {
+      if (NUMBER_REGAX.test(input)) {
+        setGoalLost(Number(input));
+      }
+    };
+
+    const testMatchDateRegax = (input: Date) => {
+      if (input && !DATE_REGAX.test(String(input))) {
+        setPopupTitle("[Error] 시합날짜 입력값 확인");
+        setPopupContents("시합날짜가 0000-00-00 형식에 맞지 않음");
+        setMatchDate("");
+        setPopupShow(true);
+        return;
+      }
+    };
+
     const validateTeamInputData = (matchResult: MatchResultModel) => {
       for (let res of Object.entries(matchResult)) {
         let key: string = res[0];
         let value: string = res[1];
 
+        console.log(key + " / " + value);
+
         if (key === "opposingTeamName") continue;
 
-        if (!value || value.length == 0) {
+        if (value === undefined || value === null || value.length === 0) {
           setPopupTitle("[Error] 필수값 미입력");
           setPopupContents(key + " 입력되지 않음");
           setPopupShow(true);
@@ -134,7 +202,7 @@ const MatchResultInputBox = forwardRef(
         goalsLost: goalLost,
         matchResult: matchResultWL,
         shootOutYn: shootoutYn,
-        matchDate: matchDate || new Date(),
+        matchDate: matchDate,
       };
       if (!validateTeamInputData(matchResult)) return;
 
@@ -163,55 +231,57 @@ const MatchResultInputBox = forwardRef(
           <CustomizedSelectBox
             title={"상대팀 :"}
             value={opposingTeamName}
-            options={opposintTeamOptions}
-            className={"pisition"}
-            useStateFunc={setOpposingTeamName}
+            options={opposingTeamOptions}
+            useStateFuncForValue={setOpposingTeamName}
+            useStateFuncForId={setOpposingTeamId}
           />
           <CustomizedSelectBox
             title={"매치 종류 :"}
-            value={opposingTeamName}
-            options={opposintTeamOptions}
-            className={"match_type"}
-            useStateFunc={setMatchTypeName}
+            value={matchTypeName}
+            options={matchTypeOptions}
+            useStateFuncForValue={setMatchTypeName}
+            useStateFuncForId={setMatchTypeId}
           />
           <CustomizedInput
             title={"경기 장소 : "}
             value={matchLocation}
-            className={"name"}
             onChange={setMatchLocation}
             maxLength={15}
             placeHolder={"최대길이 15자"}
           />
           <CustomizedInput
-            title={"득점 : "}
-            value={matchLocation}
+            title={"득점(숫자만) : "}
+            value={String(goalScored)}
             className={"number"}
-            onChange={setGoalScored}
+            onChange={handleGoalScoredChange}
             maxLength={2}
-            placeHolder={"숫자만"}
           />
           <CustomizedInput
-            title={"실점 : "}
-            value={matchLocation}
+            title={"실점(숫자만) : "}
+            value={String(goalLost)}
             className={"number"}
-            onChange={setGoalLost}
+            onChange={handleGoalLostChange}
             maxLength={2}
-            placeHolder={"숫자만"}
           />
           <CustomizedSelectBox
             title={"승부차기 여부 : "}
-            value={"Y"}
-            options={["Y", "N"]}
-            className={"shoot_out_yn"}
-            useStateFunc={setShootoutYn}
+            value={shootoutYn}
+            options={shootoutOptions}
+            useStateFuncForValue={setShootoutYn}
+          />
+          <CustomizedSelectBox
+            title={"경기 결과 : "}
+            value={matchResultWL}
+            options={matchResultWLOptions}
+            useStateFuncForValue={setMatchResultWL}
           />
           <CustomizedInput
             title={"시합 날짜 : "}
-            value={matchLocation}
+            value={matchDate}
             className={"number"}
             onChange={setMatchDate}
-            maxLength={2}
-            placeHolder={"숫자만"}
+            onBlur={testMatchDateRegax}
+            placeHolder={"0000-00-00"}
           />
           <Button
             size="large"

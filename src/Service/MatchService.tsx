@@ -1,5 +1,6 @@
 import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
 import { MatchResultModel } from "../Models/MatchResultModel";
+import { MatchTypeModel } from "../Models/MatchTypeModel";
 import {
   getApiCall,
   GetParameter,
@@ -41,5 +42,15 @@ export async function registerNewMatchResultAPI(
     data: matchResultModel,
   };
   const result: MatchResultModel = await postApiCall(postParameter);
+  return result;
+}
+
+export async function getAllMatchTypeAPI(
+  props?: MatchResultProps
+): Promise<MatchTypeModel[]> {
+  const getParameter: GetParameter = {
+    url: "match-types",
+  };
+  const result: MatchTypeModel[] = await getApiCall(getParameter);
   return result;
 }

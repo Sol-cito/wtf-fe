@@ -8,7 +8,7 @@ import {
   useRef,
 } from "react";
 import {
-  BIRTH_REGAX,
+  DATE_REGAX,
   ENGLISH_REGAX,
   KOREAN_REGAX,
   NUMBER_REGAX,
@@ -21,7 +21,7 @@ import {
 import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
-import CustomizedSelectBox from "./CustomizedSelectBox";
+import CustomizedSelectBox, { CustomizedOptions } from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
 import "./PlayerInfoInputBox.scss";
 import WaitingBackground from "./WaitingBackground";
@@ -61,7 +61,14 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   const [playerMultipartModel, setPlayerMultipartModel] =
     useState<PlayerMultipartModel>();
 
-  const allPositions: string[] = ["GK", "FW", "MF", "DF"];
+  const positionOptions: CustomizedOptions[] = [
+    { value: "GK" },
+    { value: "FW" },
+    { value: "MF" },
+    { value: "DF" },
+  ];
+
+  const curYnOptions: CustomizedOptions[] = [{ value: "Y" }, { value: "N" }];
 
   useEffect(() => {
     if (!props.playerInfo) return;
@@ -139,7 +146,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   };
 
   const testBirthRegax = (input: string) => {
-    if (input && !BIRTH_REGAX.test(input)) {
+    if (input && !DATE_REGAX.test(input)) {
       setPopupTitle("[Error] 생년월일 입력값 확인");
       setPopupContents("생년월일이 0000-00-00 형식에 맞지 않음");
       setPopupShow(true);
@@ -301,9 +308,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         <CustomizedSelectBox
           title={"포지션 :"}
           value={position}
-          options={allPositions}
+          options={positionOptions}
           className={"pisition"}
-          useStateFunc={setPosition}
+          useStateFuncForValue={setPosition}
         />
         <CustomizedInput
           title={"등번호(숫자만) : "}
@@ -326,9 +333,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         <CustomizedSelectBox
           title={"현재활동여부"}
           value={curYn}
-          options={["Y", "N"]}
+          options={curYnOptions}
           className={"curYn"}
-          useStateFunc={setCurYn}
+          useStateFuncForValue={setCurYn}
         />
         <ImageUploader
           fileInputId="profile_img"

@@ -10,5 +10,5 @@ export interface MatchResultModel {
   goalsLost: number;
   matchResult: WinOrLoseOrDraw;
   shootOutYn: YesOrNo;
-  matchDate: Date;
+  matchDate: string;
 }
