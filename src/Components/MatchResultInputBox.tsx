@@ -9,7 +9,10 @@ import {
 } from "react";
 import { DATE_REGAX, NUMBER_REGAX } from "../CommonConstant/CommonConstant";
 import { WinOrLoseOrDraw, YesOrNo } from "../Models/Enum/CommonEnum";
-import { MatchResultModel } from "../Models/MatchResultModel";
+import {
+  MatchRegisterationRequestModel,
+  MatchResultModel,
+} from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
 import { TeamModel } from "../Models/TeamModel";
 import { getAllMatchTypeAPI } from "../Service/MatchService";
@@ -54,7 +57,8 @@ const MatchResultInputBox = forwardRef(
       String(moment(new Date()).format("YYYY-MM-DD"))
     );
 
-    const [matchResult, setMatchResult] = useState<MatchResultModel>();
+    const [matchRegistrationRequest, setMatchRegistrationRequest] =
+      useState<MatchRegisterationRequestModel>();
 
     const [popupTitle, setPopupTitle] = useState<string>("");
     const [popupContents, setPopupContents] = useState<string>("");
@@ -123,8 +127,8 @@ const MatchResultInputBox = forwardRef(
       // TO-DO : 수정시
       if (!props.matchResult) return;
       setMatchId(props.matchResult.id);
-      setOpposingTeamName(props.matchResult.opposingTeamName);
-      setMatchTypeName(props.matchResult.matchTypeName);
+      // setOpposingTeamName(props.matchResult.opposingTeamName);
+      // setMatchTypeName(props.matchResult.matchTypeName);
       setMatchLocation(props.matchResult.matchLocation);
       setGoalScored(props.matchResult.goalsScored);
       setGoalLost(props.matchResult.goalsLost);
@@ -173,14 +177,10 @@ const MatchResultInputBox = forwardRef(
       }
     };
 
-    const validateTeamInputData = (matchResult: MatchResultModel) => {
-      for (let res of Object.entries(matchResult)) {
+    const validateInputData = (request: MatchRegisterationRequestModel) => {
+      for (let res of Object.entries(request)) {
         let key: string = res[0];
         let value: string = res[1];
-
-        console.log(key + " / " + value);
-
-        if (key === "opposingTeamName") continue;
 
         if (value === undefined || value === null || value.length === 0) {
           setPopupTitle("[Error] 필수값 미입력");
@@ -193,26 +193,38 @@ const MatchResultInputBox = forwardRef(
     };
 
     const handleBtnOnClick = () => {
-      const matchResult: MatchResultModel = {
+      const matchRegistrationRequest: MatchRegisterationRequestModel = {
         id: matchId,
-        opposingTeamName: opposingTeamName || "",
-        matchTypeName: matchTypeName || "",
-        matchLocation: matchLocation || "",
+        opposingTeamId: opposingTeamId,
+        matchTypeId: matchTypeId,
+        matchLocation: matchLocation,
         goalsScored: goalScored,
         goalsLost: goalLost,
         matchResult: matchResultWL,
         shootOutYn: shootoutYn,
         matchDate: matchDate,
       };
-      if (!validateTeamInputData(matchResult)) return;
+      if (!validateInputData(matchRegistrationRequest)) return;
 
-      setMatchResult(matchResult);
+      setMatchRegistrationRequest(matchRegistrationRequest);
 
       setConfirmContents(
-        "- 팀명 : " +
-          matchResult.opposingTeamName +
-          "\n- 연고지 : " +
-          matchResult.matchTypeName
+        "- 상대팀 : " +
+          opposingTeamName +
+          "\n- 매치종류 : " +
+          matchTypeName +
+          "\n- 경기장소 : " +
+          matchRegistrationRequest.matchLocation +
+          "\n- 득점 : " +
+          matchRegistrationRequest.goalsScored +
+          "\n- 실점 : " +
+          matchRegistrationRequest.goalsLost +
+          "\n- 승부차기 여부 : " +
+          matchRegistrationRequest.shootOutYn +
+          "\n- 경기결과 : " +
+          matchRegistrationRequest.matchResult +
+          "\n- 시합날짜 : " +
+          matchRegistrationRequest.matchDate
       );
       setShowConfirm(true);
     };
@@ -220,7 +232,7 @@ const MatchResultInputBox = forwardRef(
     const handleOnConfirm = async () => {
       setShowConfirm(false);
       setIsLoading(true);
-      await props.handleMatchResultRegistration(matchResult);
+      await props.handleMatchResultRegistration(matchRegistrationRequest);
       setIsLoading(false);
     };
 

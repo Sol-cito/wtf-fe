@@ -4,7 +4,10 @@ import MatchResultInputBox from "../../Components/MatchResultInputBox";
 import MatchResultList from "../../Components/MatchResultList";
 import WaitingBackground from "../../Components/WaitingBackground";
 import { OrderSortKeyword } from "../../Models/Enum/CommonEnum";
-import { MatchResultModel } from "../../Models/MatchResultModel";
+import {
+  MatchRegisterationRequestModel,
+  MatchResultModel,
+} from "../../Models/MatchResultModel";
 import {
   getMatchResultAPI,
   MatchResultProps,
@@ -44,10 +47,10 @@ const MatchResultRegisterFragment = () => {
   }, []);
 
   const handleMatchResultRegistration = async (
-    matchResultModel: MatchResultModel
+    request: MatchRegisterationRequestModel
   ) => {
     const registrationResult: MatchResultModel =
-      await registerNewMatchResultAPI(matchResultModel);
+      await registerNewMatchResultAPI(request);
     if (registrationResult) {
       setPopupTitle("[Success] Match Result Registration Success!!");
     } else {

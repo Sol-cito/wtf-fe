@@ -74,7 +74,7 @@ const MatchResultList = (props: MatchResultListProps) => {
                           />
                         </TableCell>
                       ) : null}
-                      <TableCell>{ele.opposingTeamName}</TableCell>
+                      <TableCell>{ele.opposingTeam.name}</TableCell>
                       <TableCell>{ele.matchLocation}</TableCell>
                       <TableCell>{ele.goalsScored}</TableCell>
                       <TableCell>{ele.goalsLost}</TableCell>
