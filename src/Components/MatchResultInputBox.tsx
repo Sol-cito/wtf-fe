@@ -69,7 +69,7 @@ const MatchResultInputBox = forwardRef(
     const [opposingTeamOptions, setOpposingTeamOptions] = useState<
       CustomizedOptions[]
     >([]);
-    const [matchTypeOptions, setMathTypeOptions] = useState<
+    const [matchTypeOptions, setMatchTypeOptions] = useState<
       CustomizedOptions[]
     >([]);
 
@@ -99,6 +99,7 @@ const MatchResultInputBox = forwardRef(
             return ele.value !== "WTF";
           });
         setOpposingTeamOptions(teamNameOptions);
+        setOpposingTeamId(teamNameOptions[0].id || -1);
         setOpposingTeamName(teamNameOptions[0].value);
       }
 
@@ -112,10 +113,10 @@ const MatchResultInputBox = forwardRef(
               (ele.matchSeason ? " (" + ele.matchSeason + ")" : ""),
           };
         });
-        setMathTypeOptions(matchTypeOptions);
+        setMatchTypeOptions(matchTypeOptions);
+        setMatchTypeId(matchTypeOptions[0].id || -1);
         setMatchTypeName(matchTypeOptions[0].value);
       }
-
       setIsLoading(false);
     };
 
@@ -147,7 +148,7 @@ const MatchResultInputBox = forwardRef(
       setGoalScored(0);
       setGoalLost(0);
       setMatchResultWL(WinOrLoseOrDraw.WIN);
-      setShootoutYn(YesOrNo.YES);
+      setShootoutYn(YesOrNo.NO);
       setMatchDate(String(moment(new Date()).format("YYYY-MM-DD")));
     };
 
@@ -233,6 +234,7 @@ const MatchResultInputBox = forwardRef(
       setShowConfirm(false);
       setIsLoading(true);
       await props.handleMatchResultRegistration(matchRegistrationRequest);
+      getAllTeamListAndMathTypes();
       setIsLoading(false);
     };
 
@@ -277,7 +279,7 @@ const MatchResultInputBox = forwardRef(
           />
           <CustomizedSelectBox
             title={"승부차기 여부 : "}
-            value={shootoutYn}
+            value={"shootoutYn"}
             options={shootoutOptions}
             useStateFuncForValue={setShootoutYn}
           />
