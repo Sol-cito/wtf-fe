@@ -36,10 +36,10 @@ const TeamRegisterFragment = () => {
       setPopupTitle(
         "[Success] Team Registration Success!! " + registrationResult.name
       );
+      initStateRef.current.initState();
     } else {
       setPopupTitle("[ERROR] 요청 실패...개발자에게 문의 ㄱㄱ");
     }
-    initStateRef.current.initState();
     getAllTeamList();
     setPopupShow(true);
   };

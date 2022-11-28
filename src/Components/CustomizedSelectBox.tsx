@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import "./CustomizedSelectBox.scss";
 
 export interface CustomizedOptions {
@@ -9,7 +8,7 @@ export interface CustomizedOptions {
 export interface CustomizedSelectBox {
   title: string;
   useStateFuncForId?: Function;
-  value: string;
+  defaultValue: string;
   useStateFuncForValue: Function;
   options: CustomizedOptions[];
   className?: string;
@@ -27,7 +26,11 @@ const CustomizedSelectBox = (props: CustomizedSelectBox) => {
   return (
     <div className={"customized_select_box " + props.className}>
       <span>{props.title} </span>
-      <select className="select_each" onChange={handleOnChange}>
+      <select
+        className="select_each"
+        defaultValue={"IEMU11"}
+        onChange={handleOnChange}
+      >
         {props.options &&
           props.options.length > 0 &&
           props.options.map((element, idx) => {

@@ -14,7 +14,7 @@ export interface MatchResultModel {
   matchDate: string;
 }
 
-export interface MatchRegisterationRequestModel {
+export interface MatchResultRequestModel {
   id: number;
   opposingTeamId: number;
   matchTypeId: number;

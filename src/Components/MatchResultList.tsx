@@ -9,15 +9,18 @@ import {
   TableRow,
 } from "@material-ui/core";
 import moment from "moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MatchResultModel } from "../Models/MatchResultModel";
 import CustomizedSpinner from "./CustomizedSpinner";
+import MatchResult from "./MatchResult";
 import "./TeamList.scss";
 
 export interface MatchResultListProps {
   matchResults?: MatchResultModel[];
   title?: string;
   isRadioButtonVisible?: boolean;
+  initialSelectedRadioId?: number;
+  setSelectedMatch?: Function;
 }
 
 const MatchResultList = (props: MatchResultListProps) => {
@@ -28,15 +31,19 @@ const MatchResultList = (props: MatchResultListProps) => {
     matchResult: MatchResultModel
   ) => {
     setSelectedRadioId(Number(e.target.id));
-    // if (props.setSelectedPlayer) {
-    //   props.setSelectedPlayer(player);
-    // }
+    if (props.setSelectedMatch) {
+      props.setSelectedMatch(matchResult);
+    }
   };
+
+  useEffect(() => {
+    setSelectedRadioId(props.initialSelectedRadioId || -1);
+  }, [props.initialSelectedRadioId]);
 
   return (
     <div className="register_page_container">
       <p>{props.title}</p>
-      <TableContainer className="registered_team_board" component={Paper}>
+      <TableContainer component={Paper}>
         <Table aria-label="simple table" stickyHeader>
           <TableHead>
             <TableRow>
@@ -47,6 +54,7 @@ const MatchResultList = (props: MatchResultListProps) => {
                 </>
               ) : null}
               <TableCell>상대팀명</TableCell>
+              <TableCell>매치종류</TableCell>
               <TableCell>매치장소</TableCell>
               <TableCell>득점</TableCell>
               <TableCell>실점</TableCell>
@@ -75,6 +83,7 @@ const MatchResultList = (props: MatchResultListProps) => {
                         </TableCell>
                       ) : null}
                       <TableCell>{ele.opposingTeam.name}</TableCell>
+                      <TableCell>{ele.matchType.matchTypeName}</TableCell>
                       <TableCell>{ele.matchLocation}</TableCell>
                       <TableCell>{ele.goalsScored}</TableCell>
                       <TableCell>{ele.goalsLost}</TableCell>

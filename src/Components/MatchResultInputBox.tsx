@@ -10,7 +10,7 @@ import {
 import { DATE_REGAX, NUMBER_REGAX } from "../CommonConstant/CommonConstant";
 import { WinOrLoseOrDraw, YesOrNo } from "../Models/Enum/CommonEnum";
 import {
-  MatchRegisterationRequestModel,
+  MatchResultRequestModel,
   MatchResultModel,
 } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
@@ -26,14 +26,12 @@ import WaitingBackground from "./WaitingBackground";
 
 export interface MatchResultInputBoxpProps {
   title: string;
-  matchResult?: MatchResultModel;
   handleMatchResultRegistration: Function;
+  matchResult?: MatchResultModel;
 }
 
 const MatchResultInputBox = forwardRef(
   (props: MatchResultInputBoxpProps, ref) => {
-    const deleteImageRef: React.Ref<any> = useRef({});
-
     const [showConfirm, setShowConfirm] = useState<boolean>(false);
     const [confirmContents, setConfirmContents] = useState<string>("");
 
@@ -58,7 +56,7 @@ const MatchResultInputBox = forwardRef(
     );
 
     const [matchRegistrationRequest, setMatchRegistrationRequest] =
-      useState<MatchRegisterationRequestModel>();
+      useState<MatchResultRequestModel>();
 
     const [popupTitle, setPopupTitle] = useState<string>("");
     const [popupContents, setPopupContents] = useState<string>("");
@@ -108,9 +106,7 @@ const MatchResultInputBox = forwardRef(
         let matchTypeOptions: CustomizedOptions[] = matchTypes.map((ele) => {
           return {
             id: ele.id,
-            value:
-              ele.matchTypeName +
-              (ele.matchSeason ? " (" + ele.matchSeason + ")" : ""),
+            value: ele.matchTypeName,
           };
         });
         setMatchTypeOptions(matchTypeOptions);
@@ -125,11 +121,12 @@ const MatchResultInputBox = forwardRef(
     }, []);
 
     useEffect(() => {
-      // TO-DO : 수정시
       if (!props.matchResult) return;
       setMatchId(props.matchResult.id);
-      // setOpposingTeamName(props.matchResult.opposingTeamName);
-      // setMatchTypeName(props.matchResult.matchTypeName);
+      setOpposingTeamId(props.matchResult.opposingTeam.id);
+      setOpposingTeamName(props.matchResult.opposingTeam.name);
+      setMatchTypeId(props.matchResult.matchType.id);
+      setMatchTypeName(props.matchResult.matchType.matchTypeName);
       setMatchLocation(props.matchResult.matchLocation);
       setGoalScored(props.matchResult.goalsScored);
       setGoalLost(props.matchResult.goalsLost);
@@ -178,7 +175,7 @@ const MatchResultInputBox = forwardRef(
       }
     };
 
-    const validateInputData = (request: MatchRegisterationRequestModel) => {
+    const validateInputData = (request: MatchResultRequestModel) => {
       for (let res of Object.entries(request)) {
         let key: string = res[0];
         let value: string = res[1];
@@ -194,7 +191,7 @@ const MatchResultInputBox = forwardRef(
     };
 
     const handleBtnOnClick = () => {
-      const matchRegistrationRequest: MatchRegisterationRequestModel = {
+      const matchRegistrationRequest: MatchResultRequestModel = {
         id: matchId,
         opposingTeamId: opposingTeamId,
         matchTypeId: matchTypeId,
@@ -244,14 +241,14 @@ const MatchResultInputBox = forwardRef(
           <p className="register_title">{props.title}</p>
           <CustomizedSelectBox
             title={"상대팀 :"}
-            value={opposingTeamName}
+            defaultValue={opposingTeamName}
             options={opposingTeamOptions}
             useStateFuncForValue={setOpposingTeamName}
             useStateFuncForId={setOpposingTeamId}
           />
           <CustomizedSelectBox
             title={"매치 종류 :"}
-            value={matchTypeName}
+            defaultValue={matchTypeName}
             options={matchTypeOptions}
             useStateFuncForValue={setMatchTypeName}
             useStateFuncForId={setMatchTypeId}
@@ -279,13 +276,13 @@ const MatchResultInputBox = forwardRef(
           />
           <CustomizedSelectBox
             title={"승부차기 여부 : "}
-            value={"shootoutYn"}
+            defaultValue={shootoutYn}
             options={shootoutOptions}
             useStateFuncForValue={setShootoutYn}
           />
           <CustomizedSelectBox
             title={"경기 결과 : "}
-            value={matchResultWL}
+            defaultValue={matchResultWL}
             options={matchResultWLOptions}
             useStateFuncForValue={setMatchResultWL}
           />

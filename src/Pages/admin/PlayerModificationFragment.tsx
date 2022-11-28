@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import CustomizedPopup from "../../Components/CustomizedPopup";
-import CustomizedSpinner from "../../Components/CustomizedSpinner";
 import PlayerInfoInputBox from "../../Components/PlayerInfoInputBox";
 import PlayerList from "../../Components/PlayerList";
 import WaitingBackground from "../../Components/WaitingBackground";

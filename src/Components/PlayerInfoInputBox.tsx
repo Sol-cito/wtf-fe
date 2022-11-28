@@ -307,7 +307,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         />
         <CustomizedSelectBox
           title={"포지션 :"}
-          value={position}
+          defaultValue={position}
           options={positionOptions}
           className={"pisition"}
           useStateFuncForValue={setPosition}
@@ -332,7 +332,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
         </div>
         <CustomizedSelectBox
           title={"현재활동여부"}
-          value={curYn}
+          defaultValue={curYn}
           options={curYnOptions}
           className={"curYn"}
           useStateFuncForValue={setCurYn}

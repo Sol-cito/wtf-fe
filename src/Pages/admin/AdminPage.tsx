@@ -1,6 +1,7 @@
 import { Button } from "@material-ui/core";
 import { useState } from "react";
 import "./AdminPage.scss";
+import MatchResultModificationFragment from "./MatchResultModificationFragment";
 import MatchResultRegisterFragment from "./MatchResultRegisterFragment";
 import PlayerModificationFragment from "./PlayerModificationFragment";
 import PlayerRegistrationFragment from "./PlayerRegistrationFragment";
@@ -72,6 +73,17 @@ const AdminPage = () => {
           className="match_result_register"
         >
           매치 결과 등록
+        </Button>
+
+        <Button
+          size="large"
+          variant="contained"
+          color="primary"
+          onClick={() =>
+            handleFragmentButtonClick(<MatchResultModificationFragment />)
+          }
+        >
+          매치 결과 수정
         </Button>
       </div>
       <div className="fragment_container">{fragment}</div>
