@@ -4,7 +4,7 @@ import "./AboutPage.scss";
 
 const AboutPage = () => {
   return (
-    <PageContainer title="Who is WTF ?" includedComponent={<AboutBox />} />
+    <PageContainer title="Who are we ?" includedComponent={<AboutBox />} />
   );
 };
 export default AboutPage;
