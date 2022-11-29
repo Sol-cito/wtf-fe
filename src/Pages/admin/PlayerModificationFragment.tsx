@@ -51,11 +51,13 @@ const PlayerModificationFragment = () => {
 
   return (
     <>
-      <PlayerInfoInputBox
-        title={"선수 정보 수정"}
-        handlePlayerMultiPart={handlePlayerMultiPart}
-        playerInfo={selectedPlayer}
-      />
+      {players && players.length > 0 ? (
+        <PlayerInfoInputBox
+          title={"선수 정보 수정"}
+          handlePlayerMultiPart={handlePlayerMultiPart}
+          playerInfo={selectedPlayer}
+        />
+      ) : null}
       <PlayerList
         players={players}
         title={"< 현재 등록된 선수 명단 >"}

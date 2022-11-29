@@ -67,5 +67,5 @@ export async function deleteApiCall(
     headers: deleteParameter.headerData,
   };
   const result = await BaseApiCall(requestConfig);
-  return result.data;
+  return result.successOrNot === "Y";
 }

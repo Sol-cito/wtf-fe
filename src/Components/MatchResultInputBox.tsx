@@ -9,21 +9,19 @@ import {
 } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
 import { TeamModel } from "../Models/TeamModel";
-import {
-  deleteMatchResultAPI,
-  getAllMatchTypeAPI,
-} from "../Service/MatchService";
+import { getAllMatchTypeAPI } from "../Service/MatchService";
 import { getAllTeamsAPI } from "../Service/TeamService";
+import "./CommonInfoInputBox.scss";
 import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
 import CustomizedSelectBox, { CustomizedOptions } from "./CustomizedSelectBox";
-import "./CommonInfoInputBox.scss";
 import WaitingBackground from "./WaitingBackground";
 
 export interface MatchResultInputBoxpProps {
   title: string;
   handleMatchResultRegistration: Function;
+  handleMatchResultDeletion?: Function;
   matchResult?: MatchResultModel;
 }
 
@@ -138,7 +136,7 @@ const MatchResultInputBox = forwardRef(
       setMatchDate(props.matchResult.matchDate);
     }, [props.matchResult]);
 
-    const initState = () => {
+    const initState = async () => {
       setMatchId(-1);
       setOpposingTeamName("");
       setOpposingTeamId(-1);
@@ -150,6 +148,7 @@ const MatchResultInputBox = forwardRef(
       setMatchResultWL(WinOrLoseOrDraw.WIN);
       setShootoutYn(YesOrNo.NO);
       setMatchDate(String(moment(new Date()).format("YYYY-MM-DD")));
+      await getAllTeamListAndMatchTypes();
     };
 
     useImperativeHandle(ref, () => ({
@@ -248,9 +247,9 @@ const MatchResultInputBox = forwardRef(
     };
 
     const handleOnConfirmForDeletion = async () => {
+      setShowDeletionConfirm(false);
       setIsLoading(true);
-      await deleteMatchResultAPI(matchId);
-      getAllTeamListAndMatchTypes();
+      await props.handleMatchResultDeletion!(matchId);
       setIsLoading(false);
     };
 
@@ -322,7 +321,7 @@ const MatchResultInputBox = forwardRef(
           >
             {props.title}
           </Button>
-          {props.matchResult ? (
+          {props.handleMatchResultDeletion ? (
             <Button
               size="large"
               variant="contained"

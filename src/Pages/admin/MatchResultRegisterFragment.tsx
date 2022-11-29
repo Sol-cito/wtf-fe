@@ -5,8 +5,8 @@ import MatchResultList from "../../Components/MatchResultList";
 import WaitingBackground from "../../Components/WaitingBackground";
 import { OrderSortKeyword } from "../../Models/Enum/CommonEnum";
 import {
-  MatchResultRequestModel,
   MatchResultModel,
+  MatchResultRequestModel,
 } from "../../Models/MatchResultModel";
 import {
   getMatchResultAPI,

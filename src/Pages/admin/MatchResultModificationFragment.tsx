@@ -9,6 +9,7 @@ import {
   MatchResultRequestModel,
 } from "../../Models/MatchResultModel";
 import {
+  deleteMatchResultAPI,
   getMatchResultAPI,
   MatchResultProps,
   modifyMatchResultAPI,
@@ -21,6 +22,8 @@ const MatchResultModificationFragment = () => {
 
   const [matchResults, setMatchResults] = useState<MatchResultModel[]>();
   const [selectedMatch, setSelectedMatch] = useState<MatchResultModel>();
+
+  const [isDeletionComplete, setIsDeletionComplete] = useState<boolean>(false);
 
   const [popupTitle, setPopupTitle] = useState<string>("");
   const [popupShow, setPopupShow] = useState<boolean>(false);
@@ -39,8 +42,9 @@ const MatchResultModificationFragment = () => {
     const res: MatchResultModel[] = await getMatchResultAPI(matchResultProps);
     if (res) {
       setMatchResults(res);
-      if (!selectedMatch) {
+      if (!selectedMatch || isDeletionComplete) {
         setSelectedMatch(res[0]);
+        setIsDeletionComplete(false);
       }
     }
     setIsLoading(false);
@@ -49,6 +53,10 @@ const MatchResultModificationFragment = () => {
   useEffect(() => {
     getAllMatchResult();
   }, []);
+
+  useEffect(() => {
+    getAllMatchResult();
+  }, [isDeletionComplete]);
 
   const handleMatchResultModification = async (
     request: MatchResultRequestModel
@@ -65,14 +73,29 @@ const MatchResultModificationFragment = () => {
     setPopupShow(true);
   };
 
+  const handleMatchResultDeletion = async (matchId: number) => {
+    const result = await deleteMatchResultAPI(matchId);
+    if (result) {
+      setPopupTitle("[Success] Match Result Deletion Success!!");
+      setIsDeletionComplete(true);
+      getAllMatchResult();
+    } else {
+      setPopupTitle("[ERROR] 요청 실패...개발자에게 문의 ㄱㄱ");
+    }
+    setPopupShow(true);
+  };
+
   return (
     <>
-      <MatchResultInputBox
-        title={"매치 결과 수정/삭제"}
-        handleMatchResultRegistration={handleMatchResultModification}
-        matchResult={selectedMatch}
-        ref={initStateRef}
-      />
+      {matchResults && matchResults.length > 0 ? (
+        <MatchResultInputBox
+          title={"매치 결과 수정/삭제"}
+          handleMatchResultRegistration={handleMatchResultModification}
+          handleMatchResultDeletion={handleMatchResultDeletion}
+          matchResult={selectedMatch}
+          ref={initStateRef}
+        />
+      ) : null}
       <MatchResultList
         matchResults={matchResults}
         title={"< 현재 등록된 매치 결과 >"}
