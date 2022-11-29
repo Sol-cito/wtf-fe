@@ -83,7 +83,7 @@ const AdminPage = () => {
             handleFragmentButtonClick(<MatchResultModificationFragment />)
           }
         >
-          매치 결과 수정
+          매치 결과 수정/삭제
         </Button>
       </div>
       <div className="fragment_container">{fragment}</div>

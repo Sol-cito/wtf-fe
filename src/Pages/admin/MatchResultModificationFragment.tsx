@@ -68,7 +68,7 @@ const MatchResultModificationFragment = () => {
   return (
     <>
       <MatchResultInputBox
-        title={"매치 결과 수정"}
+        title={"매치 결과 수정/삭제"}
         handleMatchResultRegistration={handleMatchResultModification}
         matchResult={selectedMatch}
         ref={initStateRef}

@@ -19,6 +19,12 @@ export interface PutParameter {
   headerData?: AxiosRequestHeaders;
 }
 
+export interface DeleteParameter {
+  url: string;
+  params?: any;
+  headerData?: AxiosRequestHeaders;
+}
+
 export async function getApiCall(getParameter: GetParameter): Promise<any> {
   const requestConfig: AxiosRequestConfig = {
     url: getParameter.url,
@@ -46,6 +52,19 @@ export async function putApiCall(putParameter: PutParameter): Promise<any> {
     method: HttpMethod.PUT,
     data: putParameter.data,
     headers: putParameter.headerData,
+  };
+  const result = await BaseApiCall(requestConfig);
+  return result.data;
+}
+
+export async function deleteApiCall(
+  deleteParameter: DeleteParameter
+): Promise<any> {
+  const requestConfig: AxiosRequestConfig = {
+    url: deleteParameter.url,
+    method: HttpMethod.DELETE,
+    params: deleteParameter.params,
+    headers: deleteParameter.headerData,
   };
   const result = await BaseApiCall(requestConfig);
   return result.data;

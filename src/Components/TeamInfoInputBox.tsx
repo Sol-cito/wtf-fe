@@ -12,7 +12,7 @@ import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
 import ImageUploader from "./ImageUploader";
-import "./PlayerInfoInputBox.scss";
+import "./CommonInfoInputBox.scss";
 import WaitingBackground from "./WaitingBackground";
 
 export interface TeamInfoInputBoxProps {
@@ -124,8 +124,8 @@ const TeamInfoInputBox = forwardRef((props: TeamInfoInputBoxProps, ref) => {
 
   return (
     <>
-      <div className="register_info_area">
-        <p className="register_title">{props.title}</p>
+      <div className="info_area">
+        <p className="title">{props.title}</p>
         <CustomizedInput
           title={"팀명 : "}
           value={name}
@@ -156,7 +156,7 @@ const TeamInfoInputBox = forwardRef((props: TeamInfoInputBoxProps, ref) => {
           variant="contained"
           color="primary"
           onClick={handleBtnOnClick}
-          className="register_btn"
+          className="btn"
         >
           {props.title}
         </Button>

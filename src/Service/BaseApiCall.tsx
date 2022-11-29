@@ -19,7 +19,7 @@ async function baseApiCall(requestConfig: AxiosRequestConfig): Promise<any> {
   try {
     requestConfig.url = baseUrl + requestConfig.url;
     const response: AxiosResponse<any> = await axios.request(requestConfig);
-    if (response.status !== 200 || !response.data) {
+    if (response.status !== 200) {
       throw new Error("Api request fail");
     }
     axiosResponse.statusCode = response.status;

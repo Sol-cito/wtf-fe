@@ -5,6 +5,8 @@ import {
 } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
 import {
+  deleteApiCall,
+  DeleteParameter,
   getApiCall,
   GetParameter,
   postApiCall,
@@ -39,6 +41,14 @@ export async function getMatchResultAPI(
   return result;
 }
 
+export async function getAllMatchTypeAPI(): Promise<MatchTypeModel[]> {
+  const getParameter: GetParameter = {
+    url: "match-types",
+  };
+  const result: MatchTypeModel[] = await getApiCall(getParameter);
+  return result;
+}
+
 export async function registerNewMatchResultAPI(
   request: MatchResultRequestModel
 ): Promise<MatchResultModel> {
@@ -61,10 +71,15 @@ export async function modifyMatchResultAPI(
   return result;
 }
 
-export async function getAllMatchTypeAPI(): Promise<MatchTypeModel[]> {
-  const getParameter: GetParameter = {
-    url: "match-types",
+export async function deleteMatchResultAPI(
+  matchResultId: number
+): Promise<MatchResultModel> {
+  const deleteParameter: DeleteParameter = {
+    url: "match",
+    params: {
+      matchResultId: matchResultId,
+    },
   };
-  const result: MatchTypeModel[] = await getApiCall(getParameter);
+  const result: MatchResultModel = await deleteApiCall(deleteParameter);
   return result;
 }

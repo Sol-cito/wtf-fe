@@ -23,7 +23,7 @@ import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
 import CustomizedSelectBox, { CustomizedOptions } from "./CustomizedSelectBox";
 import ImageUploader from "./ImageUploader";
-import "./PlayerInfoInputBox.scss";
+import "./CommonInfoInputBox.scss";
 import WaitingBackground from "./WaitingBackground";
 
 export interface PlayerInfoInputBoxProps {
@@ -272,8 +272,8 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
 
   return (
     <>
-      <div className="register_info_area">
-        <p className="register_title">{props.title}</p>
+      <div className="info_area">
+        <p className="title">{props.title}</p>
         <CustomizedInput
           title={"이름(한글) : "}
           value={korName}
@@ -360,7 +360,7 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
           variant="contained"
           color="primary"
           onClick={handleBtnOnClick}
-          className="register_btn"
+          className="btn"
         >
           {props.title}
         </Button>

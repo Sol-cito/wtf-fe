@@ -1,5 +1,5 @@
-.register_info_area {
-  .register_title {
+.info_area {
+  .title {
     font-size: 4vw;
     font-weight: 800;
   }
@@ -36,16 +36,16 @@
     margin: 2vh 0 2vh 0;
   }
 
-  .register_btn {
+  .btn {
     font-size: 2vw;
     width: fit-content;
-    margin: 3vh 0 3vh 0;
+    margin: 3vh 1vw 3vh 1vw;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .register_info_area {
-    .register_title {
+  .info_area {
+    .title {
       font-size: 6vw;
       font-weight: 800;
     }
@@ -60,7 +60,7 @@
       }
     }
 
-    .register_btn {
+    .btn {
       font-size: 4vw;
     }
   }

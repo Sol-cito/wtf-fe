@@ -1,27 +1,24 @@
 import { Button } from "@material-ui/core";
 import moment from "moment";
-import {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { DATE_REGAX, NUMBER_REGAX } from "../CommonConstant/CommonConstant";
 import { WinOrLoseOrDraw, YesOrNo } from "../Models/Enum/CommonEnum";
 import {
-  MatchResultRequestModel,
   MatchResultModel,
+  MatchResultRequestModel,
 } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
 import { TeamModel } from "../Models/TeamModel";
-import { getAllMatchTypeAPI } from "../Service/MatchService";
+import {
+  deleteMatchResultAPI,
+  getAllMatchTypeAPI,
+} from "../Service/MatchService";
 import { getAllTeamsAPI } from "../Service/TeamService";
 import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
 import CustomizedSelectBox, { CustomizedOptions } from "./CustomizedSelectBox";
-import "./PlayerInfoInputBox.scss";
+import "./CommonInfoInputBox.scss";
 import WaitingBackground from "./WaitingBackground";
 
 export interface MatchResultInputBoxpProps {
@@ -32,8 +29,14 @@ export interface MatchResultInputBoxpProps {
 
 const MatchResultInputBox = forwardRef(
   (props: MatchResultInputBoxpProps, ref) => {
-    const [showConfirm, setShowConfirm] = useState<boolean>(false);
-    const [confirmContents, setConfirmContents] = useState<string>("");
+    const [showRegistrationConfirm, setShowRegistrationConfirm] =
+      useState<boolean>(false);
+    const [showDeletionConfirm, setShowDeletionConfirm] =
+      useState<boolean>(false);
+    const [registrationConfirmContents, setRegistrationConfirmContents] =
+      useState<string>("");
+    const [deletionConfirmContents, setDeletionConfirmContents] =
+      useState<string>("");
 
     const [matchId, setMatchId] = useState<number>(-1);
 
@@ -190,7 +193,7 @@ const MatchResultInputBox = forwardRef(
       return true;
     };
 
-    const handleBtnOnClick = () => {
+    const handleModificationBtnOnClick = () => {
       const matchRegistrationRequest: MatchResultRequestModel = {
         id: matchId,
         opposingTeamId: opposingTeamId,
@@ -206,7 +209,7 @@ const MatchResultInputBox = forwardRef(
 
       setMatchRegistrationRequest(matchRegistrationRequest);
 
-      setConfirmContents(
+      setRegistrationConfirmContents(
         "- 상대팀 : " +
           opposingTeamName +
           "\n- 매치종류 : " +
@@ -224,20 +227,37 @@ const MatchResultInputBox = forwardRef(
           "\n- 시합날짜 : " +
           matchRegistrationRequest.matchDate
       );
-      setShowConfirm(true);
+      setShowRegistrationConfirm(true);
     };
 
-    const handleOnConfirm = async () => {
-      setShowConfirm(false);
+    const handleOnConfirmForRegistration = async () => {
+      setShowRegistrationConfirm(false);
       setIsLoading(true);
       await props.handleMatchResultRegistration(matchRegistrationRequest);
       setIsLoading(false);
     };
 
+    const handleDeleteBtnOnClick = async () => {
+      setDeletionConfirmContents(
+        matchDate +
+          " 에 있었던 " +
+          opposingTeamName +
+          "과의 경기기록을 삭제하시겠습니까?"
+      );
+      setShowDeletionConfirm(true);
+    };
+
+    const handleOnConfirmForDeletion = async () => {
+      setIsLoading(true);
+      await deleteMatchResultAPI(matchId);
+      getAllTeamListAndMatchTypes();
+      setIsLoading(false);
+    };
+
     return (
       <>
-        <div className="register_info_area">
-          <p className="register_title">{props.title}</p>
+        <div className="info_area">
+          <p className="title">{props.title}</p>
           <CustomizedSelectBox
             title={"상대팀 :"}
             defaultValue={opposingTeamName}
@@ -297,18 +317,38 @@ const MatchResultInputBox = forwardRef(
             size="large"
             variant="contained"
             color="primary"
-            onClick={handleBtnOnClick}
-            className="register_btn"
+            onClick={handleModificationBtnOnClick}
+            className="btn"
           >
             {props.title}
           </Button>
+          {props.matchResult ? (
+            <Button
+              size="large"
+              variant="contained"
+              color="primary"
+              onClick={handleDeleteBtnOnClick}
+              className="btn"
+            >
+              매치결과삭제
+            </Button>
+          ) : null}
           <CustomizedConfirm
-            show={showConfirm}
+            show={showRegistrationConfirm}
             confirmQuestion={"입력한 매치 정보를 한번 더 확인해주세용."}
-            contents={confirmContents}
-            onClickConfirm={handleOnConfirm}
+            contents={registrationConfirmContents}
+            onClickConfirm={handleOnConfirmForRegistration}
             onClickCancel={() => {
-              setShowConfirm(false);
+              setShowRegistrationConfirm(false);
+            }}
+          />
+          <CustomizedConfirm
+            show={showDeletionConfirm}
+            confirmQuestion={"매치 삭제 확인"}
+            contents={deletionConfirmContents}
+            onClickConfirm={handleOnConfirmForDeletion}
+            onClickCancel={() => {
+              setShowDeletionConfirm(false);
             }}
           />
           <CustomizedPopup
