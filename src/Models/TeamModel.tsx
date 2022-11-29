@@ -9,3 +9,9 @@ export interface TeamMultipartModel {
   team: TeamModel;
   teamImageFile?: File;
 }
+
+export interface TeamHistoryModel {
+  id: number;
+  year: String;
+  history: string;
+}

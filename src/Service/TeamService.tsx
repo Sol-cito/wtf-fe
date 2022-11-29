@@ -1,4 +1,4 @@
-import { TeamModel } from "../Models/TeamModel";
+import { TeamHistoryModel, TeamModel } from "../Models/TeamModel";
 import {
   getApiCall,
   GetParameter,
@@ -25,5 +25,13 @@ export async function registerNewTeamAPI(
     },
   };
   const result: TeamModel = await postApiCall(postParameter);
+  return result;
+}
+
+export async function getAllTeamHistoryAPI(): Promise<TeamHistoryModel[]> {
+  const getParameter: GetParameter = {
+    url: "team-history",
+  };
+  const result: TeamHistoryModel[] = await getApiCall(getParameter);
   return result;
 }

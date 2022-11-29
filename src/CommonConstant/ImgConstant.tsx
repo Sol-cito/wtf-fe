@@ -18,6 +18,8 @@ export const ANONYMOUS_PROFILE_IMG_PATH =
 
 export const WTF_LOGO_IMG_PATH = "/team/logo_yellow.png";
 
+export const WTF_ABOUT_UNIFORM_PATH = "/img/wtf_about_uniform.png";
+
 export const TEAM_MARK_NO_LOGO_IMG_PATH =
   "/img/otherteam/team_mark_no_logo.png";
 
