@@ -82,7 +82,7 @@ const MatchResultInputBox = forwardRef(
       { value: "DRAW" },
     ];
 
-    const getAllTeamListAndMathTypes = async () => {
+    const getAllTeamListAndMatchTypes = async () => {
       setIsLoading(true);
       const res: TeamModel[] = await getAllTeamsAPI();
       if (res) {
@@ -117,7 +117,7 @@ const MatchResultInputBox = forwardRef(
     };
 
     useEffect(() => {
-      getAllTeamListAndMathTypes();
+      getAllTeamListAndMatchTypes();
     }, []);
 
     useEffect(() => {
@@ -231,7 +231,6 @@ const MatchResultInputBox = forwardRef(
       setShowConfirm(false);
       setIsLoading(true);
       await props.handleMatchResultRegistration(matchRegistrationRequest);
-      getAllTeamListAndMathTypes();
       setIsLoading(false);
     };
 

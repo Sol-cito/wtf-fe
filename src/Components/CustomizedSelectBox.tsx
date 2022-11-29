@@ -19,7 +19,7 @@ const CustomizedSelectBox = (props: CustomizedSelectBox) => {
     const idx: number = event.target.selectedIndex;
     props.useStateFuncForValue(event.target[idx].textContent);
     if (props.useStateFuncForId) {
-      props.useStateFuncForId(Number(event.target.value));
+      props.useStateFuncForId(Number(event.target[idx].id));
     }
   };
 
@@ -28,14 +28,19 @@ const CustomizedSelectBox = (props: CustomizedSelectBox) => {
       <span>{props.title} </span>
       <select
         className="select_each"
-        defaultValue={"IEMU11"}
+        value={props.defaultValue}
         onChange={handleOnChange}
       >
         {props.options &&
           props.options.length > 0 &&
           props.options.map((element, idx) => {
             return (
-              <option className="select_option" key={idx} value={element.id}>
+              <option
+                className="select_option"
+                key={idx}
+                id={String(element.id)}
+                value={element.value}
+              >
                 {element.value}
               </option>
             );
