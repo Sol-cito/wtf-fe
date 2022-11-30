@@ -23,10 +23,11 @@ const HEADER_CONSTANT_DATA = {
       name: "players",
       url: "/players",
     },
-    {
-      name: "community",
-      url: "/community",
-    },
+    // TO-DO : 게시판 구현
+    // {
+    //   name: "community",
+    //   url: "/community",
+    // },
     {
       name: "contact",
       url: "/contact",
