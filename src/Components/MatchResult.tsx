@@ -45,7 +45,7 @@ const MatchResult = (props: MatchResultProps) => {
           }
           onErrorImgSrc={TEAM_MARK_NO_LOGO_IMG_PATH}
         />
-        <div id="opposing_team_area">{props.matchResult.opposingTeam.name}</div>
+        <div id="opposing_team">{props.matchResult.opposingTeam.name}</div>
       </div>
     </div>
   );

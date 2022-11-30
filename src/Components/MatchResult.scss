@@ -8,12 +8,17 @@
   margin: 5vh 0 5vh 0;
 
   #match_type_name {
+    max-width: 13vw;
+    word-break: break-all;
     flex-grow: 1;
     font-size: 3vh;
   }
 
   .date_and_location {
     flex-grow: 1;
+    max-width: 17vw;
+    word-break: break-all;
+
     color: rgb(171, 171, 171);
     #match_date {
       font-size: 3vh;
@@ -24,7 +29,6 @@
   }
 
   .score_area {
-    flex-grow: 2;
     font-size: 1.5vw;
     display: flex;
     align-items: center;
@@ -43,15 +47,10 @@
 
     #goals_scored {
       flex-shrink: 0;
-      width: 5vw;
+      width: 4vw;
     }
 
-    #goals_scored {
-      flex-shrink: 0;
-      width: 5vw;
-    }
-
-    #opposing_team_area {
+    #opposing_team {
       flex-shrink: 0;
       width: 10vw;
     }
@@ -65,8 +64,14 @@
     padding: 1vh 0 1vh 0;
 
     #match_type_name {
+      max-width: 100vw;
       font-size: 3vw;
     }
+
+    .date_and_location {
+      max-width: 100vw;
+    }
+
     .date_and_location {
       #match_date,
       #match_location {
@@ -96,7 +101,7 @@
         flex-grow: 1;
       }
 
-      #opposing_team_area {
+      #opposing_team {
         word-break: keep-all;
         flex-grow: 1;
       }
