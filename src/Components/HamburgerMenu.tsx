@@ -18,9 +18,8 @@ const HamburgerMenu = (props: HamburgerMenuProps) => {
     >
       {HEADER_CONSTANT_DATA.headerButton.map((data, idx) => {
         return (
-          <div className="header_menu_btn_area">
+          <div className="header_menu_btn_area" key={idx}>
             <HeaderButton
-              key={idx}
               btnName={data.name}
               url={data.url}
               onClick={() => {

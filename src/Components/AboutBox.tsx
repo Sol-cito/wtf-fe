@@ -9,6 +9,8 @@ const AboutBox = () => {
     []
   );
 
+  let curYear: String = "";
+
   const getAllTeamHistory = async () => {
     const res: TeamHistoryModel[] = await getAllTeamHistoryAPI();
     setTeamHistoryList(res);
@@ -23,12 +25,18 @@ const AboutBox = () => {
       <img src={WTF_ABOUT_UNIFORM_PATH} />
       <div className="history_contaier">
         {teamHistoryList.length > 0
-          ? teamHistoryList.map((ele) => {
+          ? teamHistoryList.map((ele, idx) => {
+              let isNewYear: boolean = curYear !== ele.year;
+              curYear = ele.year;
               return (
-                <p>
-                  <span id="year">{ele.year}</span>
-                  <span id="history">{ele.history}</span>
-                </p>
+                <div className="history" key={idx}>
+                  <div className="year">
+                    {isNewYear ? <span>{ele.year} </span> : <span></span>}
+                  </div>
+                  <div className="summary">
+                    <span>{ele.history}</span>
+                  </div>
+                </div>
               );
             })
           : null}
