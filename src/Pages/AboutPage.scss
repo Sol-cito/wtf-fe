@@ -1,3 +1,17 @@
-.about_container {
-  text-align: center;
+.about_page_container {
+  text-align: left;
+  font-size: 3rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 5vh;
+
+  img {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .about_page_container {
+    margin-bottom: 2vh;
+  }
 }
