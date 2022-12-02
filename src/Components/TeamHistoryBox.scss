@@ -1,15 +1,4 @@
-.about_container {
-  img {
-    width: 100%;
-  }
-}
-
-.history_contaier {
-  text-align: left;
-  font-size: 50px;
-  font-weight: 500;
-  color: white;
-
+.history_container {
   .history {
     margin: 3vh 0 3vh 0;
     .year {
@@ -26,9 +15,13 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .history_contaier {
-    font-size: 6vw;
-    font-weight: 500;
-    color: white;
+  .history_container {
+    font-size: 5vw;
+
+    .history {
+      .year {
+        min-width: 22vw;
+      }
+    }
   }
 }
