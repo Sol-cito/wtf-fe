@@ -64,6 +64,7 @@ const ContactBox = () => {
   const handleOnConfirm = async () => {
     setShowConfirm(false);
     setIsLoading(true);
+    setPopupContents("");
 
     const request: InquiryModel = {
       email: email,
@@ -79,6 +80,7 @@ const ContactBox = () => {
       setPopupTitle("[ERROR] 요청이 실패하였습니다. 개발자에게 문의하세요.");
     }
     setIsLoading(false);
+    setPopupShow(true);
   };
 
   const makeConfirmContents = () => {

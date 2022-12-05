@@ -23,10 +23,11 @@ async function baseApiCall(requestConfig: AxiosRequestConfig): Promise<any> {
       throw new Error("Api request fail");
     }
     axiosResponse.statusCode = response.status;
-    axiosResponse.data = response.data;
+    axiosResponse.data = response.data || true;
     return axiosResponse;
   } catch (e: any) {
     axiosResponse.successOrNot = SuccessOrNot.N;
+    axiosResponse.data = false;
     alert("Error code : " + e.code + "\n" + "Error message : " + e.message);
     return axiosResponse;
   }
