@@ -132,7 +132,6 @@ const ContactBox = () => {
         <Button
           size="large"
           variant="contained"
-          color="primary"
           className="inquiry_btn"
           onClick={handleOnClick}
         >
