@@ -1,0 +1,99 @@
+.contact_page_container {
+  color: white;
+  font-size: 3vw;
+  margin-bottom: 5vh;
+
+  p {
+    font-weight: bolder;
+    color: rgb(255, 224, 45);
+  }
+
+  .customized_input > span,
+  .customized_select_box > span,
+  .customized_text_area > span {
+    display: inline-block;
+    min-width: 15vw;
+    font-size: 1.5vw;
+  }
+
+  .input_div {
+    border-top: 1px solid rgb(255, 224, 45);
+
+    .customized_input {
+      display: flex;
+      align-items: center;
+      padding: 0 0 2vh 0;
+      border-bottom: 1px solid grey;
+
+      input {
+        width: 50vw;
+        line-height: 2;
+        font-size: 2rem;
+      }
+
+      input::placeholder {
+        color: rgb(155, 155, 155);
+        font-size: 2rem;
+        line-height: 5;
+      }
+    }
+
+    .customized_select_box {
+      display: flex;
+      align-items: center;
+      padding: 0 0 2vh 0;
+      margin: 0;
+      border-bottom: 1px solid grey;
+
+      select {
+        height: 7vh;
+        font-size: 2rem;
+        width: 50.5vw;
+      }
+    }
+
+    .customized_text_area {
+      display: flex;
+      align-items: center;
+      padding: 0 0 2vh 0;
+      border-bottom: 1px solid grey;
+
+      textarea {
+        width: 50vw;
+        line-height: 1;
+        font-size: 2rem;
+        height: 50vh;
+      }
+
+      textarea::placeholder {
+        color: rgb(155, 155, 155);
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .inquiry_btn {
+    color: black;
+    background-color: rgb(255, 224, 45);
+  }
+
+  .confirm_box {
+    p {
+      color: black;
+    }
+    .contents_area {
+      color: black;
+    }
+  }
+
+  .popup_box {
+    color: black;
+
+    p {
+      color: black;
+    }
+    .contents_area {
+      color: black;
+    }
+  }
+}

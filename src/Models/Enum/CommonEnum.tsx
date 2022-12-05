@@ -32,3 +32,9 @@ export enum WinOrLoseOrDraw {
   LOSE = "LOSE",
   DRAW = "DRAW",
 }
+
+export enum InquiryCategories {
+  MATCH = "시합문의",
+  BUG_REPORT = "버그개선",
+  ETC = "기타",
+}

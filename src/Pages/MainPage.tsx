@@ -1,4 +1,4 @@
-import { BLACK, SALLWOW_BLACK } from "../CommonConstant/StringColorConstant";
+import { BLACK, SHALLOW_BLACK } from "../CommonConstant/StringColorConstant";
 import PageContainer from "../Components/PageContainer";
 import MainTeamPhotoBox from "../Components/MainPageTeamPhotoBox";
 import MatchResultBox from "../Components/RecentMatchResultBox";
@@ -14,7 +14,7 @@ const MainPage = () => {
       />
       <PageContainer
         title="Players"
-        boxColor={SALLWOW_BLACK}
+        boxColor={SHALLOW_BLACK}
         includedComponent={<PlayerSlide />}
       />
       <PageContainer

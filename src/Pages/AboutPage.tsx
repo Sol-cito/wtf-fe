@@ -8,7 +8,7 @@ import "./AboutPage.scss";
 import { getAllBoardMemberAPI } from "../Service/BoardMemberService";
 import { getAllTeamHistoryAPI } from "../Service/TeamService";
 import CustomizedSpinner from "../Components/CustomizedSpinner";
-import { SALLWOW_BLACK } from "../CommonConstant/StringColorConstant";
+import { SHALLOW_BLACK } from "../CommonConstant/StringColorConstant";
 import CustomizedImage from "../Components/CustomizedImage";
 import TeamHistoryBox from "../Components/TeamHistoryBox";
 
@@ -51,7 +51,7 @@ const AboutPage = () => {
         <>
           <PageContainer
             title="Board Member"
-            boxColor={SALLWOW_BLACK}
+            boxColor={SHALLOW_BLACK}
             includedComponent={
               <BoardMemberBox boardMemberList={boardMemberList} />
             }

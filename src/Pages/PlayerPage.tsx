@@ -5,7 +5,7 @@ import PlayerBox from "../Components/PlayerBox";
 import { getPlayersByPositionAPI } from "../Service/PlayerService";
 import { Position } from "../Models/Enum/CommonEnum";
 import PageContainer from "../Components/PageContainer";
-import { SALLWOW_BLACK } from "../CommonConstant/StringColorConstant";
+import { SHALLOW_BLACK } from "../CommonConstant/StringColorConstant";
 import CustomizedSpinner from "../Components/CustomizedSpinner";
 
 const PlayerPage = () => {
@@ -63,7 +63,7 @@ const PlayerPage = () => {
             }
           />
           <PageContainer
-            boxColor={SALLWOW_BLACK}
+            boxColor={SHALLOW_BLACK}
             includedComponent={
               <PlayerBox title={Position.FW} players={forwardPlayers!} />
             }
@@ -74,7 +74,7 @@ const PlayerPage = () => {
             }
           />
           <PageContainer
-            boxColor={SALLWOW_BLACK}
+            boxColor={SHALLOW_BLACK}
             includedComponent={
               <PlayerBox title={Position.DF} players={defenderPlayers!} />
             }
