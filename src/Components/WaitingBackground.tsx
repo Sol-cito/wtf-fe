@@ -1,11 +1,16 @@
 import TransparentBackground from "./TransparentBackground";
 import CustomizedSpinner from "./CustomizedSpinner";
+import "./WaitingBackground.scss";
 
-const WaitingBackground = () => {
+export interface WaitingBackgroundProps {
+  spinnerColor?: string;
+}
+
+const WaitingBackground = (props?: WaitingBackgroundProps) => {
   return (
     <>
       <TransparentBackground />
-      <CustomizedSpinner zIndex={5} />
+      <CustomizedSpinner color={props?.spinnerColor} zIndex={5} />
     </>
   );
 };
