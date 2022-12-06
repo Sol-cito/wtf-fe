@@ -1,5 +1,5 @@
 import React from "react";
-import "./CustomizedInput.scss"; // to-do
+import "./CustomizedTextArea.scss";
 
 export interface CustomizedInputProps {
   title: string;
@@ -24,6 +24,7 @@ const CustomizedTextArea = (props: CustomizedInputProps) => {
     <div className={"customized_text_area" + (props.className || "")}>
       <span className={"customized_text_area_title"}> {props.title} </span>
       <textarea
+        spellCheck={false}
         className="customized_text"
         value={props.value}
         onBlur={handleOnBlur}

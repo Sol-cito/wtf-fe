@@ -100,3 +100,40 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .contact_page_container {
+    font-size: 5vw;
+
+    .input_div > .customized_input > input,
+    .input_div > .customized_input > input::placeholder {
+      font-size: 1rem;
+    }
+
+    .input_div > .customized_select_box > select {
+      font-size: 1rem;
+    }
+
+    .input_div > .customized_text_area > textarea,
+    .input_div > .customized_text_area > textarea::placeholder {
+      font-size: 1rem;
+    }
+
+    .customized_input > span,
+    .customized_select_box > span,
+    .customized_text_area > span {
+      min-width: 30vw;
+      font-size: 4vw;
+    }
+
+    .btn_area {
+      text-align: center;
+
+      .inquiry_btn {
+        margin-top: 0;
+        min-width: 40vw;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

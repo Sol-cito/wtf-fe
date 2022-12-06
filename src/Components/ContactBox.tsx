@@ -131,14 +131,16 @@ const ContactBox = () => {
             onChange={setInquiryContent}
           />
         </div>
-        <Button
-          size="large"
-          variant="contained"
-          className="inquiry_btn"
-          onClick={handleOnClick}
-        >
-          문의접수
-        </Button>
+        <div className="btn_area">
+          <Button
+            size="large"
+            variant="contained"
+            className="inquiry_btn"
+            onClick={handleOnClick}
+          >
+            문의접수
+          </Button>
+        </div>
         <CustomizedConfirm
           show={showConfirm}
           confirmQuestion={"문의를 접수하시겠습니까?"}
