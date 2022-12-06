@@ -100,7 +100,13 @@ const ContactBox = () => {
 
   return (
     <>
-      {isLoading ? <WaitingBackground spinnerColor="grey" /> : null}
+      {isLoading ? (
+        <WaitingBackground
+          spinnerColor="grey"
+          className="contact_loading"
+          zIndex={9}
+        />
+      ) : null}
       <div className="contact_page_container">
         <p>문의하기</p>
         <div className="input_div">
