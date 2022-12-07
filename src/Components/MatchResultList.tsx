@@ -6,13 +6,12 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
+  TableRow
 } from "@material-ui/core";
 import moment from "moment";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MatchResultModel } from "../Models/MatchResultModel";
 import CustomizedSpinner from "./CustomizedSpinner";
-import MatchResult from "./MatchResult";
 import "./TeamList.scss";
 
 export interface MatchResultListProps {

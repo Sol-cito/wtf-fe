@@ -1,11 +1,17 @@
 import { Button } from "@material-ui/core";
 import moment from "moment";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { DATE_REGAX, NUMBER_REGAX } from "../CommonConstant/CommonConstant";
 import { WinOrLoseOrDraw, YesOrNo } from "../Models/Enum/CommonEnum";
 import {
   MatchResultModel,
   MatchResultRequestModel,
+  ScorerAndAssisterModel,
 } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
 import { TeamModel } from "../Models/TeamModel";
@@ -16,7 +22,11 @@ import CustomizedConfirm from "./CustomizedConfirm";
 import CustomizedInput from "./CustomizedInput";
 import CustomizedPopup from "./CustomizedPopup";
 import CustomizedSelectBox, { CustomizedOptions } from "./CustomizedSelectBox";
+import GoalAndAssistInput from "./GoalAndAssistInput";
 import WaitingBackground from "./WaitingBackground";
+import "./MatchResultInputBox.scss";
+import { PlayerModel } from "../Models/PlayerModel";
+import { getAllPlayersAPI } from "../Service/PlayerService";
 
 export interface MatchResultInputBoxpProps {
   title: string;
@@ -55,6 +65,16 @@ const MatchResultInputBox = forwardRef(
     const [matchDate, setMatchDate] = useState<string>(
       String(moment(new Date()).format("YYYY-MM-DD"))
     );
+
+    const [goalAndAssistComponent, setGoalAndAssistComponent] = useState<
+      React.ReactElement[]
+    >([]);
+
+    const [goalAndAssistPlayer, setGoalAndAssistPlayer] = useState<
+      ScorerAndAssisterModel[]
+    >([]);
+
+    const [allPlayers, setAllPlayers] = useState<PlayerModel[]>([]);
 
     const [matchRegistrationRequest, setMatchRegistrationRequest] =
       useState<MatchResultRequestModel>();
@@ -120,6 +140,30 @@ const MatchResultInputBox = forwardRef(
     useEffect(() => {
       getAllTeamListAndMatchTypes();
     }, []);
+
+    const getAllPlayerAndCreateScoreAndAssist = async () => {
+      const allPlayers = await getAllPlayersAPI();
+      setAllPlayers(allPlayers);
+    };
+
+    useEffect(() => {
+      getAllPlayerAndCreateScoreAndAssist();
+    }, [goalScored]);
+
+    useEffect(() => {
+      const res: React.ReactElement[] = [];
+      for (let i = 0; i < goalScored; i++) {
+        res.push(
+          <GoalAndAssistInput
+            key={i}
+            index={i}
+            players={allPlayers}
+            handleGoalAndAssistPlayer={handleGoalAndAssistPlayer}
+          />
+        );
+      }
+      setGoalAndAssistComponent(res);
+    }, [allPlayers]);
 
     useEffect(() => {
       if (!props.matchResult) return;
@@ -253,6 +297,18 @@ const MatchResultInputBox = forwardRef(
       setIsLoading(false);
     };
 
+    const handleGoalAndAssistPlayer = (value: ScorerAndAssisterModel) => {
+      // console.log([...goalAndAssistPlayer, value]);
+
+      const temp = [...goalAndAssistPlayer];
+
+      console.log("이전 : " + goalAndAssistPlayer);
+      const temp2: ScorerAndAssisterModel[] = [value, ...temp];
+      console.log("이후 : " + temp2);
+
+      setGoalAndAssistPlayer(temp2);
+    };
+
     return (
       <>
         <div className="info_area">
@@ -285,6 +341,11 @@ const MatchResultInputBox = forwardRef(
             onChange={handleGoalScoredChange}
             maxLength={2}
           />
+          {goalAndAssistComponent && goalAndAssistComponent.length > 0
+            ? goalAndAssistComponent.map((ele, idx) => {
+                return ele;
+              })
+            : null}
           <CustomizedInput
             title={"실점(숫자만) : "}
             value={String(goalLost)}
@@ -358,6 +419,13 @@ const MatchResultInputBox = forwardRef(
               setPopupShow(false);
             }}
           />
+          <Button
+            onClick={() => {
+              console.log(goalAndAssistPlayer);
+            }}
+          >
+            실험
+          </Button>
         </div>
         {isLoading ? <WaitingBackground /> : null}
       </>

@@ -25,3 +25,8 @@ export interface MatchResultRequestModel {
   shootOutYn: YesOrNo;
   matchDate: string;
 }
+
+export interface ScorerAndAssisterModel {
+  scorerId: number;
+  assisterId: number;
+}
