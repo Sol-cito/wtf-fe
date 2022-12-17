@@ -27,6 +27,10 @@
     }
   }
 
+  .photo_wrapper {
+    width: fit-content;
+  }
+
   @keyframes slide {
     from {
       opacity: 0;

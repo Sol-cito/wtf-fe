@@ -26,12 +26,7 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
   };
 
   return (
-    <div
-      className="photo_container"
-      onClick={handleOnClick}
-      onMouseOver={handleOnMouseOver}
-      onMouseLeave={handleOnMouseLeave}
-    >
+    <div className="photo_container">
       {isHovering ? (
         <div className="overlay_text">
           <p>No. {props.player.backNo}</p>
@@ -39,15 +34,22 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
           <p>{props.player.firstNameEng}</p>
         </div>
       ) : null}
-      <CustomizedImage
-        src={
-          props.player.profileImgSrc
-            ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
-              props.player.profileImgSrc
-            : ANONYMOUS_PROFILE_IMG_PATH
-        }
-        onErrorImgSrc={ANONYMOUS_PROFILE_IMG_PATH}
-      />
+      <div
+        className="photo_wrapper"
+        onClick={handleOnClick}
+        onMouseOver={handleOnMouseOver}
+        onMouseLeave={handleOnMouseLeave}
+      >
+        <CustomizedImage
+          src={
+            props.player.profileImgSrc
+              ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
+                props.player.profileImgSrc
+              : ANONYMOUS_PROFILE_IMG_PATH
+          }
+          onErrorImgSrc={ANONYMOUS_PROFILE_IMG_PATH}
+        />
+      </div>
     </div>
   );
 };
