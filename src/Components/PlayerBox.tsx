@@ -36,13 +36,14 @@ const PlayerBox = (props: PlayerBoxProps) => {
         {props.players &&
           props.players.length > 0 &&
           props.players.map((ele, idx) => {
-            return (
-              <PlayerPhoto
-                key={idx}
-                player={ele}
-                onClick={handleOnPlayerPhotoClick}
-              />
-            );
+            if (ele.curYn === "Y")
+              return (
+                <PlayerPhoto
+                  key={idx}
+                  player={ele}
+                  onClick={handleOnPlayerPhotoClick}
+                />
+              );
           })}
       </div>
       <CustomizedModal
