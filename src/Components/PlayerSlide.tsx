@@ -25,7 +25,7 @@ const PlayerSlide = () => {
   const getPlayers = async () => {
     const res = await getAllPlayersAPI();
     setPlayers(res);
-    setSlideTranslateXValue(-20);
+    setSlideTranslateXValue(isMobile ? 0 : -20);
     if (res) setIsLoding(false);
   };
 
