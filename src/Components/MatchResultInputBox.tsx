@@ -76,6 +76,8 @@ const MatchResultInputBox = forwardRef(
 
     const [allPlayers, setAllPlayers] = useState<PlayerModel[]>([]);
 
+    const [allPlayersMap, setAllPlayersMap] = useState<Map<number, string>>();
+
     const [matchRegistrationRequest, setMatchRegistrationRequest] =
       useState<MatchResultRequestModel>();
 
@@ -145,6 +147,11 @@ const MatchResultInputBox = forwardRef(
     const getAllPlayerAndCreateScoreAndAssist = async () => {
       const allPlayers = await getAllPlayersAPI();
       setAllPlayers(allPlayers);
+      const allPlayersTempMap = new Map<number, string>();
+      allPlayers.map((ele) => {
+        allPlayersTempMap.set(ele.id, ele.name);
+      });
+      setAllPlayersMap(allPlayersTempMap);
     };
 
     useEffect(() => {
@@ -260,6 +267,19 @@ const MatchResultInputBox = forwardRef(
 
       setMatchRegistrationRequest(matchRegistrationRequest);
 
+      const goalAndAssistPlayerContent: string = goalAndAssistPlayer
+        .map((ele) => {
+          return (
+            "골 : " +
+            (ele.scorerId === -1 ? "모름" : allPlayersMap?.get(ele.scorerId)) +
+            " / 어시스트 : " +
+            (ele.assisterId === -1
+              ? "모름"
+              : allPlayersMap?.get(ele.assisterId))
+          );
+        })
+        .join("\n");
+
       setRegistrationConfirmContents(
         "- 상대팀 : " +
           opposingTeamName +
@@ -269,6 +289,9 @@ const MatchResultInputBox = forwardRef(
           matchRegistrationRequest.matchLocation +
           "\n- 득점 : " +
           matchRegistrationRequest.goalsScored +
+          (goalAndAssistPlayerContent
+            ? "\n" + goalAndAssistPlayerContent
+            : "") +
           "\n- 실점 : " +
           matchRegistrationRequest.goalsLost +
           "\n- 승부차기 여부 : " +
