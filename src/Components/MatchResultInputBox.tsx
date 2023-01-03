@@ -11,7 +11,7 @@ import { WinOrLoseOrDraw, YesOrNo } from "../Models/Enum/CommonEnum";
 import {
   MatchResultModel,
   MatchResultRequestModel,
-  ScorerAndAssisterModel,
+  ScorerAndAssisterInputModel,
 } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
 import { TeamModel } from "../Models/TeamModel";
@@ -71,7 +71,7 @@ const MatchResultInputBox = forwardRef(
     >([]);
 
     const [goalAndAssistPlayer, setGoalAndAssistPlayer] = useState<
-      ScorerAndAssisterModel[]
+      ScorerAndAssisterInputModel[]
     >([]);
 
     const [allPlayers, setAllPlayers] = useState<PlayerModel[]>([]);
@@ -139,6 +139,7 @@ const MatchResultInputBox = forwardRef(
 
     useEffect(() => {
       getAllTeamListAndMatchTypes();
+      getAllPlayerAndCreateScoreAndAssist();
     }, []);
 
     const getAllPlayerAndCreateScoreAndAssist = async () => {
@@ -147,10 +148,11 @@ const MatchResultInputBox = forwardRef(
     };
 
     useEffect(() => {
-      getAllPlayerAndCreateScoreAndAssist();
-    }, [goalScored]);
-
-    useEffect(() => {
+      if (goalScored < goalAndAssistPlayer.length) {
+        const slicedArray: ScorerAndAssisterInputModel[] =
+          goalAndAssistPlayer.slice(0, goalScored);
+        setGoalAndAssistPlayer(slicedArray);
+      }
       const res: React.ReactElement[] = [];
       for (let i = 0; i < goalScored; i++) {
         res.push(
@@ -163,7 +165,7 @@ const MatchResultInputBox = forwardRef(
         );
       }
       setGoalAndAssistComponent(res);
-    }, [allPlayers]);
+    }, [goalScored]);
 
     useEffect(() => {
       if (!props.matchResult) return;
@@ -200,12 +202,18 @@ const MatchResultInputBox = forwardRef(
     }));
 
     const handleGoalScoredChange = (input: string) => {
+      if (isNaN(Number(input))) {
+        return;
+      }
       if (NUMBER_REGAX.test(input)) {
         setGoalScored(Number(input));
       }
     };
 
     const handleGoalLostChange = (input: string) => {
+      if (isNaN(Number(input))) {
+        return;
+      }
       if (NUMBER_REGAX.test(input)) {
         setGoalLost(Number(input));
       }
@@ -297,16 +305,10 @@ const MatchResultInputBox = forwardRef(
       setIsLoading(false);
     };
 
-    const handleGoalAndAssistPlayer = (value: ScorerAndAssisterModel) => {
-      // console.log([...goalAndAssistPlayer, value]);
-
-      const temp = [...goalAndAssistPlayer];
-
-      console.log("이전 : " + goalAndAssistPlayer);
-      const temp2: ScorerAndAssisterModel[] = [value, ...temp];
-      console.log("이후 : " + temp2);
-
-      setGoalAndAssistPlayer(temp2);
+    const handleGoalAndAssistPlayer = (value: ScorerAndAssisterInputModel) => {
+      const copyArray = goalAndAssistPlayer;
+      copyArray[value.index] = value;
+      setGoalAndAssistPlayer(copyArray);
     };
 
     return (
@@ -419,13 +421,6 @@ const MatchResultInputBox = forwardRef(
               setPopupShow(false);
             }}
           />
-          <Button
-            onClick={() => {
-              console.log(goalAndAssistPlayer);
-            }}
-          >
-            실험
-          </Button>
         </div>
         {isLoading ? <WaitingBackground /> : null}
       </>

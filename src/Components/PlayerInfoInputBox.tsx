@@ -156,6 +156,9 @@ const PlayerInfoInputBox = forwardRef((props: PlayerInfoInputBoxProps, ref) => {
   };
 
   const handleBackNoChange = (input: string) => {
+    if (isNaN(Number(input))) {
+      return;
+    }
     if (NUMBER_REGAX.test(input)) {
       setBackNo(Number(input));
     }

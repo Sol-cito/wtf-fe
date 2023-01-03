@@ -26,7 +26,8 @@ export interface MatchResultRequestModel {
   matchDate: string;
 }
 
-export interface ScorerAndAssisterModel {
+export interface ScorerAndAssisterInputModel {
+  index: number;
   scorerId: number;
   assisterId: number;
 }
