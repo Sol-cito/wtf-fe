@@ -38,3 +38,11 @@ export enum InquiryCategories {
   BUG_REPORT = "버그개선",
   ETC = "기타",
 }
+
+export enum GoalType {
+  FIELD = "Field",
+  HEADER = "Header",
+  FREEKICK = "FreeKick",
+  PK = "PK",
+  UNKNOWN = "Unknown",
+}

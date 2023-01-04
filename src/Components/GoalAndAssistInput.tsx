@@ -3,6 +3,7 @@ import CustomizedSelectBox, { CustomizedOptions } from "./CustomizedSelectBox";
 import { PlayerModel } from "../Models/PlayerModel";
 import "./GoalAndAssistInput.scss";
 import { ScorerAndAssisterModel } from "../Models/MatchResultModel";
+import { GoalType } from "../Models/Enum/CommonEnum";
 
 export interface GoalAndAssistInputProps {
   index: number;
@@ -16,8 +17,15 @@ const GoalAndAssistInput = (props: GoalAndAssistInputProps) => {
   ]);
   const [goalPlayerValue, setGoalPlayerValue] = useState<string>("");
   const [assistPlayerValue, setAssistPlayerValue] = useState<string>("");
-  const [goalPlayerId, setGoalPlayerId] = useState<number>(-1);
+  const [scorerPlayerId, setScorerPlayerId] = useState<number>(-1);
   const [assistPlayerId, setAssistPlayerId] = useState<number>(-1);
+  const [goalType, setGoalType] = useState<GoalType>(GoalType.FIELD);
+
+  const goalTypeOptions: CustomizedOptions[] = Object.values(GoalType).map(
+    (ele) => {
+      return { value: ele };
+    }
+  );
 
   useEffect(() => {
     const options: CustomizedOptions[] = [{ id: -1, value: "모름" }];
@@ -30,7 +38,8 @@ const GoalAndAssistInput = (props: GoalAndAssistInputProps) => {
   const handleGoalPlayerOnChange = () => {
     const model: ScorerAndAssisterModel = {
       index: props.index,
-      scorerId: goalPlayerId,
+      scorerId: scorerPlayerId,
+      goalType: goalType,
       assisterId: assistPlayerId,
     };
     props.handleScorersAndAssisters(model);
@@ -38,7 +47,7 @@ const GoalAndAssistInput = (props: GoalAndAssistInputProps) => {
 
   useEffect(() => {
     handleGoalPlayerOnChange();
-  }, [goalPlayerId, assistPlayerId]);
+  }, [scorerPlayerId, goalType, assistPlayerId]);
 
   return (
     <div className="goal_and_assist_container">
@@ -46,8 +55,14 @@ const GoalAndAssistInput = (props: GoalAndAssistInputProps) => {
         title={"골"}
         defaultValue={goalPlayerValue || playerOptions[0].value}
         useStateFuncForValue={setGoalPlayerValue}
-        useStateFuncForId={setGoalPlayerId}
+        useStateFuncForId={setScorerPlayerId}
         options={playerOptions}
+      />
+      <CustomizedSelectBox
+        title={"골 타입"}
+        defaultValue={goalType}
+        useStateFuncForValue={setGoalType}
+        options={goalTypeOptions}
       />
       <CustomizedSelectBox
         title={"어시스트"}

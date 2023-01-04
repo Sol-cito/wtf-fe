@@ -292,9 +292,7 @@ const MatchResultInputBox = forwardRef(
           matchRegistrationRequest.matchLocation +
           "\n- 득점 : " +
           matchRegistrationRequest.goalsScored +
-          (scorersAndAssistersContent
-            ? "\n" + scorersAndAssistersContent
-            : "") +
+          (scorersAndAssistersContent && "\n" + scorersAndAssistersContent) +
           "\n- 실점 : " +
           matchRegistrationRequest.goalsLost +
           "\n- 승부차기 여부 : " +
@@ -369,11 +367,11 @@ const MatchResultInputBox = forwardRef(
             onChange={handleGoalScoredChange}
             maxLength={2}
           />
-          {goalAndAssistComponent && goalAndAssistComponent.length > 0
-            ? goalAndAssistComponent.map((ele, idx) => {
-                return ele;
-              })
-            : null}
+          {goalAndAssistComponent &&
+            goalAndAssistComponent.length > 0 &&
+            goalAndAssistComponent.map((ele, idx) => {
+              return ele;
+            })}
           <CustomizedInput
             title={"실점(숫자만) : "}
             value={String(goalLost)}

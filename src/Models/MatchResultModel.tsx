@@ -1,4 +1,4 @@
-import { WinOrLoseOrDraw, YesOrNo } from "./Enum/CommonEnum";
+import { GoalType, WinOrLoseOrDraw, YesOrNo } from "./Enum/CommonEnum";
 import { MatchTypeModel } from "./MatchTypeModel";
 import { TeamModel } from "./TeamModel";
 
@@ -30,5 +30,6 @@ export interface MatchResultRequestModel {
 export interface ScorerAndAssisterModel {
   index: number;
   scorerId: number;
+  goalType: GoalType;
   assisterId: number;
 }
