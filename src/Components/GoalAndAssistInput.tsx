@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import CustomizedSelectBox, { CustomizedOptions } from "./CustomizedSelectBox";
 import { PlayerModel } from "../Models/PlayerModel";
 import "./GoalAndAssistInput.scss";
-import { ScorerAndAssisterInputModel } from "../Models/MatchResultModel";
+import { ScorerAndAssisterModel } from "../Models/MatchResultModel";
 
 export interface GoalAndAssistInputProps {
   index: number;
   players: PlayerModel[];
-  handleGoalAndAssistPlayer: Function;
+  handleScorersAndAssisters: Function;
 }
 
 const GoalAndAssistInput = (props: GoalAndAssistInputProps) => {
@@ -28,12 +28,12 @@ const GoalAndAssistInput = (props: GoalAndAssistInputProps) => {
   }, [props.players]);
 
   const handleGoalPlayerOnChange = () => {
-    const model: ScorerAndAssisterInputModel = {
+    const model: ScorerAndAssisterModel = {
       index: props.index,
       scorerId: goalPlayerId,
       assisterId: assistPlayerId,
     };
-    props.handleGoalAndAssistPlayer(model);
+    props.handleScorersAndAssisters(model);
   };
 
   useEffect(() => {

@@ -20,13 +20,14 @@ export interface MatchResultRequestModel {
   matchTypeId: number;
   matchLocation: string;
   goalsScored: number;
+  scorersAndAssisters: ScorerAndAssisterModel[];
   goalsLost: number;
   matchResult: WinOrLoseOrDraw;
   shootOutYn: YesOrNo;
   matchDate: string;
 }
 
-export interface ScorerAndAssisterInputModel {
+export interface ScorerAndAssisterModel {
   index: number;
   scorerId: number;
   assisterId: number;

@@ -11,7 +11,7 @@ import { WinOrLoseOrDraw, YesOrNo } from "../Models/Enum/CommonEnum";
 import {
   MatchResultModel,
   MatchResultRequestModel,
-  ScorerAndAssisterInputModel,
+  ScorerAndAssisterModel,
 } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
 import { TeamModel } from "../Models/TeamModel";
@@ -70,8 +70,8 @@ const MatchResultInputBox = forwardRef(
       React.ReactElement[]
     >([]);
 
-    const [goalAndAssistPlayer, setGoalAndAssistPlayer] = useState<
-      ScorerAndAssisterInputModel[]
+    const [scorersAndAssisters, setScorersAndAssisters] = useState<
+      ScorerAndAssisterModel[]
     >([]);
 
     const [allPlayers, setAllPlayers] = useState<PlayerModel[]>([]);
@@ -155,10 +155,12 @@ const MatchResultInputBox = forwardRef(
     };
 
     useEffect(() => {
-      if (goalScored < goalAndAssistPlayer.length) {
-        const slicedArray: ScorerAndAssisterInputModel[] =
-          goalAndAssistPlayer.slice(0, goalScored);
-        setGoalAndAssistPlayer(slicedArray);
+      if (goalScored < scorersAndAssisters.length) {
+        const slicedArray: ScorerAndAssisterModel[] = scorersAndAssisters.slice(
+          0,
+          goalScored
+        );
+        setScorersAndAssisters(slicedArray);
       }
       const res: React.ReactElement[] = [];
       for (let i = 0; i < goalScored; i++) {
@@ -167,7 +169,7 @@ const MatchResultInputBox = forwardRef(
             key={i}
             index={i}
             players={allPlayers}
-            handleGoalAndAssistPlayer={handleGoalAndAssistPlayer}
+            handleScorersAndAssisters={handleScorersAndAssisters}
           />
         );
       }
@@ -258,6 +260,7 @@ const MatchResultInputBox = forwardRef(
         matchTypeId: matchTypeId,
         matchLocation: matchLocation,
         goalsScored: goalScored,
+        scorersAndAssisters: scorersAndAssisters,
         goalsLost: goalLost,
         matchResult: matchResultWL,
         shootOutYn: shootoutYn,
@@ -267,7 +270,7 @@ const MatchResultInputBox = forwardRef(
 
       setMatchRegistrationRequest(matchRegistrationRequest);
 
-      const goalAndAssistPlayerContent: string = goalAndAssistPlayer
+      const scorersAndAssistersContent: string = scorersAndAssisters
         .map((ele) => {
           return (
             "골 : " +
@@ -289,8 +292,8 @@ const MatchResultInputBox = forwardRef(
           matchRegistrationRequest.matchLocation +
           "\n- 득점 : " +
           matchRegistrationRequest.goalsScored +
-          (goalAndAssistPlayerContent
-            ? "\n" + goalAndAssistPlayerContent
+          (scorersAndAssistersContent
+            ? "\n" + scorersAndAssistersContent
             : "") +
           "\n- 실점 : " +
           matchRegistrationRequest.goalsLost +
@@ -328,10 +331,10 @@ const MatchResultInputBox = forwardRef(
       setIsLoading(false);
     };
 
-    const handleGoalAndAssistPlayer = (value: ScorerAndAssisterInputModel) => {
-      const copyArray = goalAndAssistPlayer;
+    const handleScorersAndAssisters = (value: ScorerAndAssisterModel) => {
+      const copyArray = scorersAndAssisters;
       copyArray[value.index] = value;
-      setGoalAndAssistPlayer(copyArray);
+      setScorersAndAssisters(copyArray);
     };
 
     return (
