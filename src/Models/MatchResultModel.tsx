@@ -8,6 +8,7 @@ export interface MatchResultModel {
   matchType: MatchTypeModel;
   matchLocation: string;
   goalsScored: number;
+  scorersAndAssisters: ScorerAndAssisterModel[];
   goalsLost: number;
   matchResult: WinOrLoseOrDraw;
   shootOutYn: YesOrNo;

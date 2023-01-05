@@ -9,17 +9,38 @@ export interface GoalAndAssistInputProps {
   index: number;
   players: PlayerModel[];
   handleScorersAndAssisters: Function;
+  initValue?: ScorerAndAssisterModel;
 }
 
 const GoalAndAssistInput = (props: GoalAndAssistInputProps) => {
+  const getInitIdValue = (targetId: number) => {
+    let arr: Array<PlayerModel> = props.players.filter((ele) => {
+      return ele.id === targetId;
+    });
+    if (!arr || arr.length === 0) return "";
+    return arr[0].name;
+  };
+
   const [playerOptions, setPlayerOptions] = useState<CustomizedOptions[]>([
     { id: -1, value: "모름" },
   ]);
-  const [goalPlayerValue, setGoalPlayerValue] = useState<string>("");
-  const [assistPlayerValue, setAssistPlayerValue] = useState<string>("");
-  const [scorerPlayerId, setScorerPlayerId] = useState<number>(-1);
-  const [assistPlayerId, setAssistPlayerId] = useState<number>(-1);
-  const [goalType, setGoalType] = useState<GoalType>(GoalType.FIELD);
+  const [goalPlayerValue, setGoalPlayerValue] = useState<string>(
+    props.initValue?.scorerId ? getInitIdValue(props.initValue?.scorerId) : ""
+  );
+  const [assistPlayerValue, setAssistPlayerValue] = useState<string>(
+    props.initValue?.assisterId
+      ? getInitIdValue(props.initValue?.assisterId)
+      : ""
+  );
+  const [scorerPlayerId, setScorerPlayerId] = useState<number>(
+    props.initValue?.scorerId || -1
+  );
+  const [assistPlayerId, setAssistPlayerId] = useState<number>(
+    props.initValue?.assisterId || -1
+  );
+  const [goalType, setGoalType] = useState<GoalType>(
+    props.initValue?.goalType || GoalType.FIELD
+  );
 
   const goalTypeOptions: CustomizedOptions[] = Object.values(GoalType).map(
     (ele) => {

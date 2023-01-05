@@ -87,7 +87,7 @@ const MatchResultModificationFragment = () => {
 
   return (
     <>
-      {matchResults && matchResults.length > 0 ? (
+      {matchResults && matchResults.length > 0 && (
         <MatchResultInputBox
           title={"매치 결과 수정/삭제"}
           handleMatchResultRegistration={handleMatchResultModification}
@@ -95,7 +95,7 @@ const MatchResultModificationFragment = () => {
           matchResult={selectedMatch}
           ref={initStateRef}
         />
-      ) : null}
+      )}
       <MatchResultList
         matchResults={matchResults}
         title={"< 현재 등록된 매치 결과 >"}
@@ -103,7 +103,7 @@ const MatchResultModificationFragment = () => {
         initialSelectedRadioId={selectedMatch?.id}
         setSelectedMatch={setSelectedMatch}
       />
-      {isLoading ? <WaitingBackground /> : null}
+      {isLoading && <WaitingBackground />}
       <CustomizedPopup
         title={popupTitle}
         show={popupShow}

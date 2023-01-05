@@ -170,11 +170,17 @@ const MatchResultInputBox = forwardRef(
             index={i}
             players={allPlayers}
             handleScorersAndAssisters={handleScorersAndAssisters}
+            initValue={props.matchResult?.scorersAndAssisters[i]}
           />
         );
       }
       setGoalAndAssistComponent(res);
-    }, [goalScored]);
+    }, [goalScored]); // goalScored 가 같은 matchResult 끼리 선택하면 변화를 감지못하는 버그 존재.
+
+    useEffect(() => {
+      setGoalAndAssistComponent([]);
+      setGoalScored(props.matchResult?.goalsScored || 0);
+    }, [props.matchResult]);
 
     useEffect(() => {
       if (!props.matchResult) return;
@@ -243,6 +249,8 @@ const MatchResultInputBox = forwardRef(
         let key: string = res[0];
         let value: string = res[1];
 
+        if (key === "scorersAndAssisters") continue;
+
         if (value === undefined || value === null || value.length === 0) {
           setPopupTitle("[Error] 필수값 미입력");
           setPopupContents(key + " 입력되지 않음");
@@ -275,6 +283,8 @@ const MatchResultInputBox = forwardRef(
           return (
             "골 : " +
             (ele.scorerId === -1 ? "모름" : allPlayersMap?.get(ele.scorerId)) +
+            " / 골 유형 : " +
+            ele.goalType +
             " / 어시스트 : " +
             (ele.assisterId === -1
               ? "모름"
