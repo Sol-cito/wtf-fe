@@ -162,6 +162,9 @@ const MatchResultInputBox = forwardRef(
         );
         setScorersAndAssisters(slicedArray);
       }
+    }, [goalScored, props.matchResult?.id]);
+
+    useEffect(() => {
       const res: React.ReactElement[] = [];
       for (let i = 0; i < goalScored; i++) {
         res.push(
@@ -175,14 +178,11 @@ const MatchResultInputBox = forwardRef(
         );
       }
       setGoalAndAssistComponent(res);
-    }, [goalScored]); // goalScored 가 같은 matchResult 끼리 선택하면 변화를 감지못하는 버그 존재.
+    }, [goalScored, scorersAndAssisters]);
 
     useEffect(() => {
       setGoalAndAssistComponent([]);
-      setGoalScored(props.matchResult?.goalsScored || 0);
-    }, [props.matchResult]);
 
-    useEffect(() => {
       if (!props.matchResult) return;
       setMatchId(props.matchResult.id);
       setOpposingTeamId(props.matchResult.opposingTeam.id);
@@ -191,6 +191,7 @@ const MatchResultInputBox = forwardRef(
       setMatchTypeName(props.matchResult.matchType.matchTypeName);
       setMatchLocation(props.matchResult.matchLocation);
       setGoalScored(props.matchResult.goalsScored);
+      setScorersAndAssisters(props.matchResult.scorersAndAssisters);
       setGoalLost(props.matchResult.goalsLost);
       setMatchResultWL(props.matchResult.matchResult);
       setShootoutYn(props.matchResult.shootOutYn);
