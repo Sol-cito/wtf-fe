@@ -328,7 +328,7 @@ const MatchResultInputBox = forwardRef(
         matchDate +
           " 에 있었던 " +
           opposingTeamName +
-          "과의 경기기록을 삭제하시겠습니까?"
+          "과의 경기기록을 삭제하시겠습니까? \n (득점, 어시스트기록이 함께 삭제됩니다)"
       );
       setShowDeletionConfirm(true);
     };
