@@ -1,0 +1,27 @@
+.team_photo_container {
+  height: inherit;
+  width: inherit;
+  position: relative;
+
+  img {
+    width: 70vw;
+    object-fit: cover;
+  }
+
+  .team_text_typing_container {
+    width: max-content;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .team_photo_container {
+    text-align: center;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}

@@ -1,27 +1,42 @@
 .header {
   display: flex;
-  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  background-color: white;
+  background-color: black;
   justify-content: space-between;
   line-height: 10vh;
-  z-index: 2;
+  border-bottom: 0.1px solid rgb(141, 141, 141);
+  z-index: 3;
 
   .logo_area {
     border: none;
     color: black;
-    margin-left: 7vw;
+    margin-left: 15vw;
   }
 
   .button_area {
     display: flex;
     justify-content: end;
-    margin-right: 7vw;
+    margin-right: 15vw;
   }
 
   a {
     text-decoration: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header {
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 2vh 0 2vh 0;
+    line-height: 1vh;
+    z-index: 4;
+
+    .logo_area {
+      margin-left: 4vw;
+      padding: 1vh;
+    }
   }
 }

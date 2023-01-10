@@ -1,14 +1,32 @@
 .header_logo {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  .logo_image {
+  #logo_image {
+    margin-right: 20px;
     width: 50px;
-    float: left;
   }
 
-  .logo_name {
+  #logo_name {
+    color: white;
     font-size: 25px;
     font-weight: bolder;
-    float: left;
+    min-width: 10vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header_logo {
+    justify-content: center;
+
+    #logo_image {
+      margin-right: 4vw;
+      width: 6vw;
+    }
+    #logo_name {
+      font-size: 6vw;
+    }
   }
 }

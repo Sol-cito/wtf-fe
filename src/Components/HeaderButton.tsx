@@ -1,16 +1,21 @@
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../Store/config";
+import { setHeaderBtn } from "../Store/Slices/HeaderBtnSlice";
 import "./HeaderButton.scss";
 
 export interface ButtonProps {
   btnName: string;
-  isSelected: boolean;
   url: string;
-  setSelectedHeaderBtn: Function;
+  onClick?: Function;
 }
 
 const HeaderButton = (props: ButtonProps) => {
+  const { headerBtnValue } = useAppSelector((state) => state.headerBtn);
+  const dispatch = useAppDispatch();
+
   const handleOnClick = () => {
-    props.setSelectedHeaderBtn(props.btnName);
+    dispatch(setHeaderBtn(props.btnName));
+    if (props.onClick) props.onClick();
   };
 
   const changeFirstLetterUpperCase = (target: string) => {
@@ -18,12 +23,14 @@ const HeaderButton = (props: ButtonProps) => {
   };
 
   return (
-    <Link to={props.url} onClick={handleOnClick}>
-      <div className="header_button">
-        <div className={"button_name" + (props.isSelected ? " active" : "")}>
-          {changeFirstLetterUpperCase(props.btnName)}
-        </div>
-      </div>
+    <Link to={props.url} onClick={handleOnClick} className="header_button">
+      <span
+        className={
+          "button_name" + (props.btnName === headerBtnValue ? " active" : "")
+        }
+      >
+        {changeFirstLetterUpperCase(props.btnName)}
+      </span>
     </Link>
   );
 };

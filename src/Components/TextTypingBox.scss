@@ -1,0 +1,21 @@
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+}
+
+.typing_area {
+  height: inherit;
+  text-align: center;
+  font-size: 5vw;
+  font-weight: 700;
+
+  .typing_result {
+    color: rgb(251, 224, 4);
+  }
+
+  .typing_cursor {
+    color: rgb(251, 224, 4);
+    animation: blink-effect 1.5s step-end infinite;
+  }
+}

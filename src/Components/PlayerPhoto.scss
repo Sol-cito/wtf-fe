@@ -1,0 +1,60 @@
+.photo_container {
+  padding: 10px 30px 0 10px;
+  img {
+    display: block;
+    width: 30vh;
+    height: 50vh;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all ease 0.5s;
+  }
+
+  img:hover {
+    transform: scale(1.1);
+    opacity: 0.4;
+  }
+
+  .overlay_text {
+    position: absolute;
+    color: white;
+    max-width: 30vh;
+    font-size: 35px;
+    margin-top: 25vh;
+    animation: slide 0.5s ease-in-out;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .photo_wrapper {
+    width: fit-content;
+  }
+
+  @keyframes slide {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .photo_container {
+    img {
+      width: 20vh;
+      height: 30vh;
+      transition: none;
+    }
+    img:hover {
+      transform: none;
+      opacity: 1;
+    }
+    .overlay_text {
+      visibility: hidden;
+      animation: none;
+    }
+  }
+}

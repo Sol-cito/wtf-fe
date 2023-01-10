@@ -1,6 +1,13 @@
-.body {
-  width: inherit;
-  height: 100%;
+.App {
+  .body {
+    padding: 0 0 10vh 0;
+  }
+}
 
-  margin: 10vh 5vw 10vh 5vw;
+@media only screen and (max-width: 768px) {
+  .App {
+    .body {
+      padding: 0 0 10vh 0;
+    }
+  }
 }

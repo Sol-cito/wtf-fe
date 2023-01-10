@@ -1,0 +1,16 @@
+.background_shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: 100vh;
+  background-color: black;
+  opacity: 0.6;
+}
+
+@media only screen and (max-width: 768px) {
+  .background_shadow {
+  }
+}

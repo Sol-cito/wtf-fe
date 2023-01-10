@@ -1,0 +1,20 @@
+.customized_text_area {
+  margin: 3vh 0 3vh 0;
+
+  span {
+    font-size: 2vw;
+  }
+
+  textarea {
+    font-family: Arial;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .customized_text_area {
+    span {
+      font-weight: 700;
+      font-size: 4vw;
+    }
+  }
+}

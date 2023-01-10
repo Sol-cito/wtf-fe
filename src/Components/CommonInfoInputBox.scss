@@ -1,0 +1,66 @@
+.info_area {
+  .title {
+    font-size: 4vw;
+    font-weight: 800;
+  }
+  font-size: 3vh;
+  margin: 1vw 5vw 1vw 5vw;
+  text-align: center;
+
+  p {
+    text-align: center;
+  }
+
+  input {
+    width: 30vw;
+    height: 5vw;
+    font-size: 2vw;
+  }
+
+  .moto_area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      font-size: 2vw;
+    }
+    textarea {
+      width: 30vw;
+      height: 20vh;
+      font-size: 2vw;
+    }
+  }
+
+  .curYn {
+    margin: 2vh 0 2vh 0;
+  }
+
+  .btn {
+    font-size: 2vw;
+    width: fit-content;
+    margin: 3vh 1vw 3vh 1vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .info_area {
+    .title {
+      font-size: 6vw;
+      font-weight: 800;
+    }
+
+    .moto_area {
+      span {
+        font-size: 4vw;
+        font-weight: 600;
+      }
+      textarea {
+        font-size: 4vw;
+      }
+    }
+
+    .btn {
+      font-size: 4vw;
+    }
+  }
+}

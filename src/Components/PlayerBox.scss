@@ -1,0 +1,35 @@
+.player_box_title {
+  margin-top: 2vh;
+  color: white;
+  font-size: 3vw;
+  width: fit-content;
+  border-bottom: 5px solid yellow;
+}
+
+.player_photos_area {
+  display: flex;
+  flex-wrap: wrap;
+
+  .photo_container {
+    flex-grow: 1;
+    padding: 0 0 3vw 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .player_box_title {
+    font-size: 7vw;
+  }
+  .player_photos_area {
+    justify-content: center;
+    .photo_container {
+      flex-grow: 0;
+      padding: 0 2vw 2vw 0;
+
+      img {
+        width: 18vh;
+        height: 27vh;
+      }
+    }
+  }
+}

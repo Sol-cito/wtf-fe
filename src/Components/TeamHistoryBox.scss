@@ -1,0 +1,27 @@
+.history_container {
+  .history {
+    margin: 3vh 0 3vh 0;
+    .year {
+      min-width: 15vw;
+      display: inline-block;
+      margin-right: 2vw;
+      color: rgb(255, 224, 45);
+    }
+
+    .summary {
+      display: inline-block;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .history_container {
+    font-size: 5vw;
+
+    .history {
+      .year {
+        min-width: 22vw;
+      }
+    }
+  }
+}

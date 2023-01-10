@@ -1,0 +1,58 @@
+.confirm_box {
+  background-color: white;
+  position: fixed;
+  margin: 20vh auto;
+  padding: 2vw;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 40vw;
+  min-height: 20vh;
+  max-height: 70vh;
+  z-index: 10;
+  overflow-y: scroll;
+
+  p {
+    margin: 0;
+    margin-bottom: 5vh;
+    font-size: 2vw;
+  }
+
+  .contents_area {
+    white-space: pre-wrap;
+    font-size: 1.5vw;
+  }
+
+  .btn_area {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: space-between;
+
+    .button {
+      margin: 5vw 5vw 0 5vw;
+      width: 10vw;
+      font-size: 1.5vw;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .confirm_box {
+    width: 70vw;
+    p {
+      font-size: 5vw;
+    }
+
+    .contents_area {
+      white-space: pre-wrap;
+      font-size: 4vw;
+    }
+
+    .btn_area {
+      .button {
+        width: fit-content;
+        font-size: 3vw;
+      }
+    }
+  }
+}

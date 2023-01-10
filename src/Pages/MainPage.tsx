@@ -1,13 +1,28 @@
+import { BLACK, SHALLOW_BLACK } from "../CommonConstant/StringColorConstant";
+import PageContainer from "../Components/PageContainer";
+import MainTeamPhotoBox from "../Components/MainPageTeamPhotoBox";
+import MatchResultBox from "../Components/RecentMatchResultBox";
+import PlayerSlide from "../Components/PlayerSlide";
 import "./MainPage.scss";
 
 const MainPage = () => {
   return (
-    <div className="grid_container">
-      안녕하십니까 왓더퍽입니다.
-      <div className="img_holder">
-        <img src="img/team_photo_1.jpg" />
-      </div>
-    </div>
+    <>
+      <PageContainer
+        boxColor={BLACK}
+        includedComponent={<MainTeamPhotoBox />}
+      />
+      <PageContainer
+        title="Players"
+        boxColor={SHALLOW_BLACK}
+        includedComponent={<PlayerSlide />}
+      />
+      <PageContainer
+        title="Recent Match Results"
+        boxColor={BLACK}
+        includedComponent={<MatchResultBox />}
+      />
+    </>
   );
 };
 export default MainPage;

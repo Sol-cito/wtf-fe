@@ -1,0 +1,24 @@
+.customized_select_box {
+  margin: 1vw;
+  font-size: 2vw;
+
+  .select_each {
+    min-width: 10vw;
+    height: 5vh;
+    font-size: 2vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .customized_select_box {
+    span {
+      font-weight: 700;
+      font-size: 4vw;
+    }
+
+    .select_each {
+      min-width: 20vw;
+      font-size: 4vw;
+    }
+  }
+}
