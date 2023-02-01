@@ -1,0 +1,9 @@
+@media only screen and (max-width: 768px) {
+  .carousel_container .slick-slide {
+    height: fit-content;
+
+    img {
+      min-height: inherit;
+    }
+  }
+}
