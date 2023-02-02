@@ -28,10 +28,24 @@ const PlayerModalBox = () => {
     <>
       {player && (
         <div className="player_info_header">
-          <Button variant="contained" onClick={() => handleOnClickBtn(0)}>
+          <Button
+            style={{
+              backgroundColor:
+                selectedBtnNumber === 0 ? "rgb(255, 224, 45)" : undefined,
+            }}
+            variant="contained"
+            onClick={() => handleOnClickBtn(0)}
+          >
             선수정보
           </Button>
-          <Button variant="contained" onClick={() => handleOnClickBtn(1)}>
+          <Button
+            style={{
+              backgroundColor:
+                selectedBtnNumber === 1 ? "rgb(255, 224, 45)" : undefined,
+            }}
+            variant="contained"
+            onClick={() => handleOnClickBtn(1)}
+          >
             스탯
           </Button>
         </div>

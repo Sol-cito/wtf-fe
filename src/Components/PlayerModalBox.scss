@@ -3,4 +3,14 @@
   left: 50%;
   transform: translate(-50%, -10%);
   top: 3%;
+  width: max-content;
+
+  button {
+    min-width: 8vw;
+    margin: 0 1vw 0 1vw;
+
+    span {
+      font-weight: bold;
+    }
+  }
 }
