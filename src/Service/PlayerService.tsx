@@ -1,4 +1,4 @@
-import { PlayerModel } from "../Models/PlayerModel";
+import { PlayerModel, PlayerStatModel } from "../Models/PlayerModel";
 import {
   getApiCall,
   GetParameter,
@@ -67,5 +67,18 @@ export async function modifyPlayerAPI(
     },
   };
   const result: PlayerModel = await putApiCall(putParameter);
+  return result;
+}
+
+export async function getPlayerStatAPI(
+  playerId: number
+): Promise<PlayerStatModel> {
+  const getParameter: GetParameter = {
+    url: "player-stat",
+    params: {
+      id: playerId,
+    },
+  };
+  const result: PlayerStatModel = await getApiCall(getParameter);
   return result;
 }

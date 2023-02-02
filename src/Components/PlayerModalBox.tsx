@@ -1,13 +1,19 @@
 import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { PlayerStatModel } from "../Models/PlayerModel";
+import { getPlayerStatAPI } from "../Service/PlayerService";
 import { useAppSelector } from "../Store/config";
 import PlayerInfoBox from "./PlayerInfoBox";
 import "./PlayerModalBox.scss";
+import PlayerStatBox from "./PlayerStatBox";
 
 const PlayerModalBox = () => {
+  const { modalShow } = useAppSelector((state) => state.modal);
   const { player } = useAppSelector((state) => state.modal);
 
   const [selectedBtnNumber, setSelectedBtnNumber] = useState<number>(0);
+
+  const [playerStat, setPlayerStat] = useState<PlayerStatModel>();
 
   const [contentComponent, setContentComponent] =
     useState<React.ReactElement>();
@@ -16,13 +22,32 @@ const PlayerModalBox = () => {
     setSelectedBtnNumber(btnNumber);
   };
 
+  const getPlayerStat = async (playerId: number) => {
+    const res: PlayerStatModel = await getPlayerStatAPI(playerId);
+    setPlayerStat(res);
+  };
+
   useEffect(() => {
+    if (modalShow) {
+      setSelectedBtnNumber(0);
+    }
+  }, [modalShow]);
+
+  useEffect(() => {
+    if (!player) return;
+
     if (selectedBtnNumber === 0) {
-      player && setContentComponent(<PlayerInfoBox player={player} />);
+      setContentComponent(<PlayerInfoBox player={player} />);
     } else if (selectedBtnNumber === 1) {
-      setContentComponent(undefined);
+      setContentComponent(<PlayerStatBox playerStat={playerStat} />);
+      getPlayerStat(player.id);
     }
   }, [selectedBtnNumber]);
+
+  useEffect(() => {
+    if (!player) return;
+    getPlayerStat(player.id);
+  }, [contentComponent]);
 
   return (
     <>
