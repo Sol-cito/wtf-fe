@@ -1,45 +1,81 @@
-import moment from "moment";
-import { ANONYMOUS_PROFILE_IMG_PATH } from "../CommonConstant/ImgConstant";
+import { Button } from "@material-ui/core";
+import { useEffect, useState } from "react";
+import { PlayerStatModel } from "../Models/PlayerModel";
+import { getPlayerStatAPI } from "../Service/PlayerService";
 import { useAppSelector } from "../Store/config";
-import CustomizedImage from "./CustomizedImage";
+import PlayerInfoBox from "./PlayerInfoBox";
 import "./PlayerModalBox.scss";
+import PlayerStatBox from "./PlayerStatBox";
 
 const PlayerModalBox = () => {
+  const { modalShow } = useAppSelector((state) => state.modal);
   const { player } = useAppSelector((state) => state.modal);
+
+  const [selectedBtnNumber, setSelectedBtnNumber] = useState<number>(0);
+
+  const [playerStat, setPlayerStat] = useState<PlayerStatModel>();
+
+  const [contentComponent, setContentComponent] =
+    useState<React.ReactElement>();
+
+  const handleOnClickBtn = (btnNumber: number) => {
+    setSelectedBtnNumber(btnNumber);
+  };
+
+  const getPlayerStat = async (playerId: number) => {
+    const res: PlayerStatModel = await getPlayerStatAPI(playerId);
+    setPlayerStat(res);
+  };
+
+  useEffect(() => {
+    if (modalShow) {
+      setSelectedBtnNumber(0);
+    }
+  }, [modalShow]);
+
+  useEffect(() => {
+    if (!player) return;
+
+    if (selectedBtnNumber === 0) {
+      setContentComponent(<PlayerInfoBox player={player} />);
+    } else if (selectedBtnNumber === 1) {
+      setContentComponent(<PlayerStatBox playerStat={playerStat} />);
+      getPlayerStat(player.id);
+    }
+  }, [selectedBtnNumber]);
+
+  useEffect(() => {
+    if (!player) return;
+    getPlayerStat(player.id);
+  }, [contentComponent]);
 
   return (
     <>
-      {player ? (
-        <div className="player_info_container">
-          <div className="photo_area">
-            <CustomizedImage
-              src={
-                process.env.REACT_APP_IMAGE_SRC_PREFIX
-                  ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
-                    player.profileTorsoImgSrc
-                  : ANONYMOUS_PROFILE_IMG_PATH
-              }
-              onErrorImgSrc={ANONYMOUS_PROFILE_IMG_PATH}
-            />
-          </div>
-          <div className="info_area">
-            <div className="moto_area">"{player.moto}"</div>
-            <div className="basic_info_area">
-              <span id="back_no">{player.backNo}</span>
-              <span id="position">{player.position}</span>
-              <span id="name">{player.name}</span>
-            </div>
-            <div className="eng_name_area">
-              <span id="first_name_eng">{player.firstNameEng}</span>
-              <span id="family_name_eng">{player.familyNameEng}</span>
-            </div>
-            <div className="birth_area">
-              <span id="birth">생년월일 | </span>{" "}
-              {moment(player.birth).format("YYYY-MM-DD")}
-            </div>
-          </div>
+      {player && (
+        <div className="player_info_header">
+          <Button
+            style={{
+              backgroundColor:
+                selectedBtnNumber === 0 ? "rgb(255, 224, 45)" : undefined,
+            }}
+            variant="contained"
+            onClick={() => handleOnClickBtn(0)}
+          >
+            선수정보
+          </Button>
+          <Button
+            style={{
+              backgroundColor:
+                selectedBtnNumber === 1 ? "rgb(255, 224, 45)" : undefined,
+            }}
+            variant="contained"
+            onClick={() => handleOnClickBtn(1)}
+          >
+            스탯
+          </Button>
         </div>
-      ) : null}
+      )}
+      {contentComponent}
     </>
   );
 };

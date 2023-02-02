@@ -17,3 +17,8 @@ export interface PlayerMultipartModel {
   profileImgFile?: File;
   profileTorsoImgFile?: File;
 }
+
+export interface PlayerStatModel {
+  scores: number;
+  assists: number;
+}
