@@ -5,7 +5,9 @@
   top: 15vh;
   left: 20vw;
   right: 20vw;
-  height: 65vh;
+  min-height: 65vh;
+  height: 30%;
+  overflow-y: auto;
   z-index: 10;
   border: 1px solid grey;
 

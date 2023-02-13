@@ -22,3 +22,10 @@ export interface PlayerStatModel {
   scores: number;
   assists: number;
 }
+
+export interface PlayerMatchStatModel {
+  matchDate: string;
+  matchTypeName: string;
+  opposingTeamName: string;
+  stat: number;
+}

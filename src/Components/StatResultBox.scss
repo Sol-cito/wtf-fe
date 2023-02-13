@@ -1,0 +1,72 @@
+.stat_title {
+  margin-left: 5vw;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: white;
+}
+
+.stat_container {
+  margin: 1vh 5vw 5vh 5vw;
+  border: 1px yellow solid;
+  background-color: black;
+
+  .stat_detail {
+    display: flex;
+    margin: 2vh 0 2vh 0;
+    text-align: center;
+    align-items: center;
+    color: white;
+    font-size: 1rem;
+
+    span {
+      flex-basis: 10vw;
+      flex-grow: 1;
+    }
+    .opposing_team_detail {
+      display: flex;
+      flex-basis: 15vw;
+      align-items: center;
+
+      .opposing_team_img {
+        display: block;
+        flex-basis: 10vw;
+        img {
+          width: 4vw;
+        }
+      }
+    }
+    .stat_number {
+      color: yellow;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .stat_container {
+    .stat_detail {
+      font-size: 3.5vw;
+
+      .date_and_type {
+        display: flex;
+        flex-basis: 28vw;
+        flex-direction: column;
+        align-items: center;
+
+        div {
+          margin-top: 1vh;
+        }
+      }
+
+      .opposing_team_detail {
+        display: flex;
+        flex-basis: 40vw;
+
+        .opposing_team_img {
+          img {
+            width: 15vw;
+          }
+        }
+      }
+    }
+  }
+}
