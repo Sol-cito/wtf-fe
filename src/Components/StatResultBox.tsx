@@ -1,6 +1,7 @@
 import { isMobile } from "react-device-detect";
 import { TEAM_MARK_NO_LOGO_IMG_PATH } from "../CommonConstant/ImgConstant";
 import { PlayerMatchStatModel } from "../Models/PlayerModel";
+import CustomizedImage from "./CustomizedImage";
 import "./StatResultBox.scss";
 
 export interface StatResultBoxProps {
@@ -14,6 +15,9 @@ const StatResultBox = (props: StatResultBoxProps) => {
     <>
       <span className="stat_title">{props.title}</span>
       <div className="stat_container">
+        {props.statResult.length === 0 && (
+          <div className="no_stat">기록 없음</div>
+        )}
         {props.statResult.map((ele, key) => {
           return (
             <div key={key} className="stat_detail">
@@ -31,7 +35,10 @@ const StatResultBox = (props: StatResultBoxProps) => {
               <div className="opposing_team_detail">
                 <span>VS</span>
                 <div className="opposing_team_img">
-                  <img src={TEAM_MARK_NO_LOGO_IMG_PATH} />
+                  <CustomizedImage
+                    src={ele.teamLogoSrc || TEAM_MARK_NO_LOGO_IMG_PATH}
+                    onErrorImgSrc={TEAM_MARK_NO_LOGO_IMG_PATH}
+                  />
                   <div>{ele.opposingTeamName}</div>
                 </div>
               </div>

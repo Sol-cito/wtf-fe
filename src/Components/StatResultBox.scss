@@ -10,6 +10,12 @@
   border: 1px yellow solid;
   background-color: black;
 
+  .no_stat {
+    padding: 2vh 0 2vh 2vw;
+    color: yellow;
+    font-weight: bolder;
+  }
+
   .stat_detail {
     display: flex;
     margin: 2vh 0 2vh 0;

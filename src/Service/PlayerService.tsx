@@ -1,4 +1,8 @@
-import { PlayerModel, PlayerStatModel } from "../Models/PlayerModel";
+import {
+  PlayerMatchStatModel,
+  PlayerModel,
+  PlayerStatModel,
+} from "../Models/PlayerModel";
 import {
   getApiCall,
   GetParameter,
@@ -70,15 +74,43 @@ export async function modifyPlayerAPI(
   return result;
 }
 
-export async function getPlayerStatAPI(
+export async function getPlayerTotalStatAPI(
   playerId: number
 ): Promise<PlayerStatModel> {
   const getParameter: GetParameter = {
-    url: "player-stat",
+    url: "player-total-stat",
     params: {
       id: playerId,
     },
   };
   const result: PlayerStatModel = await getApiCall(getParameter);
+  return result;
+}
+
+export async function getPlayerScoresByMatchResultAPI(
+  playerId: number
+): Promise<PlayerMatchStatModel[]> {
+  const getParameter: GetParameter = {
+    url: "player-match-score",
+    params: {
+      playerId: playerId,
+      limit: 3,
+    },
+  };
+  const result: PlayerMatchStatModel[] = await getApiCall(getParameter);
+  return result;
+}
+
+export async function getPlayerAssistsByMatchResultAPI(
+  playerId: number
+): Promise<PlayerMatchStatModel[]> {
+  const getParameter: GetParameter = {
+    url: "player-match-assist",
+    params: {
+      playerId: playerId,
+      limit: 3,
+    },
+  };
+  const result: PlayerMatchStatModel[] = await getApiCall(getParameter);
   return result;
 }

@@ -1,4 +1,5 @@
 import { PlayerStatModel } from "../Models/PlayerModel";
+import { useAppSelector } from "../Store/config";
 import PlayerMatchResult from "./PlayerMatchResult";
 import "./PlayerStatBox.scss";
 
@@ -7,6 +8,8 @@ export interface PlayerStatBoxProps {
 }
 
 const PlayerStatBox = (props: PlayerStatBoxProps) => {
+  const { player } = useAppSelector((state) => state.modal);
+
   return (
     <>
       <div className="statbox_container">
@@ -17,9 +20,7 @@ const PlayerStatBox = (props: PlayerStatBoxProps) => {
           Assists :<span>{props.playerStat?.scores || 0} </span>
         </span>
       </div>
-      <div>
-        <PlayerMatchResult />
-      </div>
+      <div>{player && <PlayerMatchResult playerId={player.id} />}</div>
     </>
   );
 };

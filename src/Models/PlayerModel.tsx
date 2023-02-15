@@ -27,5 +27,6 @@ export interface PlayerMatchStatModel {
   matchDate: string;
   matchTypeName: string;
   opposingTeamName: string;
+  teamLogoSrc: string;
   stat: number;
 }
