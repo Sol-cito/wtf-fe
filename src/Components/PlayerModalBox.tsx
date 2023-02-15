@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { PlayerStatModel } from "../Models/PlayerModel";
-import { getPlayerStatAPI } from "../Service/PlayerService";
+import { getPlayerTotalStatAPI } from "../Service/PlayerService";
 import { useAppSelector } from "../Store/config";
 import PlayerInfoBox from "./PlayerInfoBox";
 import "./PlayerModalBox.scss";
@@ -23,7 +23,7 @@ const PlayerModalBox = () => {
   };
 
   const getPlayerStat = async (playerId: number) => {
-    const res: PlayerStatModel = await getPlayerStatAPI(playerId);
+    const res: PlayerStatModel = await getPlayerTotalStatAPI(playerId);
     setPlayerStat(res);
   };
 

@@ -1,0 +1,17 @@
+.statbox_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+
+  span {
+    color: white;
+    font-size: 3vh;
+    font-weight: bolder;
+    margin: 0 3vw 5vh 3vw;
+
+    span {
+      color: yellow;
+    }
+  }
+}
