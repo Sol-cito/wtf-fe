@@ -13,6 +13,8 @@ import {
 } from "../CommonConstant/ImgConstant";
 import CustomizedModal from "./CustomizedModal";
 import CustomizedSpinner from "./CustomizedSpinner";
+import { SortModel } from "../Models/CommonModel";
+import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
 
 const PlayerSlide = () => {
   const [players, setPlayers] = useState<PlayerModel[]>();
@@ -23,7 +25,11 @@ const PlayerSlide = () => {
   const dispatch = useAppDispatch();
 
   const getPlayers = async () => {
-    const res = await getAllPlayersAPI();
+    const sortParam: SortModel = {
+      columnName: "backNo",
+      sortDirection: OrderSortKeyword.ASC,
+    };
+    const res = await getAllPlayersAPI(sortParam);
     setPlayers(res);
     setSlideTranslateXValue(isMobile ? 0 : -20);
     if (res) setIsLoding(false);

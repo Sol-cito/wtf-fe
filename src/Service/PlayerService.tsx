@@ -1,4 +1,10 @@
-import { PlayerModel } from "../Models/PlayerModel";
+import { SortModel } from "../Models/CommonModel";
+import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
+import {
+  PlayerMatchStatModel,
+  PlayerModel,
+  PlayerStatModel,
+} from "../Models/PlayerModel";
 import {
   getApiCall,
   GetParameter,
@@ -8,9 +14,15 @@ import {
   PutParameter,
 } from "./ApiCall";
 
-export async function getAllPlayersAPI(): Promise<PlayerModel[]> {
+export async function getAllPlayersAPI(
+  sortParam?: SortModel
+): Promise<PlayerModel[]> {
   const getParameter: GetParameter = {
     url: "player",
+    params: {
+      columnName: sortParam?.columnName || "id",
+      sortDirection: sortParam?.sortDirection || OrderSortKeyword.ASC,
+    },
   };
   const result: PlayerModel[] = await getApiCall(getParameter);
   return result;
@@ -67,5 +79,46 @@ export async function modifyPlayerAPI(
     },
   };
   const result: PlayerModel = await putApiCall(putParameter);
+  return result;
+}
+
+export async function getPlayerTotalStatAPI(
+  playerId: number
+): Promise<PlayerStatModel> {
+  const getParameter: GetParameter = {
+    url: "player-total-stat",
+    params: {
+      id: playerId,
+    },
+  };
+  const result: PlayerStatModel = await getApiCall(getParameter);
+  return result;
+}
+
+export async function getPlayerScoresByMatchResultAPI(
+  playerId: number
+): Promise<PlayerMatchStatModel[]> {
+  const getParameter: GetParameter = {
+    url: "player-match-score",
+    params: {
+      playerId: playerId,
+      limit: 3,
+    },
+  };
+  const result: PlayerMatchStatModel[] = await getApiCall(getParameter);
+  return result;
+}
+
+export async function getPlayerAssistsByMatchResultAPI(
+  playerId: number
+): Promise<PlayerMatchStatModel[]> {
+  const getParameter: GetParameter = {
+    url: "player-match-assist",
+    params: {
+      playerId: playerId,
+      limit: 3,
+    },
+  };
+  const result: PlayerMatchStatModel[] = await getApiCall(getParameter);
   return result;
 }

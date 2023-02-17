@@ -1,120 +1,16 @@
-.player_info_container {
-  display: flex;
-  margin-left: 3vw;
+.player_info_header {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  top: 3%;
+  width: max-content;
 
-  .photo_area {
-    margin-top: 15vh;
-    max-width: 20vw;
+  button {
+    min-width: 8vw;
+    margin: 0 1vw 0 1vw;
 
-    img {
-      display: block;
-      object-fit: cover;
-      height: 50vh;
-      max-width: inherit;
-    }
-  }
-  .info_area {
-    padding: 10vh 3vh 3vh 3vh;
-    color: white;
-
-    .moto_area {
-      width: fit-content;
-      font-style: italic;
-      font-size: 2vw;
-      font-weight: 700;
-      border-bottom: 1px solid white;
-      word-break: break-all;
-    }
-
-    .basic_info_area {
-      margin-top: 12vh;
-
-      #back_no {
-        color: yellow;
-        font-size: 3vw;
-        font-weight: 700;
-        padding-right: 30px;
-      }
-
-      #position {
-        font-size: 3vw;
-        font-weight: 700;
-        padding-right: 30px;
-      }
-
-      #name {
-        font-size: 3vw;
-        font-weight: 700;
-      }
-    }
-
-    .eng_name_area {
-      #first_name_eng,
-      #family_name_eng {
-        color: yellow;
-        font-size: 3vh;
-        margin-right: 1vh;
-        font-weight: bold;
-      }
-    }
-
-    .birth_area {
-      margin-top: 3vh;
-      font-size: 3vh;
-
-      #birth {
-        color: yellow;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .player_info_container {
-    display: block;
-
-    .photo_area {
-      display: flex;
-      justify-content: center;
-      max-width: inherit;
-
-      img {
-        max-width: 90%;
-        object-fit: cover;
-      }
-    }
-
-    .info_area {
-      margin-top: 4vh;
-      padding: 0;
-      margin-bottom: 4vh;
-      text-align: center;
-
-      .moto_area {
-        display: inline;
-        font-size: 6vw;
-        width: auto;
-      }
-
-      .basic_info_area {
-        margin-top: 5vh;
-
-        #back_no,
-        #position,
-        #name {
-          font-size: 6vw;
-        }
-      }
-
-      .eng_name_area {
-        #first_name_eng,
-        #family_name_eng {
-          font-size: 8vw;
-        }
-      }
-      .birth_area {
-        margin-top: 8vh;
-      }
+    span {
+      font-weight: bold;
     }
   }
 }

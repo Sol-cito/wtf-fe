@@ -2,6 +2,7 @@ import "./TransparentBackground.scss";
 
 export interface TransparentBackgroundProps {
   zIndex?: number;
+  height?: string;
   onClick?: Function;
 }
 
@@ -16,6 +17,7 @@ const TransparentBackground = (props: TransparentBackgroundProps) => {
         className="background_shadow"
         style={{
           zIndex: `${props.zIndex || 3}`,
+          height: `${props.height}`,
         }}
         onClick={handleOnClick}
       />

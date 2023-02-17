@@ -41,7 +41,7 @@ const AdminPage = () => {
           선수 정보 수정
         </Button>
 
-        <Button
+        {/* <Button
           size="large"
           variant="contained"
           color="primary"
@@ -51,7 +51,7 @@ const AdminPage = () => {
           className="player_delete"
         >
           등록 선수 삭제
-        </Button>
+        </Button> */}
 
         <Button
           size="large"

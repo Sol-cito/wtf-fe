@@ -1,4 +1,10 @@
-export const MAIN_TEAM_PHOTO_SRC = "img/team/team_photo_2.jpg";
+export const MAIN_TEAM_PHOTO_HOME_SRC = "img/team/team_photo_home.jpg";
+
+export const MAIN_TEAM_PHOTO_AWAY_SRC = "img/team/team_photo_away.jpg";
+
+export const MAIN_TEAM_PHOTO_TRAINING_SRC = "img/team/team_photo_training.jpg";
+
+export const MAIN_TEAM_PHOTO_TROPHIES_SRC = "img/team/team_photo_trophies.jpg";
 
 export const PLAYER_MODAL_BACKGROUND_STYLE_BROWSER = {
   background: "url(/img/etc/player_modal_background.jpg)",
@@ -16,7 +22,7 @@ export const IMAGE_SRC_PREFIX = process.env.REACT_APP_IMAGE_SRC_PREFIX;
 export const ANONYMOUS_PROFILE_IMG_PATH =
   "/img/player/anonymous_profile_no_background.png";
 
-export const WTF_LOGO_IMG_PATH = "/team/logo_yellow.png";
+export const WTF_LOGO_IMG_PATH = "/img/logo_yellow.png";
 
 export const WTF_ABOUT_UNIFORM_PATH = "/img/wtf_about_uniform.png";
 

@@ -1,4 +1,4 @@
-export const MAIN_PAGE_BOX_TYPING: string = "Woori Team Fighting...!!";
+export const MAIN_PAGE_BOX_TYPING: string = "Woori Team Fighting!!";
 
 export const PAGE_NOT_FOUND: string = "Page Not Found";
 
