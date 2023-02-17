@@ -3,7 +3,7 @@ import { WTF_LOGO_IMG_PATH } from "./ImgConstant";
 const HEADER_CONSTANT_DATA = {
   headerLogo: {
     name: "W T F",
-    srcLink: process.env.REACT_APP_IMAGE_SRC_PREFIX + WTF_LOGO_IMG_PATH,
+    srcLink: WTF_LOGO_IMG_PATH,
   },
 
   headerButton: [
