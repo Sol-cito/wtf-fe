@@ -7,7 +7,11 @@ import React, {
   useState,
 } from "react";
 import { DATE_REGAX, NUMBER_REGAX } from "../CommonConstant/CommonConstant";
-import { WinOrLoseOrDraw, YesOrNo } from "../Models/Enum/CommonEnum";
+import {
+  OrderSortKeyword,
+  WinOrLoseOrDraw,
+  YesOrNo,
+} from "../Models/Enum/CommonEnum";
 import {
   MatchResultModel,
   MatchResultRequestModel,
@@ -27,6 +31,7 @@ import WaitingBackground from "./WaitingBackground";
 import "./MatchResultInputBox.scss";
 import { PlayerModel } from "../Models/PlayerModel";
 import { getAllPlayersAPI } from "../Service/PlayerService";
+import { SortModel } from "../Models/CommonModel";
 
 export interface MatchResultInputBoxpProps {
   title: string;
@@ -145,7 +150,11 @@ const MatchResultInputBox = forwardRef(
     }, []);
 
     const getAllPlayerAndCreateScoreAndAssist = async () => {
-      const allPlayers = await getAllPlayersAPI();
+      const sortParam: SortModel = {
+        columnName: "name",
+        sortDirection: OrderSortKeyword.ASC,
+      };
+      const allPlayers = await getAllPlayersAPI(sortParam);
       setAllPlayers(allPlayers);
       const allPlayersTempMap = new Map<number, string>();
       allPlayers.map((ele) => {

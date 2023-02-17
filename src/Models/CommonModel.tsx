@@ -1,3 +1,5 @@
+import { OrderSortKeyword } from "./Enum/CommonEnum";
+
 export interface CarouselSetting {
   dots: boolean;
   arrows: boolean;
@@ -5,4 +7,9 @@ export interface CarouselSetting {
   autoplay: boolean;
   autoplaySpeed: number;
   slidesToShow: number;
+}
+
+export interface SortModel {
+  columnName: string;
+  sortDirection: OrderSortKeyword;
 }

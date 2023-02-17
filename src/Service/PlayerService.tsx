@@ -1,3 +1,5 @@
+import { SortModel } from "../Models/CommonModel";
+import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
 import {
   PlayerMatchStatModel,
   PlayerModel,
@@ -12,9 +14,15 @@ import {
   PutParameter,
 } from "./ApiCall";
 
-export async function getAllPlayersAPI(): Promise<PlayerModel[]> {
+export async function getAllPlayersAPI(
+  sortParam?: SortModel
+): Promise<PlayerModel[]> {
   const getParameter: GetParameter = {
     url: "player",
+    params: {
+      columnName: sortParam?.columnName || "id",
+      sortDirection: sortParam?.sortDirection || OrderSortKeyword.ASC,
+    },
   };
   const result: PlayerModel[] = await getApiCall(getParameter);
   return result;

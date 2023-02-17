@@ -3,6 +3,8 @@ import CustomizedPopup from "../../Components/CustomizedPopup";
 import PlayerInfoInputBox from "../../Components/PlayerInfoInputBox";
 import PlayerList from "../../Components/PlayerList";
 import WaitingBackground from "../../Components/WaitingBackground";
+import { SortModel } from "../../Models/CommonModel";
+import { OrderSortKeyword } from "../../Models/Enum/CommonEnum";
 import { PlayerModel } from "../../Models/PlayerModel";
 import {
   getAllPlayersAPI,
@@ -22,7 +24,11 @@ const PlayerRegistrationFragment = () => {
 
   const getAllRegisteredPlayers = async () => {
     setIsLoading(true);
-    const res: PlayerModel[] = await getAllPlayersAPI();
+    const sortParam: SortModel = {
+      columnName: "name",
+      sortDirection: OrderSortKeyword.ASC,
+    };
+    const res: PlayerModel[] = await getAllPlayersAPI(sortParam);
     if (res) setPlayers(res);
     setIsLoading(false);
   };
