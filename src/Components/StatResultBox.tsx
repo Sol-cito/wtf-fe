@@ -36,7 +36,13 @@ const StatResultBox = (props: StatResultBoxProps) => {
                 <span>VS</span>
                 <div className="opposing_team_img">
                   <CustomizedImage
-                    src={ele.teamLogoSrc || TEAM_MARK_NO_LOGO_IMG_PATH}
+                    id="opposing_team_logo"
+                    src={
+                      ele.teamLogoSrc
+                        ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
+                          ele.teamLogoSrc
+                        : TEAM_MARK_NO_LOGO_IMG_PATH
+                    }
                     onErrorImgSrc={TEAM_MARK_NO_LOGO_IMG_PATH}
                   />
                   <div>{ele.opposingTeamName}</div>
