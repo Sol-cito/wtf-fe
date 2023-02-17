@@ -17,7 +17,7 @@ const PlayerStatBox = (props: PlayerStatBoxProps) => {
           Goals :<span>{props.playerStat?.scores || 0}</span>
         </span>
         <span>
-          Assists :<span>{props.playerStat?.scores || 0} </span>
+          Assists :<span>{props.playerStat?.assists || 0} </span>
         </span>
       </div>
       <div>{player && <PlayerMatchResult playerId={player.id} />}</div>
