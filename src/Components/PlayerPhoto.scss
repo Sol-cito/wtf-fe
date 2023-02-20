@@ -43,18 +43,24 @@
 
 @media only screen and (max-width: 768px) {
   .photo_container {
+    padding: 2vw !important;
+    text-align: center;
+
     img {
       width: 20vh;
       height: 30vh;
       transition: none;
+      opacity: 0.5;
     }
     img:hover {
       transform: none;
       opacity: 1;
     }
     .overlay_text {
-      visibility: hidden;
-      animation: none;
+      width: 18vh;
+      font-size: 1rem;
+      margin-top: 15vh;
+      text-align: center;
     }
   }
 }
