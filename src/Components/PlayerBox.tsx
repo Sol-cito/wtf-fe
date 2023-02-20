@@ -41,8 +41,9 @@ const PlayerBox = (props: PlayerBoxProps) => {
                 <PlayerPhoto
                   key={idx}
                   player={ele}
-                  isOverlayTextOn={true}
                   onClick={handleOnPlayerPhotoClick}
+                  overlayTextOnHovering={!isMobile}
+                  alwaysOverlayTextOn={isMobile}
                 />
               );
           })}

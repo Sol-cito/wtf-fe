@@ -90,6 +90,7 @@ const PlayerSlide = () => {
                           key={idx}
                           player={player}
                           onClick={handleOnPlayerPhotoClick}
+                          overlayTextOnHovering={!isMobile}
                         />
                       );
                     }
