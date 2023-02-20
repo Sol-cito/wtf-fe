@@ -8,6 +8,7 @@ import "./PlayerPhoto.scss";
 export interface PlayerPhotoProps {
   player: PlayerModel;
   onClick?: Function;
+  isOverlayTextOn?: boolean;
 }
 
 const PlayerPhoto = (props: PlayerPhotoProps) => {
@@ -28,7 +29,7 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
 
   return (
     <div className="photo_container" onClick={handleOnClick}>
-      {(isMobile || isHovering) && (
+      {props.isOverlayTextOn && (isMobile || isHovering) && (
         <div className="overlay_text">
           <p>No. {props.player.backNo}</p>
           <p>{props.player.position}</p>
@@ -41,6 +42,7 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
         onMouseLeave={handleOnMouseLeave}
       >
         <CustomizedImage
+          className={props.isOverlayTextOn ? "" : "without_overlay"}
           src={
             props.player.profileImgSrc
               ? process.env.REACT_APP_IMAGE_SRC_PREFIX +

@@ -5,6 +5,7 @@ import "./CustomizedImage.scss";
 export interface CustomizedImageProps {
   id?: string;
   src: string | undefined | null;
+  className?: string;
   onErrorImgSrc?: string;
 }
 
@@ -23,7 +24,12 @@ const CustomizedImage = (props: CustomizedImageProps) => {
 
   return (
     <>
-      <img id={props.id || ""} src={imageSrc} onError={handleImgOnError} />
+      <img
+        id={props.id || ""}
+        className={props.className}
+        src={imageSrc}
+        onError={handleImgOnError}
+      />
     </>
   );
 };
