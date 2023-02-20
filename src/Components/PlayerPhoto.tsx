@@ -8,7 +8,8 @@ import "./PlayerPhoto.scss";
 export interface PlayerPhotoProps {
   player: PlayerModel;
   onClick?: Function;
-  isOverlayTextOn?: boolean;
+  alwaysOverlayTextOn?: boolean;
+  overlayTextOnHovering?: boolean;
 }
 
 const PlayerPhoto = (props: PlayerPhotoProps) => {
@@ -20,6 +21,7 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
   };
 
   const handleOnMouseOver = () => {
+    if (!props.overlayTextOnHovering) return;
     setIsHovering(true);
   };
 
@@ -28,9 +30,10 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
   };
 
   return (
-    <div className="photo_container" onClick={handleOnClick}>
-      {props.isOverlayTextOn && (isMobile || isHovering) && (
-        <div className="overlay_text">
+    <div className="photo_container">
+      {(props.alwaysOverlayTextOn ||
+        (props.overlayTextOnHovering && isHovering)) && (
+        <div className="overlay_text" onClick={handleOnClick}>
           <p>No. {props.player.backNo}</p>
           <p>{props.player.position}</p>
           <p>{props.player.firstNameEng}</p>
@@ -38,12 +41,15 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
       )}
       <div
         className="photo_wrapper"
+        onClick={handleOnClick}
         onMouseOver={handleOnMouseOver}
         onMouseLeave={handleOnMouseLeave}
       >
         <CustomizedImage
           className={
-            props.isOverlayTextOn ? "img_with_overlay" : "img_without_overlay"
+            props.alwaysOverlayTextOn
+              ? "img_with_overlay"
+              : "img_without_overlay"
           }
           src={
             props.player.profileImgSrc
