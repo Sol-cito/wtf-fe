@@ -43,18 +43,34 @@
 
 @media only screen and (max-width: 768px) {
   .photo_container {
+    padding: 2vw !important;
+    text-align: center;
+
     img {
       width: 20vh;
       height: 30vh;
       transition: none;
     }
+
     img:hover {
       transform: none;
+    }
+
+    .img_with_overlay,
+    .img_with_overlay:hover {
+      opacity: 0.6;
+    }
+
+    .img_without_overlay,
+    .img_without_overlay:hover {
       opacity: 1;
     }
+
     .overlay_text {
-      visibility: hidden;
-      animation: none;
+      width: 18vh;
+      font-size: 1rem;
+      margin-top: 16vh;
+      text-align: center;
     }
   }
 }

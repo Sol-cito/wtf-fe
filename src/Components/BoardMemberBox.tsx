@@ -8,7 +8,7 @@ export interface BoardMemberBoxProps {
 const BoardMemberBox = (props: BoardMemberBoxProps) => {
   return (
     <div className="board_member_container">
-      {props.boardMemberList.map.length > 0
+      {props.boardMemberList.map && props.boardMemberList.map.length > 0
         ? props.boardMemberList.map((ele, idx) => {
             return (
               <div key={idx} className="member">

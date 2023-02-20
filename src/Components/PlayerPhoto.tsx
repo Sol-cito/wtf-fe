@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { isMobile } from "react-device-detect";
 import { ANONYMOUS_PROFILE_IMG_PATH } from "../CommonConstant/ImgConstant";
 import { PlayerModel } from "../Models/PlayerModel";
 import CustomizedImage from "./CustomizedImage";
@@ -7,6 +8,7 @@ import "./PlayerPhoto.scss";
 export interface PlayerPhotoProps {
   player: PlayerModel;
   onClick?: Function;
+  isOverlayTextOn?: boolean;
 }
 
 const PlayerPhoto = (props: PlayerPhotoProps) => {
@@ -26,21 +28,23 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
   };
 
   return (
-    <div className="photo_container">
-      {isHovering ? (
+    <div className="photo_container" onClick={handleOnClick}>
+      {props.isOverlayTextOn && (isMobile || isHovering) && (
         <div className="overlay_text">
           <p>No. {props.player.backNo}</p>
           <p>{props.player.position}</p>
           <p>{props.player.firstNameEng}</p>
         </div>
-      ) : null}
+      )}
       <div
         className="photo_wrapper"
-        onClick={handleOnClick}
         onMouseOver={handleOnMouseOver}
         onMouseLeave={handleOnMouseLeave}
       >
         <CustomizedImage
+          className={
+            props.isOverlayTextOn ? "img_with_overlay" : "img_without_overlay"
+          }
           src={
             props.player.profileImgSrc
               ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
