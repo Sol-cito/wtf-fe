@@ -50,16 +50,22 @@
       width: 20vh;
       height: 30vh;
       transition: none;
-      opacity: 0.6;
-    }
-
-    .without_overlay {
-      opacity: 1;
     }
 
     img:hover {
       transform: none;
     }
+
+    .img_with_overlay,
+    .img_with_overlay:hover {
+      opacity: 0.6;
+    }
+
+    .img_without_overlay,
+    .img_without_overlay:hover {
+      opacity: 1;
+    }
+
     .overlay_text {
       width: 18vh;
       font-size: 1rem;

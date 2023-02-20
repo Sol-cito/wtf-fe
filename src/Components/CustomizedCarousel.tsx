@@ -16,7 +16,7 @@ const CustomizedCarousel = (props: CarouselProps) => {
       <Slider {...props.settings}>
         {props.imageSrcs.map((ele, idx) => {
           return (
-            <div>
+            <div key={idx}>
               <img src={ele} alt={NOT_FOUND_IMG_PATH} />
             </div>
           );

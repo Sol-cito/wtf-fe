@@ -42,7 +42,9 @@ const PlayerPhoto = (props: PlayerPhotoProps) => {
         onMouseLeave={handleOnMouseLeave}
       >
         <CustomizedImage
-          className={props.isOverlayTextOn ? "" : "without_overlay"}
+          className={
+            props.isOverlayTextOn ? "img_with_overlay" : "img_without_overlay"
+          }
           src={
             props.player.profileImgSrc
               ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
