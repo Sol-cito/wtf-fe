@@ -5,6 +5,7 @@ import MatchResultModificationFragment from "./MatchResultModificationFragment";
 import MatchResultRegisterFragment from "./MatchResultRegisterFragment";
 import PlayerModificationFragment from "./PlayerModificationFragment";
 import PlayerRegistrationFragment from "./PlayerRegistrationFragment";
+import TeamModificationFragment from "./TeamModificationFragment";
 import TeamRegisterFragment from "./TeamRegisterFragment";
 
 const AdminPage = () => {
@@ -61,6 +62,17 @@ const AdminPage = () => {
           className="team_register"
         >
           팀 등록
+        </Button>
+
+        <Button
+          size="large"
+          variant="contained"
+          color="primary"
+          onClick={() =>
+            handleFragmentButtonClick(<TeamModificationFragment />)
+          }
+        >
+          팀 정보 수정
         </Button>
 
         <Button

@@ -47,6 +47,7 @@ const TeamInfoInputBox = forwardRef((props: TeamInfoInputBoxProps, ref) => {
     setTeamId(props.teamInfo.id);
     setName(props.teamInfo.name);
     setHometown(props.teamInfo.hometown || "");
+    setTeamLogoSrc(props.teamInfo.teamLogoSrc);
   }, [props.teamInfo]);
 
   const initState = () => {
