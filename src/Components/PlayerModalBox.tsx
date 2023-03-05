@@ -39,8 +39,8 @@ const PlayerModalBox = () => {
     if (selectedBtnNumber === 0) {
       setContentComponent(<PlayerInfoBox player={player} />);
     } else if (selectedBtnNumber === 1) {
-      setContentComponent(<PlayerStatBox playerStat={playerStat} />);
       getPlayerStat(player.id);
+      setContentComponent(<PlayerStatBox playerStat={playerStat} />);
     }
   }, [selectedBtnNumber]);
 
