@@ -29,6 +29,9 @@ const TeamList = (props: TeamListProps) => {
     team: TeamModel
   ) => {
     setSelectedRadioId(Number(e.target.id));
+    if (props.setSelectedTeam) {
+      props.setSelectedTeam(team);
+    }
   };
 
   useEffect(() => {
