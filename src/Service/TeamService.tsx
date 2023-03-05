@@ -4,6 +4,8 @@ import {
   GetParameter,
   postApiCall,
   PostParameter,
+  putApiCall,
+  PutParameter,
 } from "./ApiCall";
 
 export async function getAllTeamsAPI(): Promise<TeamModel[]> {
@@ -25,6 +27,18 @@ export async function registerNewTeamAPI(
     },
   };
   const result: TeamModel = await postApiCall(postParameter);
+  return result;
+}
+
+export async function modifyTeamAPI(formData: FormData): Promise<TeamModel> {
+  const putParameter: PutParameter = {
+    url: "team",
+    data: formData,
+    headerData: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const result: TeamModel = await putApiCall(putParameter);
   return result;
 }
 
