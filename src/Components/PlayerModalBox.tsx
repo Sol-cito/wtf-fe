@@ -1,7 +1,5 @@
 import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { PlayerStatModel } from "../Models/PlayerModel";
-import { getPlayerTotalStatAPI } from "../Service/PlayerService";
 import { useAppSelector } from "../Store/config";
 import PlayerInfoBox from "./PlayerInfoBox";
 import "./PlayerModalBox.scss";
@@ -13,18 +11,11 @@ const PlayerModalBox = () => {
 
   const [selectedBtnNumber, setSelectedBtnNumber] = useState<number>(0);
 
-  const [playerStat, setPlayerStat] = useState<PlayerStatModel>();
-
   const [contentComponent, setContentComponent] =
     useState<React.ReactElement>();
 
   const handleOnClickBtn = (btnNumber: number) => {
     setSelectedBtnNumber(btnNumber);
-  };
-
-  const getPlayerStat = async (playerId: number) => {
-    const res: PlayerStatModel = await getPlayerTotalStatAPI(playerId);
-    setPlayerStat(res);
   };
 
   useEffect(() => {
@@ -35,19 +26,12 @@ const PlayerModalBox = () => {
 
   useEffect(() => {
     if (!player) return;
-
     if (selectedBtnNumber === 0) {
       setContentComponent(<PlayerInfoBox player={player} />);
     } else if (selectedBtnNumber === 1) {
-      getPlayerStat(player.id);
-      setContentComponent(<PlayerStatBox playerStat={playerStat} />);
+      setContentComponent(<PlayerStatBox player={player} />);
     }
   }, [selectedBtnNumber]);
-
-  useEffect(() => {
-    if (!player) return;
-    getPlayerStat(player.id);
-  }, [contentComponent]);
 
   return (
     <>
