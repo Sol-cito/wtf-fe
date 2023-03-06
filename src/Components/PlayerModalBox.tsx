@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { PlayerModalComponentEnum } from "../Models/Enum/CommonEnum";
 import { useAppSelector } from "../Store/config";
 import PlayerInfoBox from "./PlayerInfoBox";
 import "./PlayerModalBox.scss";
@@ -9,29 +10,37 @@ const PlayerModalBox = () => {
   const { modalShow } = useAppSelector((state) => state.modal);
   const { player } = useAppSelector((state) => state.modal);
 
-  const [selectedBtnNumber, setSelectedBtnNumber] = useState<number>(0);
+  const [selectedModalComponent, setSelectedModalComponent] =
+    useState<PlayerModalComponentEnum>(
+      PlayerModalComponentEnum.PLAYER_GENERAL_INFO
+    );
 
   const [contentComponent, setContentComponent] =
     useState<React.ReactElement>();
 
-  const handleOnClickBtn = (btnNumber: number) => {
-    setSelectedBtnNumber(btnNumber);
+  const handleOnClickBtn = (playerModalComponent: PlayerModalComponentEnum) => {
+    setSelectedModalComponent(playerModalComponent);
   };
 
   useEffect(() => {
     if (modalShow) {
-      setSelectedBtnNumber(0);
+      setSelectedModalComponent(PlayerModalComponentEnum.PLAYER_GENERAL_INFO);
     }
   }, [modalShow]);
 
   useEffect(() => {
     if (!player) return;
-    if (selectedBtnNumber === 0) {
+
+    if (
+      selectedModalComponent === PlayerModalComponentEnum.PLAYER_GENERAL_INFO
+    ) {
       setContentComponent(<PlayerInfoBox player={player} />);
-    } else if (selectedBtnNumber === 1) {
+    } else if (
+      selectedModalComponent === PlayerModalComponentEnum.PLAYER_STAT
+    ) {
       setContentComponent(<PlayerStatBox player={player} />);
     }
-  }, [selectedBtnNumber]);
+  }, [selectedModalComponent]);
 
   return (
     <>
@@ -40,20 +49,29 @@ const PlayerModalBox = () => {
           <Button
             style={{
               backgroundColor:
-                selectedBtnNumber === 0 ? "rgb(255, 224, 45)" : undefined,
+                selectedModalComponent ===
+                PlayerModalComponentEnum.PLAYER_GENERAL_INFO
+                  ? "rgb(255, 224, 45)"
+                  : undefined,
             }}
             variant="contained"
-            onClick={() => handleOnClickBtn(0)}
+            onClick={() =>
+              handleOnClickBtn(PlayerModalComponentEnum.PLAYER_GENERAL_INFO)
+            }
           >
             선수정보
           </Button>
           <Button
             style={{
               backgroundColor:
-                selectedBtnNumber === 1 ? "rgb(255, 224, 45)" : undefined,
+                selectedModalComponent === PlayerModalComponentEnum.PLAYER_STAT
+                  ? "rgb(255, 224, 45)"
+                  : undefined,
             }}
             variant="contained"
-            onClick={() => handleOnClickBtn(1)}
+            onClick={() =>
+              handleOnClickBtn(PlayerModalComponentEnum.PLAYER_STAT)
+            }
           >
             스탯
           </Button>

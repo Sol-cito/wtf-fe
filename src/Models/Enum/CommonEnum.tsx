@@ -46,3 +46,8 @@ export enum GoalType {
   PK = "PK",
   UNKNOWN = "Unknown",
 }
+
+export enum PlayerModalComponentEnum {
+  PLAYER_GENERAL_INFO = "선수정보",
+  PLAYER_STAT = "스탯",
+}
