@@ -60,9 +60,10 @@ export async function registerNewPlayerAPI(
   const postParameter: PostParameter = {
     url: "player",
     data: formData,
-    headerData: {
-      "Content-Type": "multipart/form-data",
-    },
+    isMultipartData: true,
+    // headerData: {
+    //   "Content-Type": "multipart/form-data",
+    // },
   };
   const result: PlayerModel = await postApiCall(postParameter);
   return result;
@@ -74,9 +75,10 @@ export async function modifyPlayerAPI(
   const putParameter: PutParameter = {
     url: "player",
     data: formData,
-    headerData: {
-      "Content-Type": "multipart/form-data",
-    },
+    isMultipartData: true,
+    // headerData: {
+    //   "Content-Type": "multipart/form-data",
+    // },
   };
   const result: PlayerModel = await putApiCall(putParameter);
   return result;
