@@ -1,11 +1,11 @@
 import { useAppDispatch } from "../Store/config";
-import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";
+import { ModalState, setModalState } from "../Store/Slices/ModalSlice";
 import "./CustomizedModal.scss";
 import TransparentBackground from "./TransparentBackground";
 
 export interface CustomizedModalProps {
   showModal: boolean;
-  includedComponent?: React.ReactElement;
+  includedComponent: React.ReactElement;
   backgroundStyle?: {};
 }
 
@@ -15,6 +15,8 @@ const CustomizedModal = (props: CustomizedModalProps) => {
   const onClickModalClose = () => {
     const modalState: ModalState = {
       modalShow: false,
+      includedComponent: props.includedComponent,
+      backgroundStyle: props.backgroundStyle,
     };
     document.body.style.overflow = "unset";
     dispatch(setModalState(modalState));

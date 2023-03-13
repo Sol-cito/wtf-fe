@@ -4,9 +4,8 @@ import {
   PLAYER_MODAL_BACKGROUND_STYLE_MOBILE,
 } from "../CommonConstant/ImgConstant";
 import { PlayerModel } from "../Models/PlayerModel";
-import { useAppDispatch, useAppSelector } from "../Store/config";
-import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";
-import CustomizedModal from "./CustomizedModal";
+import { useAppDispatch } from "../Store/config";
+import { ModalState, setModalState } from "../Store/Slices/ModalSlice";
 import "./PlayerBox.scss";
 import PlayerModalBox from "./PlayerModalBox";
 import PlayerPhoto from "./PlayerPhoto";
@@ -17,16 +16,19 @@ export interface PlayerBoxProps {
 }
 
 const PlayerBox = (props: PlayerBoxProps) => {
-  const { modalShow } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
 
   const handleOnPlayerPhotoClick = (inputPlayer: PlayerModel) => {
-    const playerModalState: ModalState = {
+    const modalState: ModalState = {
       modalShow: true,
-      player: inputPlayer,
+      model: inputPlayer,
+      includedComponent: <PlayerModalBox />,
+      backgroundStyle: isMobile
+        ? PLAYER_MODAL_BACKGROUND_STYLE_MOBILE
+        : PLAYER_MODAL_BACKGROUND_STYLE_BROWSER,
     };
     document.body.style.overflow = "hidden";
-    dispatch(setModalState(playerModalState));
+    dispatch(setModalState(modalState));
   };
 
   return (
@@ -48,15 +50,6 @@ const PlayerBox = (props: PlayerBoxProps) => {
               );
           })}
       </div>
-      <CustomizedModal
-        showModal={modalShow}
-        includedComponent={<PlayerModalBox />}
-        backgroundStyle={
-          isMobile
-            ? PLAYER_MODAL_BACKGROUND_STYLE_MOBILE
-            : PLAYER_MODAL_BACKGROUND_STYLE_BROWSER
-        }
-      />
     </div>
   );
 };
