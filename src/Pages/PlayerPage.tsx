@@ -1,12 +1,12 @@
-import { PlayerModel } from "../Models/PlayerModel";
-import { useState, useEffect } from "react";
-import "./PlayerPage.scss";
-import PlayerBox from "../Components/PlayerBox";
-import { getPlayersByPositionAPI } from "../Service/PlayerService";
-import { Position } from "../Models/Enum/CommonEnum";
-import PageContainer from "../Components/PageContainer";
+import { useEffect, useState } from "react";
 import { SHALLOW_BLACK } from "../CommonConstant/StringColorConstant";
 import CustomizedSpinner from "../Components/CustomizedSpinner";
+import PageContainer from "../Components/PageContainer";
+import PlayerBox from "../Components/PlayerBox";
+import { Position } from "../Models/Enum/CommonEnum";
+import { PlayerModel } from "../Models/PlayerModel";
+import { getPlayersByPositionAPI } from "../Service/PlayerService";
+import "./PlayerPage.scss";
 
 const PlayerPage = () => {
   const [isLoading, setIsLoding] = useState<boolean>(true);

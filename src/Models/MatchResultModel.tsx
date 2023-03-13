@@ -1,8 +1,9 @@
+import { ModalModel } from "./CommonModel";
 import { GoalType, WinOrLoseOrDraw, YesOrNo } from "./Enum/CommonEnum";
 import { MatchTypeModel } from "./MatchTypeModel";
 import { TeamModel } from "./TeamModel";
 
-export interface MatchResultModel {
+export interface MatchResultModel extends ModalModel {
   id: number;
   opposingTeam: TeamModel;
   matchType: MatchTypeModel;

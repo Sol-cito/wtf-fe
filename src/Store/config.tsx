@@ -1,11 +1,11 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { createLogger } from "redux-logger";
-import headerBtnSlice from "./Slices/HeaderBtnSlice";
-import playerModalSlice, { modalSlice } from "./Slices/PlayerModalSlice";
+import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage/session";
-import { persistStore, persistReducer } from "redux-persist";
+import headerBtnSlice from "./Slices/HeaderBtnSlice";
 import loginSlice from "./Slices/LoginSlice";
+import { modalSlice } from "./Slices/ModalSlice";
 
 const logger = createLogger();
 

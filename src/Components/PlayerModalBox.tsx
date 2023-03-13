@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { PlayerModel } from "../Models/PlayerModel";
 import { useAppSelector } from "../Store/config";
 import PlayerInfoBox from "./PlayerInfoBox";
 import "./PlayerModalBox.scss";
@@ -7,7 +8,7 @@ import PlayerStatBox from "./PlayerStatBox";
 
 const PlayerModalBox = () => {
   const { modalShow } = useAppSelector((state) => state.modal);
-  const { player } = useAppSelector((state) => state.modal);
+  const { model } = useAppSelector((state) => state.modal);
 
   const [selectedBtnNumber, setSelectedBtnNumber] = useState<number>(0);
 
@@ -25,17 +26,17 @@ const PlayerModalBox = () => {
   }, [modalShow]);
 
   useEffect(() => {
-    if (!player) return;
+    if (!model) return;
     if (selectedBtnNumber === 0) {
-      setContentComponent(<PlayerInfoBox player={player} />);
+      setContentComponent(<PlayerInfoBox player={model as PlayerModel} />);
     } else if (selectedBtnNumber === 1) {
-      setContentComponent(<PlayerStatBox player={player} />);
+      setContentComponent(<PlayerStatBox player={model as PlayerModel} />);
     }
   }, [selectedBtnNumber]);
 
   return (
     <>
-      {player && (
+      {model && (
         <div className="player_info_header">
           <Button
             style={{

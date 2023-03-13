@@ -1,25 +1,23 @@
-import { PlayerModel } from "../Models/PlayerModel";
-import "./PlayerSlide.scss";
-import { useState, useEffect } from "react";
-import { getAllPlayersAPI } from "../Service/PlayerService";
-import PlayerPhoto from "./PlayerPhoto";
-import { useAppDispatch, useAppSelector } from "../Store/config";
-import { ModalState, setModalState } from "../Store/Slices/PlayerModalSlice";
-import PlayerModalBox from "./PlayerModalBox";
+import { useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import {
   PLAYER_MODAL_BACKGROUND_STYLE_BROWSER,
   PLAYER_MODAL_BACKGROUND_STYLE_MOBILE,
 } from "../CommonConstant/ImgConstant";
-import CustomizedModal from "./CustomizedModal";
-import CustomizedSpinner from "./CustomizedSpinner";
 import { SortModel } from "../Models/CommonModel";
 import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
+import { PlayerModel } from "../Models/PlayerModel";
+import { getAllPlayersAPI } from "../Service/PlayerService";
+import { useAppDispatch } from "../Store/config";
+import { ModalState, setModalState } from "../Store/Slices/ModalSlice";
+import CustomizedSpinner from "./CustomizedSpinner";
+import PlayerModalBox from "./PlayerModalBox";
+import PlayerPhoto from "./PlayerPhoto";
+import "./PlayerSlide.scss";
 
 const PlayerSlide = () => {
   const [players, setPlayers] = useState<PlayerModel[]>();
   const [slideTranslateXValue, setSlideTranslateXValue] = useState<number>(0);
-  const { modalShow } = useAppSelector((state) => state.modal);
   const [isLoading, setIsLoding] = useState<boolean>(true);
 
   const dispatch = useAppDispatch();
@@ -47,12 +45,16 @@ const PlayerSlide = () => {
   };
 
   const handleOnPlayerPhotoClick = (inputPlayer: PlayerModel) => {
-    const playerModalState: ModalState = {
+    const modalState: ModalState = {
       modalShow: true,
-      player: inputPlayer,
+      model: inputPlayer,
+      includedComponent: <PlayerModalBox />,
+      backgroundStyle: isMobile
+        ? PLAYER_MODAL_BACKGROUND_STYLE_MOBILE
+        : PLAYER_MODAL_BACKGROUND_STYLE_BROWSER,
     };
     document.body.style.overflow = "hidden";
-    dispatch(setModalState(playerModalState));
+    dispatch(setModalState(modalState));
   };
 
   return (
@@ -98,15 +100,6 @@ const PlayerSlide = () => {
                 : null}
             </div>
           </div>
-          <CustomizedModal
-            showModal={modalShow}
-            includedComponent={<PlayerModalBox />}
-            backgroundStyle={
-              isMobile
-                ? PLAYER_MODAL_BACKGROUND_STYLE_MOBILE
-                : PLAYER_MODAL_BACKGROUND_STYLE_BROWSER
-            }
-          />
         </>
       )}
     </>

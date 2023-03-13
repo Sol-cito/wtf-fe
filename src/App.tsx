@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
+import CustomizedModal from "./Components/CustomizedModal";
 import Footer from "./Footer";
 import Header from "./Header";
 import AboutPage from "./Pages/AboutPage";
@@ -14,6 +15,10 @@ import { useAppSelector } from "./Store/config";
 
 const App = () => {
   const { isLogin } = useAppSelector((state) => state.isLogin);
+
+  const { modalShow } = useAppSelector((state) => state.modal);
+  const { includedComponent } = useAppSelector((state) => state.modal);
+  const { backgroundStyle } = useAppSelector((state) => state.modal);
 
   return (
     <div className="App">
@@ -35,6 +40,11 @@ const App = () => {
         </div>
         <Footer />
       </BrowserRouter>
+      <CustomizedModal
+        showModal={modalShow}
+        includedComponent={includedComponent}
+        backgroundStyle={backgroundStyle}
+      />
     </div>
   );
 };

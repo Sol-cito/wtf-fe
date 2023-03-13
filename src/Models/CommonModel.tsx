@@ -13,3 +13,5 @@ export interface SortModel {
   columnName: string;
   sortDirection: OrderSortKeyword;
 }
+
+export interface ModalModel {}
