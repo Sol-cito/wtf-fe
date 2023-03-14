@@ -1,5 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { HttpMethod, SuccessOrNot } from "../Models/Enum/CommonEnum";
+import {
+  HeaderContentType,
+  HttpMethod,
+  SuccessOrNot,
+} from "../Models/Enum/CommonEnum";
 
 export interface AxiosResponseModel {
   successOrNot: string;
@@ -12,7 +16,7 @@ export interface BaseApiCallProps {
   method: HttpMethod;
   params?: any;
   data?: any;
-  isMultipartData?: boolean;
+  HeaderContentType?: HeaderContentType;
 }
 
 async function baseApiCall(props: BaseApiCallProps): Promise<any> {
@@ -24,10 +28,9 @@ async function baseApiCall(props: BaseApiCallProps): Promise<any> {
     data: props.data,
     params: props.params,
     headers: {
-      Authorization: "test auth",
-      "Content-Type": props.isMultipartData
-        ? "multipart/form-data"
-        : "application/json;charset=UTF-8",
+      Authorization: "test auth", // TO-DO
+      "Content-Type":
+        props.HeaderContentType || HeaderContentType.APPLICATION_JSON,
     },
   };
 

@@ -1,5 +1,5 @@
 import { SortModel } from "../Models/CommonModel";
-import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
+import { HeaderContentType, OrderSortKeyword } from "../Models/Enum/CommonEnum";
 import {
   PlayerMatchStatModel,
   PlayerModel,
@@ -60,10 +60,7 @@ export async function registerNewPlayerAPI(
   const postParameter: PostParameter = {
     url: "player",
     data: formData,
-    isMultipartData: true,
-    // headerData: {
-    //   "Content-Type": "multipart/form-data",
-    // },
+    headerContentType: HeaderContentType.MULTIPART_FORM,
   };
   const result: PlayerModel = await postApiCall(postParameter);
   return result;
@@ -75,10 +72,7 @@ export async function modifyPlayerAPI(
   const putParameter: PutParameter = {
     url: "player",
     data: formData,
-    isMultipartData: true,
-    // headerData: {
-    //   "Content-Type": "multipart/form-data",
-    // },
+    headerContentType: HeaderContentType.MULTIPART_FORM,
   };
   const result: PlayerModel = await putApiCall(putParameter);
   return result;

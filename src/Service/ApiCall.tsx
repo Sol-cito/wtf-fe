@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
-import { HttpMethod } from "../Models/Enum/CommonEnum";
+import { HeaderContentType, HttpMethod } from "../Models/Enum/CommonEnum";
 import BaseApiCall, {
   AxiosResponseModel,
   BaseApiCallProps,
@@ -13,13 +13,13 @@ export interface GetParameter {
 export interface PostParameter {
   url: string;
   data?: any;
-  isMultipartData?: boolean;
+  headerContentType?: HeaderContentType;
 }
 
 export interface PutParameter {
   url: string;
   data?: any;
-  isMultipartData?: boolean;
+  headerContentType?: HeaderContentType;
 }
 
 export interface DeleteParameter {
