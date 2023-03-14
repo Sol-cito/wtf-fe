@@ -25,7 +25,9 @@ async function baseApiCall(props: BaseApiCallProps): Promise<any> {
     params: props.params,
     headers: {
       Authorization: "test auth",
-      "Content-Type": props.isMultipartData ? "multipart/form-data" : "",
+      "Content-Type": props.isMultipartData
+        ? "multipart/form-data"
+        : "application/json;charset=UTF-8",
     },
   };
 
