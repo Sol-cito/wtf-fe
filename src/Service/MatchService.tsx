@@ -2,6 +2,7 @@ import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
 import {
   MatchResultRequestModel,
   MatchResultModel,
+  MatchScorerAndAssisterNames,
 } from "../Models/MatchResultModel";
 import { MatchTypeModel } from "../Models/MatchTypeModel";
 import {
@@ -38,6 +39,19 @@ export async function getMatchResultAPI(
     },
   };
   const result: MatchResultModel[] = await getApiCall(getParameter);
+  return result;
+}
+
+export async function getMatchResultByIdAPI(
+  id: number
+): Promise<MatchResultModel> {
+  const getParameter: GetParameter = {
+    url: "match",
+    params: {
+      id: id,
+    },
+  };
+  const result: MatchResultModel = await getApiCall(getParameter);
   return result;
 }
 

@@ -5,10 +5,10 @@ import {
   WTF_LOGO_IMG_PATH,
 } from "../CommonConstant/ImgConstant";
 import { MatchResultModel } from "../Models/MatchResultModel";
-import AboutPage from "../Pages/AboutPage";
 import { useAppDispatch } from "../Store/config";
 import { ModalState, setModalState } from "../Store/Slices/ModalSlice";
 import CustomizedImage from "./CustomizedImage";
+import MatchDetailModalBox from "./MatchDetailModalBox";
 import "./MatchResult.scss";
 
 export interface MatchResultProps {
@@ -18,11 +18,11 @@ export interface MatchResultProps {
 const MatchResult = (props: MatchResultProps) => {
   const dispatch = useAppDispatch();
 
-  const handleOnClick = (model: MatchResultModel) => {
+  const handleOnClick = (matchResultModel: MatchResultModel) => {
     const modalState: ModalState = {
       modalShow: true,
-      model: model,
-      includedComponent: <></>,
+      model: matchResultModel,
+      includedComponent: <MatchDetailModalBox matchId={matchResultModel.id} />,
       backgroundStyle: MATCH_RESULT_BACKGROUND_STYLE_MOBILE,
     };
     document.body.style.overflow = "hidden";

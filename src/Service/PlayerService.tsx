@@ -82,7 +82,7 @@ export async function getPlayerTotalStatAPI(
   playerId: number
 ): Promise<PlayerStatModel> {
   const getParameter: GetParameter = {
-    url: "player-total-stat",
+    url: "player/total-stat",
     params: {
       id: playerId,
     },
@@ -95,7 +95,7 @@ export async function getPlayerScoresByMatchResultAPI(
   playerId: number
 ): Promise<PlayerMatchStatModel[]> {
   const getParameter: GetParameter = {
-    url: "player-match-score",
+    url: "player/match-score",
     params: {
       playerId: playerId,
       limit: 3,
@@ -109,7 +109,7 @@ export async function getPlayerAssistsByMatchResultAPI(
   playerId: number
 ): Promise<PlayerMatchStatModel[]> {
   const getParameter: GetParameter = {
-    url: "player-match-assist",
+    url: "player/match-assist",
     params: {
       playerId: playerId,
       limit: 3,

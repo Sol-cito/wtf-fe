@@ -1,6 +1,7 @@
 import { ModalModel } from "./CommonModel";
 import { GoalType, WinOrLoseOrDraw, YesOrNo } from "./Enum/CommonEnum";
 import { MatchTypeModel } from "./MatchTypeModel";
+import { PlayerModel } from "./PlayerModel";
 import { TeamModel } from "./TeamModel";
 
 export interface MatchResultModel extends ModalModel {
@@ -31,7 +32,12 @@ export interface MatchResultRequestModel {
 
 export interface ScorerAndAssisterModel {
   index: number;
-  scorerId: number;
+  scorer?: PlayerModel;
   goalType: GoalType;
-  assisterId: number;
+  assister?: PlayerModel;
+}
+
+export interface MatchScorerAndAssisterNames {
+  scorerName: string;
+  assisterName: string;
 }

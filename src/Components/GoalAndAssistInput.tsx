@@ -25,18 +25,18 @@ const GoalAndAssistInput = (props: GoalAndAssistInputProps) => {
     { id: -1, value: "모름" },
   ]);
   const [goalPlayerValue, setGoalPlayerValue] = useState<string>(
-    props.initValue?.scorerId ? getInitIdValue(props.initValue?.scorerId) : ""
+    props.initValue?.scorer ? getInitIdValue(props.initValue?.scorer.id) : ""
   );
   const [assistPlayerValue, setAssistPlayerValue] = useState<string>(
-    props.initValue?.assisterId
-      ? getInitIdValue(props.initValue?.assisterId)
+    props.initValue?.assister
+      ? getInitIdValue(props.initValue?.assister.id)
       : ""
   );
   const [scorerPlayerId, setScorerPlayerId] = useState<number>(
-    props.initValue?.scorerId || -1
+    props.initValue?.scorer?.id || -1
   );
   const [assistPlayerId, setAssistPlayerId] = useState<number>(
-    props.initValue?.assisterId || -1
+    props.initValue?.assister?.id || -1
   );
   const [goalType, setGoalType] = useState<GoalType>(
     props.initValue?.goalType || GoalType.FIELD
@@ -59,9 +59,13 @@ const GoalAndAssistInput = (props: GoalAndAssistInputProps) => {
   const handleGoalPlayerOnChange = () => {
     const model: ScorerAndAssisterModel = {
       index: props.index,
-      scorerId: scorerPlayerId,
+      scorer: props.players.filter((ele) => {
+        return ele.id === scorerPlayerId;
+      })[0],
       goalType: goalType,
-      assisterId: assistPlayerId,
+      assister: props.players.filter((ele) => {
+        return ele.id === assistPlayerId;
+      })[0],
     };
     props.handleScorersAndAssisters(model);
   };
