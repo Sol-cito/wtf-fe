@@ -12,10 +12,11 @@
   border: 1px solid grey;
 
   .modal_header {
+    position: absolute;
+    right: 2%;
     font-size: 40px;
-    float: right;
     color: rgb(180, 180, 180);
-    margin: 0 20px 0 0;
+    margin: 0 0 0 0;
     cursor: pointer;
   }
 
@@ -32,6 +33,10 @@
     left: 0;
     right: 0;
     height: 100vh;
+
+    .modal_header {
+      right: 5%;
+    }
 
     .modal_container {
       margin-bottom: 12vh;
