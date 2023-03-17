@@ -292,13 +292,11 @@ const MatchResultInputBox = forwardRef(
         .map((ele) => {
           return (
             "골 : " +
-            (ele.scorerId === -1 ? "모름" : allPlayersMap?.get(ele.scorerId)) +
+            (ele.scorer ? allPlayersMap?.get(ele.scorer!.id) : "모름") +
             " / 골 유형 : " +
             ele.goalType +
             " / 어시스트 : " +
-            (ele.assisterId === -1
-              ? "모름"
-              : allPlayersMap?.get(ele.assisterId))
+            (ele.assister ? allPlayersMap?.get(ele.assister!.id) : "모름")
           );
         })
         .join("\n");

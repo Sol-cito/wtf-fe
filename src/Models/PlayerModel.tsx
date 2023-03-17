@@ -1,4 +1,6 @@
-export interface PlayerModel {
+import { ModalModel } from "./CommonModel";
+
+export interface PlayerModel extends ModalModel {
   id: number;
   name: string;
   firstNameEng: string;

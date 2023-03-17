@@ -51,3 +51,8 @@ export enum PlayerModalComponentEnum {
   PLAYER_GENERAL_INFO = "선수정보",
   PLAYER_STAT = "스탯",
 }
+
+export enum HeaderContentType {
+  MULTIPART_FORM = "multipart/form-data",
+  APPLICATION_JSON = "application/json;charset=UTF-8",
+}

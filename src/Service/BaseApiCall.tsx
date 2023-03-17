@@ -1,5 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { SuccessOrNot } from "../Models/Enum/CommonEnum";
+import {
+  HeaderContentType,
+  HttpMethod,
+  SuccessOrNot,
+} from "../Models/Enum/CommonEnum";
 
 export interface AxiosResponseModel {
   successOrNot: string;
@@ -7,8 +11,28 @@ export interface AxiosResponseModel {
   data: any;
 }
 
-async function baseApiCall(requestConfig: AxiosRequestConfig): Promise<any> {
+export interface BaseApiCallProps {
+  url: string;
+  method: HttpMethod;
+  params?: any;
+  data?: any;
+  HeaderContentType?: HeaderContentType;
+}
+
+async function baseApiCall(props: BaseApiCallProps): Promise<any> {
   const baseUrl: string = process.env.REACT_APP_BASE_URL as string;
+
+  const requestConfig: AxiosRequestConfig = {
+    url: props.url,
+    method: props.method,
+    data: props.data,
+    params: props.params,
+    headers: {
+      Authorization: "test auth", // TO-DO
+      "Content-Type":
+        props.HeaderContentType || HeaderContentType.APPLICATION_JSON,
+    },
+  };
 
   let axiosResponse: AxiosResponseModel = {
     successOrNot: SuccessOrNot.Y,

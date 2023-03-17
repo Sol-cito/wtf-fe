@@ -17,6 +17,11 @@ export const PLAYER_MODAL_BACKGROUND_STYLE_MOBILE = {
   backgroundSize: "cover",
 };
 
+export const MATCH_RESULT_BACKGROUND_STYLE_MOBILE = {
+  backgroundColor: "black",
+  backgroundSize: "cover",
+};
+
 export const IMAGE_SRC_PREFIX = process.env.REACT_APP_IMAGE_SRC_PREFIX;
 
 export const ANONYMOUS_PROFILE_IMG_PATH =
