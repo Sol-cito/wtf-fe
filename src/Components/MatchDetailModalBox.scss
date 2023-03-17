@@ -1,3 +1,87 @@
 .result_container {
-  background-color: wheat;
+  margin: 12vh 0 2rem 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+
+  .team_area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+
+    #wtf,
+    #opposing_team {
+      text-align: center;
+      width: 10vw;
+      font-size: 1.7vw;
+    }
+    .score_and_type {
+      text-align: center;
+      .score_area {
+        display: flex;
+        align-items: center;
+        word-break: break-all;
+        width: 15vw;
+        font-size: 3vw;
+        font-weight: 500;
+        justify-content: center;
+      }
+
+      .match_type {
+        margin-top: 0.5rem;
+        color: grey;
+      }
+
+      span {
+        display: inline-block;
+        margin: 0 1vw 0 1vw;
+      }
+    }
+
+    #wtf_logo,
+    #opposing_team_logo {
+      flex-grow: 0;
+      padding: 0 1.5vw 0 1.5vw;
+      width: 6vw;
+    }
+  }
+
+  .score_and_assist {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    height: 7vh;
+    letter-spacing: 3px;
+
+    a {
+      width: 25vw;
+      margin: 0 5px 0 5px;
+    }
+
+    .slash {
+      margin: 0 1rem 0 1rem;
+    }
+
+    .score_prefix,
+    .assist_prefix {
+      color: rgb(255, 224, 45);
+    }
+
+    .score {
+      text-align: right;
+      .unknown {
+        display: inline-block;
+        margin: 0 1.5rem 0 1.5rem;
+      }
+    }
+
+    .assist {
+      text-align: left;
+      .unknown {
+        display: inline-block;
+        margin: 0 1.5rem 0 1.5rem;
+      }
+    }
+  }
 }
