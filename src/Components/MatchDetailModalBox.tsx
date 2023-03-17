@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { isMobile } from "react-device-detect";
 import {
   TEAM_MARK_NO_LOGO_IMG_PATH,
   WTF_LOGO_IMG_PATH,
@@ -35,12 +36,15 @@ const MatchDetailModalBox = (props: MatchDetailModalBoxProps) => {
       {matchResult && (
         <div className="result_container">
           <div className="team_area">
-            <div id="wtf">W T F</div>
-            <CustomizedImage
-              id="wtf_logo"
-              src={WTF_LOGO_IMG_PATH}
-              onErrorImgSrc={TEAM_MARK_NO_LOGO_IMG_PATH}
-            />
+            <div className="wtf_area">
+              {!isMobile && <div id="wtf">W T F</div>}
+              <CustomizedImage
+                id="wtf_logo"
+                src={WTF_LOGO_IMG_PATH}
+                onErrorImgSrc={TEAM_MARK_NO_LOGO_IMG_PATH}
+              />
+              {isMobile && <div id="wtf">W T F</div>}
+            </div>
             <div className="score_and_type">
               <div className="score_area">
                 <div>{matchResult.goalsScored}</div>
@@ -51,17 +55,19 @@ const MatchDetailModalBox = (props: MatchDetailModalBoxProps) => {
                 {matchResult.matchType.matchTypeName}
               </div>
             </div>
-            <CustomizedImage
-              id="opposing_team_logo"
-              src={
-                matchResult.opposingTeam.teamLogoSrc
-                  ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
-                    matchResult.opposingTeam.teamLogoSrc
-                  : TEAM_MARK_NO_LOGO_IMG_PATH
-              }
-              onErrorImgSrc={TEAM_MARK_NO_LOGO_IMG_PATH}
-            />
-            <div id="opposing_team">{matchResult.opposingTeam.name}</div>
+            <div className="opposing_team_area">
+              <CustomizedImage
+                id="opposing_team_logo"
+                src={
+                  matchResult.opposingTeam.teamLogoSrc
+                    ? process.env.REACT_APP_IMAGE_SRC_PREFIX +
+                      matchResult.opposingTeam.teamLogoSrc
+                    : TEAM_MARK_NO_LOGO_IMG_PATH
+                }
+                onErrorImgSrc={TEAM_MARK_NO_LOGO_IMG_PATH}
+              />
+              <div id="opposing_team">{matchResult.opposingTeam.name}</div>
+            </div>
           </div>
           {matchResult?.scorersAndAssisters.map((ele, key) => {
             return (
@@ -70,10 +76,12 @@ const MatchDetailModalBox = (props: MatchDetailModalBoxProps) => {
                   <span className="score_prefix">Goal </span>{" "}
                   {ele.scorer?.name || <span className="unknown">?</span>}
                 </a>
-                <span className="slash"> / </span>
+                {!isMobile && <span className="slash"> / </span>}
                 <a className="assist">
                   <span className="assist_prefix">Assist</span>{" "}
-                  {ele.assister?.name || <span className="unknown">?</span>}
+                  <span>
+                    {ele.assister?.name || <span className="unknown">?</span>}{" "}
+                  </span>
                 </a>
               </div>
             );

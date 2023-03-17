@@ -10,6 +10,12 @@
     justify-content: center;
     margin-bottom: 5vh;
 
+    .wtf_area,
+    .opposing_team_area {
+      display: flex;
+      align-items: center;
+    }
+
     #wtf,
     #opposing_team {
       text-align: center;
@@ -81,6 +87,64 @@
       .unknown {
         display: inline-block;
         margin: 0 1.5rem 0 1.5rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .result_container {
+    .team_area {
+      .wtf_area,
+      .opposing_team_area {
+        display: flex;
+        flex-direction: column;
+
+        #wtf,
+        #opposing_team {
+          width: 30vw;
+          font-size: 1rem;
+        }
+
+        #wtf_logo,
+        #opposing_team_logo {
+          height: 12vh;
+          width: fit-content;
+          padding: 0 1.5vw 2vh 1.5vw;
+        }
+      }
+
+      .score_and_type {
+        flex-grow: 1;
+
+        .score_area {
+          width: inherit;
+          font-size: 1.8rem;
+        }
+        .match_type {
+          font-size: 1rem;
+        }
+      }
+
+      #wtf_logo,
+      #opposing_team_logo {
+        padding: 0 5vw 0 5vw;
+        flex-grow: 1;
+      }
+    }
+
+    .score_and_assist {
+      font-size: 0.9rem;
+      a {
+        flex-grow: 1;
+      }
+
+      .score,
+      .assist {
+        margin: 0 5vw 0 5vw;
+        .unknown {
+          margin: 0 1.3rem 0 0.9rem;
+        }
       }
     }
   }
