@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
-import { PlayerModel, PlayerStatModel } from "../Models/PlayerModel";
-import { getPlayerTotalStatAPI } from "../Service/PlayerService";
+import { PLAYER_RECENT_STAT_LIMIT } from "../CommonConstant/CommonConstant";
+import {
+  PlayerModel,
+  PlayerRecentStatModel,
+  PlayerStatModel,
+} from "../Models/PlayerModel";
+import {
+  getPlayerRecentAssistAPI,
+  getPlayerRecentScoreAPI,
+  getPlayerTotalStatAPI,
+} from "../Service/PlayerService";
 import CustomizedSpinner from "./CustomizedSpinner";
 import PlayerMatchResult from "./PlayerMatchResult";
 import "./PlayerStatBox.scss";
@@ -11,12 +20,28 @@ export interface PlayerStatBoxProps {
 
 const PlayerStatBox = (props: PlayerStatBoxProps) => {
   const [playerStat, setPlayerStat] = useState<PlayerStatModel>();
+  const [playerRecentScore, setPlayerRecentScore] =
+    useState<PlayerRecentStatModel>();
+  const [playerRecentAssist, setPlayerRecentAssist] =
+    useState<PlayerRecentStatModel>();
   const [isLoading, setIsLoding] = useState<boolean>(true);
 
   const getPlayerStat = async () => {
     setIsLoding(true);
-    const res: PlayerStatModel = await getPlayerTotalStatAPI(props.player.id);
-    setPlayerStat(res);
+    const totalStatRes: PlayerStatModel = await getPlayerTotalStatAPI(
+      props.player.id
+    );
+    const recentScoreRes: PlayerRecentStatModel = await getPlayerRecentScoreAPI(
+      props.player.id,
+      PLAYER_RECENT_STAT_LIMIT
+    );
+    const recentAssistRes: PlayerRecentStatModel =
+      await getPlayerRecentAssistAPI(props.player.id, PLAYER_RECENT_STAT_LIMIT);
+
+    setPlayerStat(totalStatRes);
+    setPlayerRecentScore(recentScoreRes);
+    setPlayerRecentAssist(recentAssistRes);
+
     setIsLoding(false);
   };
 

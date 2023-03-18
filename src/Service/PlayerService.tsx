@@ -1,8 +1,10 @@
+import { PLAYER_RECENT_MATCH_STAT_LIMIT } from "../CommonConstant/CommonConstant";
 import { SortModel } from "../Models/CommonModel";
 import { HeaderContentType, OrderSortKeyword } from "../Models/Enum/CommonEnum";
 import {
   PlayerMatchStatModel,
   PlayerModel,
+  PlayerRecentStatModel,
   PlayerStatModel,
 } from "../Models/PlayerModel";
 import {
@@ -91,6 +93,36 @@ export async function getPlayerTotalStatAPI(
   return result;
 }
 
+export async function getPlayerRecentScoreAPI(
+  playerId: number,
+  limit: number
+): Promise<PlayerRecentStatModel> {
+  const getParameter: GetParameter = {
+    url: "player/recent-score",
+    params: {
+      playerId: playerId,
+      limit: limit,
+    },
+  };
+  const result: PlayerRecentStatModel = await getApiCall(getParameter);
+  return result;
+}
+
+export async function getPlayerRecentAssistAPI(
+  playerId: number,
+  limit: number
+): Promise<PlayerRecentStatModel> {
+  const getParameter: GetParameter = {
+    url: "player/recent-assist",
+    params: {
+      playerId: playerId,
+      limit: limit,
+    },
+  };
+  const result: PlayerRecentStatModel = await getApiCall(getParameter);
+  return result;
+}
+
 export async function getPlayerScoresByMatchResultAPI(
   playerId: number
 ): Promise<PlayerMatchStatModel[]> {
@@ -98,7 +130,7 @@ export async function getPlayerScoresByMatchResultAPI(
     url: "player/match-score",
     params: {
       playerId: playerId,
-      limit: 3,
+      limit: PLAYER_RECENT_MATCH_STAT_LIMIT,
     },
   };
   const result: PlayerMatchStatModel[] = await getApiCall(getParameter);
@@ -112,7 +144,7 @@ export async function getPlayerAssistsByMatchResultAPI(
     url: "player/match-assist",
     params: {
       playerId: playerId,
-      limit: 3,
+      limit: PLAYER_RECENT_MATCH_STAT_LIMIT,
     },
   };
   const result: PlayerMatchStatModel[] = await getApiCall(getParameter);

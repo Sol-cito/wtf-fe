@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { PLAYER_RECENT_MATCH_STAT_LIMIT } from "../CommonConstant/CommonConstant";
 import { PlayerMatchStatModel } from "../Models/PlayerModel";
 import {
   getPlayerAssistsByMatchResultAPI,
@@ -39,14 +40,14 @@ const PlayerMatchResult = (props: PlayerMatchResultProps) => {
       {isLoading && <CustomizedSpinner />}
       {scoreStat && (
         <StatResultBox
-          title={"득점한 최근 3경기"}
+          title={"득점한 최근 " + PLAYER_RECENT_MATCH_STAT_LIMIT + "경기"}
           statResult={scoreStat}
           statName={"goal"}
         />
       )}
       {assistStat && (
         <StatResultBox
-          title={"어시스트한 최근 3경기"}
+          title={"어시스트한 최근 " + PLAYER_RECENT_MATCH_STAT_LIMIT + "경기"}
           statResult={assistStat}
           statName={"assist"}
         />

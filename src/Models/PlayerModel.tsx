@@ -32,3 +32,11 @@ export interface PlayerMatchStatModel {
   teamLogoSrc: string;
   stat: number;
 }
+
+export interface PlayerRecentStatModel {
+  matchDate: string;
+  opposingTeamName: string;
+  matchLocation: string;
+  matchTypeName: string;
+  stat: number;
+}

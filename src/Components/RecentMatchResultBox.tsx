@@ -1,10 +1,11 @@
-import { MatchResultModel } from "../Models/MatchResultModel";
-import { useState, useEffect } from "react";
-import "./RecentMatchResultBox.scss";
-import MatchResult from "./MatchResult";
-import CustomizedSpinner from "./CustomizedSpinner";
-import { getMatchResultAPI, MatchResultProps } from "../Service/MatchService";
+import { useEffect, useState } from "react";
+import { RECENT_MATCH_RESULT_LIMIT } from "../CommonConstant/CommonConstant";
 import { OrderSortKeyword } from "../Models/Enum/CommonEnum";
+import { MatchResultModel } from "../Models/MatchResultModel";
+import { getMatchResultAPI, MatchResultProps } from "../Service/MatchService";
+import CustomizedSpinner from "./CustomizedSpinner";
+import MatchResult from "./MatchResult";
+import "./RecentMatchResultBox.scss";
 
 const RecentMatchResultBox = () => {
   const [recentResult, setRecentResult] = useState<MatchResultModel[]>();
@@ -13,7 +14,7 @@ const RecentMatchResultBox = () => {
   const getRecentResult = async () => {
     const matchResultProps: MatchResultProps = {
       startIdx: 0,
-      limit: 3,
+      limit: RECENT_MATCH_RESULT_LIMIT,
       order: {
         entityFieldName: "matchDate",
         orderSortKeyword: OrderSortKeyword.DESC,
